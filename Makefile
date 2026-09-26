@@ -7,8 +7,8 @@ CFLAGS := -Wall -Wextra -Werror -I Libft/include -I includes
 
 OBJ := $(SRC:.c=.o)
 
-# LIBFT_DIR := Libft
-# LIBFT := $(LIBFT_DIR)/libft.a
+LIBFT_DIR := libft
+LIBFT := $(LIBFT_DIR)/libft.a
 
 .SILENT: all $(NAME)
 
