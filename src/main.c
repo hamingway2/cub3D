@@ -6,19 +6,23 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/26 17:17:30 by azielnic          #+#    #+#             */
-/*   Updated: 2026/09/26 20:47:40 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/09/26 21:03:13 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	exit_free(t_game *game)
+void	exit_free(t_game *game, int status)
 {
 	// mlx_destroy_image(game->mlx, game->image);
-	mlx_destroy_window(game->mlx, game->window);
-	mlx_destroy_display(game->mlx);
-	free(game->mlx);
-	exit(0);
+	if (game->window)
+		mlx_destroy_window(game->mlx, game->window);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
+	exit(status);
 }
 
 int	key_handler(int keycode, void *in)
@@ -27,14 +31,7 @@ int	key_handler(int keycode, void *in)
 
 	game = (t_game *)in;
 	if (keycode == XK_Escape)
-		exit_free(game);
-	// if (keycode == XK_c || keycode == XK_C)
-	// {
-		// mlx->fractal->colour_mode++;
-		// if (mlx->fractal->colour_mode > 2)
-			// mlx->fractal->colour_mode = 0;
-		// pixel_to_image(mlx, mlx->fractal);
-	// }
+		exit_free(game, EXIT_SUCCESS);
 	return (0);
 }
 
@@ -43,7 +40,7 @@ int	click_handler(void *in)
 	t_game	*game;
 
 	game = (t_game *)in;
-	exit_free(game);
+	exit_free(game, EXIT_SUCCESS);
 	return (0);
 }
 
@@ -55,8 +52,8 @@ void game_init(t_game *game)
 		exit(EXIT_FAILURE);
 	game->window = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D");
 	if (!game->window)
-		exit(EXIT_FAILURE);
-
+		exit_free(game, EXIT_FAILURE);
+	
 	mlx_hook(game->window, 2, KeyPressMask, &key_handler, game);
 	mlx_hook(game->window, 17, StructureNotifyMask, &click_handler, game);
 	
