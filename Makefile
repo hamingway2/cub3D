@@ -1,9 +1,9 @@
 SRC := src/main.c \
 
-
 NAME := cub3d
 CC := cc
 CFLAGS := -Wall -Wextra -Werror -I Libft/include -I includes
+MLXFLAGS = -lmlx -lXext -lX11 -lm  # -lm for the math library
 
 OBJ := $(SRC:.c=.o)
 
@@ -21,7 +21,7 @@ $(LIBFT):
 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(MLXFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -Iincludes -c $< -o $@
