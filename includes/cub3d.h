@@ -10,8 +10,11 @@
 
 // Macro Definition
 #define USAGE_INFO "Usage: ./cub3d maps/<map.cub>\n"
-#define ERRPR "Error\n"
 #define HELP_FLAG "--help"
+
+//Error msg
+#define ERROR "Error\n"
+#define WRONG_EXTENSION "Invalid file extension\n"
 
 typedef	struct s_game
 {
