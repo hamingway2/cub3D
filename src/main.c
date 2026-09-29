@@ -35,8 +35,6 @@ int	check_arguments(int ac, char **av)
 		return (error_msg(USAGE_INFO));
 	if (has_cub_extension(av[1]) == FALSE)
 		return (error_msg(WRONG_EXTENSION));
-	if (ft_strlen(av[1]) < 5)
-		return (error_msg(INVALID_FILENAME));
 	return (TRUE);
 }
 
