@@ -27,6 +27,7 @@
 # define USAGE_INFO "Usage: ./cub3d maps/<map.cub>\n"
 # define HELP_FLAG "--help"
 # define EXTENSION ".cub"
+# define BUFFER_SIZE 42
 
 //Error msg
 # define ERROR "Error\n"

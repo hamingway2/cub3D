@@ -39,6 +39,7 @@ int	load_map(t_game *game, char *filename)
 	int	fd;
 	(void)game;
 
+	//load map from file
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (error_msg(OPEN_ERROR));
