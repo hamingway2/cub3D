@@ -1,5 +1,5 @@
 SRC := src/main.c \
-
+		src/init/init.c \
 
 NAME := cub3d
 CC := cc

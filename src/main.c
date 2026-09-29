@@ -12,6 +12,18 @@
 
 #include "../includes/cub3d.h"
 
+void	destroy_event(t_game *game, int exit_status)
+{
+	if (game->img.img)
+		mlx_destroy_image(game->mlx, game->img.img);
+	if (game->window)
+		mlx_destroy_window(game->mlx, game->window);
+	if (game->mlx)
+		mlx_destroy_display(game->mlx);
+	free(game->mlx);
+	exit(exit_status);
+}
+
 int	error_msg(char *msg)
 {
 	ft_putstr_fd(ERROR, 2);
@@ -51,7 +63,7 @@ int	main(int argc, char **argv)
 	}
 	if (check_arguments(argc, argv) == FALSE)
 		return (1);
-	//game_init(&game);
+	game_init(&game);
 	//load map
 	//initialize player
 	//initialize input

@@ -68,6 +68,7 @@ typedef struct s_game
 	t_img		img;
 }	t_game;
 
-int	main(int argc, char **argv);
+void	game_init(t_game *game);
+void	destroy_event(t_game *game, int exit_status);
 
 #endif
