@@ -41,6 +41,8 @@ int	check_arguments(int ac, char **av)
 
 int	main(int argc, char **argv)
 {
+	t_game	game;
+
 	if (argc == 2 && ft_strncmp(argv[1], HELP_FLAG,
 			ft_strlen(HELP_FLAG) + 1) == 0)
 	{
@@ -49,6 +51,12 @@ int	main(int argc, char **argv)
 	}
 	if (check_arguments(argc, argv) == FALSE)
 		return (1);
+	//game_init(&game);
+	//load map
+	//initialize player
+	//initialize input
+	//mlx loop
+	//destroy everything
 	ft_putstr_fd("cub3d started!\n", 1);
 	return (0);
 }
