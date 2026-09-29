@@ -31,6 +31,14 @@ int	is_valid_filename(char *filename)
 	return (1);
 }
 
+int	check_arguments(int ac, char **av)
+{
+	if (ac != 2)
+		return (error_msg(USAGE_INFO));
+	if (!is_valid_filename(av[1]))
+		return (error_msg(WRONG_EXTENSION));
+}
+
 int	main(int argc, char **argv)
 {
 	(void)argv;
@@ -40,13 +48,8 @@ int	main(int argc, char **argv)
 		ft_putstr(USAGE_INFO, 1);
 		return (0);
 	}
-
-	//check arguments
-	if (argc != 2)
-		return (error_msg(USAGE_INFO));
-	//check filename
-	if (!is_valid_filename(argv[1]))
-		return (error_msg(WRONG_EXTENSION));
+	if (check_arguments(argc, argv[1]) != 0)
+		return (1);
 
 	ft_putstr("cub3d started!\n", 1);
 	return (0);
