@@ -16,12 +16,17 @@ int	main(int argc, char **argv)
 {
 	(void)argv;
 
+	//check arguments
 	if (argc != 2)
 	{
 		ft_putstr("Error\nUsage: ./cub3d maps/<map.cub>\n", 2);
 		return (1);
 	}
-
+	if (ft_strcmp(argv[1], HELP_FLAG))
+	{
+		ft_putstr("Usage: ./cub3d maps/<map.cub>\n", 1);
+		return (1);
+	}
 	ft_putstr("cub3d started!\n", 1);
 	return (0);
 }
