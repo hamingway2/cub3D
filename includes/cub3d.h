@@ -73,7 +73,11 @@ typedef struct s_game
 void	game_init(t_game *game);
 void	destroy_event(t_game *game, int exit_status);
 int	error_msg(char *msg);
-int	load_map(t_game *game, char *filename);
-
+int	parse_file(t_game *game, char *filename);
+int	is_empty_line(char *line);
+int is_config_line(char *line);
+int parse_config(t_game *game, char *line);
+void load_map(t_game *game, int fd, char *line);
+char	*get_next_line(int fd);
 
 #endif

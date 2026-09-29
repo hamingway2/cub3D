@@ -64,7 +64,7 @@ int	main(int argc, char **argv)
 	if (check_arguments(argc, argv) == FALSE)
 		return (1);
 	game_init(&game);
-	if (load_map(&game, argv[1]) == FALSE)
+	if (parse_file(&game, argv[1]) == FALSE)
 		return (1);
 	//initialize player
 	//initialize input

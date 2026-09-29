@@ -34,22 +34,30 @@ void	game_init(t_game *game)
 		destroy_event(game, EXIT_FAILURE);
 }
 
-int	load_map(t_game *game, char *filename)
+int	parse_file(t_game *game, char *filename)
 {
 	int	fd;
-	(void)game;
+	char	*line;
 
 	//load map from file
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (error_msg(OPEN_ERROR));
-
-	// parse texture/color configuration
-	// ...
-	// find beginning of map
-	// ...
-	// load map grid
-
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (is_empty_line(line))
+			;
+		else if (is_config_line(line))
+			parse_config(game, line);
+		else
+		{
+			load_map(game, fd, line);
+			break;
+		}
+		free(line);
+		line = get_next_line(fd);
+	}
 	close(fd);
 	return (TRUE);
 }
