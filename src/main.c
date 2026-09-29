@@ -14,43 +14,42 @@
 
 int error_msg(char *msg)
 {
-	ft_putstr(ERROR, 2);
-	ft_putstr(msg, 2);
-	return (1);
+	ft_putstr_fd(ERROR, 2);
+	ft_putstr_fd(msg, 2);
+	return (FALSE);
 }
 
-int	is_valid_filename(char *filename)
+int	has_cub_extension(char *filename)
 {
 	size_t	len;
 
 	len = ft_strlen(filename);
 	if (len < 5)
-		return (1);
-	if (ft_strcmp(filename + len - 4, ".cub") != 0)
-		return (0);
-	return (1);
+		return (FALSE);
+	return (ft_strncmp(filename + len - ft_strlen(EXTENSION), EXTENSION, ft_strlen(EXTENSION) + 1) == 0);
 }
 
 int	check_arguments(int ac, char **av)
 {
 	if (ac != 2)
 		return (error_msg(USAGE_INFO));
-	if (!is_valid_filename(av[1]))
+	if (has_cub_extension(av[1]) == FALSE)
 		return (error_msg(WRONG_EXTENSION));
+	if (ft_strlen(av[1]) < 5)
+		return (error_msg(INVALID_FILENAME));
+	return (TRUE);
 }
 
 int	main(int argc, char **argv)
 {
-	(void)argv;
-
-	if (ft_strcmp(argv[1], HELP_FLAG))
+	if (argc == 2 && ft_strncmp(argv[1], HELP_FLAG, ft_strlen(HELP_FLAG) + 1) == 0)
 	{
-		ft_putstr(USAGE_INFO, 1);
+		ft_putstr_fd(USAGE_INFO, 1);
 		return (0);
 	}
-	if (check_arguments(argc, argv[1]) != 0)
+	if (check_arguments(argc, argv) == FALSE)
 		return (1);
 
-	ft_putstr("cub3d started!\n", 1);
+	ft_putstr_fd("cub3d started!\n", 1);
 	return (0);
 }
