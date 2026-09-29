@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <math.h>
-# include <mlx.h>
+# include "mlx.h"
 
 // Macro Definition
 # define TRUE 1
