@@ -12,7 +12,7 @@
 
 #include "../includes/cub3d.h"
 
-int error_msg(char *msg)
+int	error_msg(char *msg)
 {
 	ft_putstr_fd(ERROR, 2);
 	ft_putstr_fd(msg, 2);
@@ -26,7 +26,8 @@ int	has_cub_extension(char *filename)
 	len = ft_strlen(filename);
 	if (len < 5)
 		return (FALSE);
-	return (ft_strncmp(filename + len - ft_strlen(EXTENSION), EXTENSION, ft_strlen(EXTENSION) + 1) == 0);
+	return (ft_strncmp(filename + len - ft_strlen(EXTENSION),
+			EXTENSION, ft_strlen(EXTENSION) + 1) == 0);
 }
 
 int	check_arguments(int ac, char **av)
@@ -40,14 +41,14 @@ int	check_arguments(int ac, char **av)
 
 int	main(int argc, char **argv)
 {
-	if (argc == 2 && ft_strncmp(argv[1], HELP_FLAG, ft_strlen(HELP_FLAG) + 1) == 0)
+	if (argc == 2 && ft_strncmp(argv[1], HELP_FLAG,
+			ft_strlen(HELP_FLAG) + 1) == 0)
 	{
 		ft_putstr_fd(USAGE_INFO, 1);
 		return (0);
 	}
 	if (check_arguments(argc, argv) == FALSE)
 		return (1);
-
 	ft_putstr_fd("cub3d started!\n", 1);
 	return (0);
 }
