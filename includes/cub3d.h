@@ -21,10 +21,30 @@
 #define INVALID_FILENAME "Invalid file name\n"
 #define WRONG_EXTENSION "Invalid file extension\n"
 
-typedef	struct s_game
+typedef struct	s_map
 {
-	void	*mlx;
-	void	*window;
+	char	**grid;
+	int		width;
+	int		height;
+}	t_map;
+
+typedef struct	s_player
+{
+	double	x;
+	double	y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+}	t_player;
+
+typedef	struct	s_game
+{
+	void		*mlx;
+	void		*window;
+	t_map		map;
+    t_player	player;
+    t_img		img;
 }	t_game;
 
 int	main(int argc, char **argv);
