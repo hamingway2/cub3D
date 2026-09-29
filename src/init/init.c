@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
+//TODO: maybe add error message for mlx function failure
 void	game_init(t_game *game)
 {
 	int	width;
@@ -32,4 +32,23 @@ void	game_init(t_game *game)
 		&game->img.line_length,	&game->img.endian);
 	if(!game->img.addr)
 		destroy_event(game, EXIT_FAILURE);
+}
+
+int	load_map(t_game *game, char *filename)
+{
+	int	fd;
+	(void)game;
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (error_msg(OPEN_ERROR));
+
+	// parse texture/color configuration
+	// ...
+	// find beginning of map
+	// ...
+	// load map grid
+
+	close(fd);
+	return (TRUE);
 }

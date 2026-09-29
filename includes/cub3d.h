@@ -32,6 +32,7 @@
 # define ERROR "Error\n"
 # define INVALID_FILENAME "Invalid file name\n"
 # define WRONG_EXTENSION "Invalid file extension\n"
+# define OPEN_ERROR "Failed to open file\n"
 
 typedef struct s_img
 {
@@ -70,5 +71,8 @@ typedef struct s_game
 
 void	game_init(t_game *game);
 void	destroy_event(t_game *game, int exit_status);
+int	error_msg(char *msg);
+int	load_map(t_game *game, char *filename);
+
 
 #endif
