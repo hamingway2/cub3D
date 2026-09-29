@@ -18,10 +18,10 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		printf("Usage: ./cub3d maps/<map.cub>\n");
+		ft_putstr("Error\nUsage: ./cub3d maps/<map.cub>\n", 2);
 		return (1);
 	}
 
-	printf("cub3d started!\n");
+	ft_putstr("cub3d started!\n", 1);
 	return (0);
 }
