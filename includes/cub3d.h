@@ -34,6 +34,15 @@
 # define INVALID_FILENAME "Invalid file name\n"
 # define WRONG_EXTENSION "Invalid file extension\n"
 # define OPEN_ERROR "Failed to open file\n"
+# define INVALID_LINE "Invalid line detected\n"
+
+//Map elements
+# define WALL '1'
+# define EMPTY '0'
+# define PLAYER_NORTH 'N'
+# define PLAYER_SOUTH 'S'
+# define PLAYER_WEST 'W'
+# define PLAYER_EAST 'E'
 
 typedef struct s_img
 {
@@ -72,12 +81,14 @@ typedef struct s_game
 
 void	game_init(t_game *game);
 void	destroy_event(t_game *game, int exit_status);
-int	error_msg(char *msg);
-int	parse_file(t_game *game, char *filename);
-int	is_empty_line(char *line);
-int is_config_line(char *line);
-int parse_config(t_game *game, char *line);
-void load_map(t_game *game, int fd, char *line);
+int		error_msg(char *msg);
+int		parse_file(t_game *game, char *filename);
+int		is_empty_line(char *line);
+int		is_config_line(char *line);
+int		is_map_line(char *line);
+int		parse_config(t_game *game, char *line);
+int		load_map(t_game *game, int fd, char *first_line, char *filename);
+int		get_map_height(char *filename);
 char	*get_next_line(int fd);
-
+int		ft_max(int a, int b);
 #endif

@@ -1,6 +1,8 @@
 SRC := src/main.c \
+		src/utils.c \
 		src/get_next_line.c \
 		src/init/init.c \
+		src/init/init_utils.c \
 
 NAME := cub3d
 CC := cc
