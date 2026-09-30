@@ -1,15 +1,6 @@
 #include "cub3d.h"
 
-
-int	is_map_line(char *line)
-{
-	while (*line == ' ' || *line == '\t')
-		line++;
-	return (*line == WALL || *line == EMPTY || *line == PLAYER_NORTH || *line == PLAYER_SOUTH
-		|| *line == PLAYER_WEST || *line == PLAYER_EAST); // valid map lines start with a map character (might still be invalid)
-}
-
-int	get_map_height(char *filename)
+static int	get_map_height(char *filename)
 {
 	int		fd;
 	int		height;
@@ -45,7 +36,7 @@ int	get_map_height(char *filename)
 	return (height);
 }
 
-int read_map(t_game *game, int fd, char *first_line)
+static int read_map(t_game *game, int fd, char *first_line)
 {
 	char	*line;
 	int		i;

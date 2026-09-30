@@ -2,8 +2,8 @@
 
 void	game_destroy(t_game *game, int exit_status)
 {
-	if (game->map.grid)
-		free_map(&game->map);
+//	if (game->map.grid)
+//		free_map(&game->map);
 	//todo: destroy textures
 	if (game->img.img)
 		mlx_destroy_image(game->mlx, game->img.img);

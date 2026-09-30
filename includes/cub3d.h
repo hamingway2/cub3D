@@ -80,15 +80,15 @@ typedef struct s_game
 }	t_game;
 
 void	game_init(t_game *game);
-void	destroy_event(t_game *game, int exit_status);
-int		error_msg(char *msg);
 int		parse_file(t_game *game, char *filename);
+void	game_destroy(t_game *game, int exit_code);
+int		error_msg(char *msg);
+char	*get_next_line(int fd);
 int		is_empty_line(char *line);
 int		is_config_line(char *line);
 int		is_map_line(char *line);
 int		parse_config(t_game *game, char *line);
-int		load_map(t_game *game, int fd, char *first_line, char *filename);
-int		get_map_height(char *filename);
-char	*get_next_line(int fd);
+int		parse_map(t_game *game, int fd, char *first_line, char *filename);
 int		ft_max(int a, int b);
+
 #endif

@@ -20,18 +20,18 @@ void	game_init(t_game *game)
 	ft_bzero(game, sizeof(*game));
 	game->mlx = mlx_init();
 	if (!game->mlx)
-		destroy_event(game, EXIT_FAILURE);
+		game_destroy(game, EXIT_FAILURE);
 	mlx_get_screen_size(game->mlx, &width, &height);
 	game->window = mlx_new_window(game->mlx, width, height, "cub3d");
 	if (!game->window)
-		destroy_event(game, EXIT_FAILURE);
+		game_destroy(game, EXIT_FAILURE);
 	game->img.img = mlx_new_image(game->mlx, width, height);
 	if (!game->img.img)
-		destroy_event(game, EXIT_FAILURE);
+		game_destroy(game, EXIT_FAILURE);
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bits_per_pixel,
 			&game->img.line_length, &game->img.endian);
 	if (!game->img.addr)
-		destroy_event(game, EXIT_FAILURE);
+		game_destroy(game, EXIT_FAILURE);
 }
 
 //Later

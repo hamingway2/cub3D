@@ -1,8 +1,12 @@
 SRC := src/main.c \
-		src/utils.c \
 		src/get_next_line.c \
-		src/init/init.c \
-		src/init/init_utils.c \
+		src/utils.c \
+		src/init/game_init.c \
+		src/init/game_destroy.c \
+		src/parsing/parse_file.c \
+		src/parsing/parse_config.c \
+		src/parsing/parse_map.c \
+		src/parsing/parsing_utils.c \
 
 NAME := cub3d
 CC := cc
