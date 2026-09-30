@@ -29,14 +29,14 @@ void	game_init(t_game *game)
 	if (!game->img.img)
 		destroy_event(game, EXIT_FAILURE);
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bits_per_pixel,
-		&game->img.line_length,	&game->img.endian);
-	if(!game->img.addr)
+			&game->img.line_length, &game->img.endian);
+	if (!game->img.addr)
 		destroy_event(game, EXIT_FAILURE);
 }
 
 int	parse_file(t_game *game, char *filename)
 {
-	int	fd;
+	int		fd;
 	char	*line;
 
 	//load map from file
@@ -53,7 +53,7 @@ int	parse_file(t_game *game, char *filename)
 		else
 		{
 			load_map(game, fd, line);
-			break;
+			break ;
 		}
 		free(line);
 		line = get_next_line(fd);

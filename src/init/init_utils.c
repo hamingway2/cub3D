@@ -7,14 +7,15 @@ int	is_empty_line(char *line)
 	return (*line == '\0' || *line == '\n');
 }
 
-int is_config_line(char *line)
+int	is_config_line(char *line)
 {
 	while (*line == ' ' || *line == '\t')
 		line++;
-	return (*line == 'N' || *line == 'S' || *line == 'E' || *line == 'W' || *line == 'F' || *line == 'C');
+	return (*line == 'N' || *line == 'S'
+		|| *line == 'E' || *line == 'W' || *line == 'F' || *line == 'C');
 }
 
-int parse_config(t_game *game, char *line)
+int	parse_config(t_game *game, char *line)
 {
 	// Implementation for parsing configuration lines
 	return (TRUE);
