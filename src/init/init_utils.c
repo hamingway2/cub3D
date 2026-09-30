@@ -11,8 +11,19 @@ int	is_config_line(char *line)
 {
 	while (*line == ' ' || *line == '\t')
 		line++;
-	return (*line == 'N' || *line == 'S'
-		|| *line == 'E' || *line == 'W' || *line == 'F' || *line == 'C');
+	if (ft_strncmp(line, "NO ", 3) == 0)
+		return (TRUE);
+	if (ft_strncmp(line, "SO ", 3) == 0)
+		return (TRUE);
+	if (ft_strncmp(line, "WE ", 3) == 0)
+		return (TRUE);
+	if (ft_strncmp(line, "EA ", 3) == 0)
+		return (TRUE);
+	if (ft_strncmp(line, "F ", 2) == 0)
+		return (TRUE);
+	if (ft_strncmp(line, "C ", 2) == 0)
+		return (TRUE);
+	return (FALSE);
 }
 
 int	parse_config(t_game *game, char *line)
