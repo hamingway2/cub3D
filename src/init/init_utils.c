@@ -26,7 +26,7 @@ int	is_config_line(char *line)
 	return (FALSE);
 }
 
-int is_map_line(char *line)
+int	is_map_line(char *line)
 {
 	while (*line == ' ' || *line == '\t')
 		line++;
@@ -38,14 +38,12 @@ int	parse_config(t_game *game, char *line)
 {
 	(void) game;
 	(void) line;
-
 	// Implementation for parsing configuration lines
 	return (TRUE);
 }
 
-int get_map_height(char *filename)
+int	get_map_height(char *filename)
 {
-
 	int		fd;
 	int		height;
 	int		map_started;

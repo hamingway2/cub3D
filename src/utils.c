@@ -1,4 +1,4 @@
-# include "cub3d.h"
+#include "cub3d.h"
 
 int	ft_max(int a, int b)
 {
