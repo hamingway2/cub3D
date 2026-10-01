@@ -21,7 +21,9 @@ int	parse_file(t_game *game, char *filename)
 		//once the first map line is detected, load the map and break the loop, validate the map in load_map function
 		else if (is_map_line(line))
 		{
+			free(line);
 			close(fd);
+			fd = -1; //set fd to -1 to avoid closing it again in the end of the function
 			parse_map(game, filename);
 			break ;
 		}
@@ -35,6 +37,7 @@ int	parse_file(t_game *game, char *filename)
 		free(line);
 		line = get_next_line(fd);
 	}
-	close(fd);
+	if (fd >= 0)
+		close(fd);
 	return (TRUE);
 }
