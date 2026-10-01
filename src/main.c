@@ -39,11 +39,16 @@ int	check_arguments(int ac, char **av)
 	return (TRUE);
 }
 
-void	print_map(char **grid)
+void	print_map(char **grid, int height, int width)
 {
 	int i;
 	int j;
 
+	ft_putstr_fd("Printing a map of height ", 1);
+	ft_putnbr_fd(height, 1);
+	ft_putstr_fd(" and width ", 1);
+	ft_putnbr_fd(width, 1);
+	ft_putstr_fd(".\n\n", 1);
 	i = 0;
 	while (grid[i] != NULL)
 	{
@@ -74,7 +79,7 @@ int	main(int argc, char **argv)
 	if (parse_file(&game, argv[1]) == FALSE)
 		return (1);
 	//testing map output
-	print_map(game.map.grid);
+	print_map(game.map.grid, game.map.height, game.map.width);
 	//initialize player
 	//initialize input
 	//mlx loop
