@@ -16,6 +16,9 @@ static int	get_map_height(char *filename)
 	line = get_next_line(fd);
 	while (line)
 	{
+//		ft_putstr_fd("Test\n", 1);
+//		ft_putstr_fd(line, 1);
+//		ft_putchar_fd('\n', 1);
 		if (map_started == FALSE)
 		{
 			if (is_map_line(line))

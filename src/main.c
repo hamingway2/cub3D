@@ -79,7 +79,7 @@ int	main(int argc, char **argv)
 	if (parse_file(&game, argv[1]) == FALSE)
 		return (1);
 	//testing map output
-	print_map(game.map.grid, game.map.height, game.map.width);
+	//print_map(game.map.grid, game.map.height, game.map.width); // Testfunktion
 	//initialize player
 	//initialize input
 	//mlx loop
