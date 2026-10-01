@@ -55,13 +55,13 @@ static int read_map(t_game *game, char *filename)
 		line = get_next_line(fd);
 	}
 	game->map.grid[i] = line;
-	width = ft_strlen(line);
+	width = get_line_length(line);
 	i++;
 	while (line)
 	{
 		line = get_next_line(fd);
 		game->map.grid[i] = line;
-		width = ft_max(width, (int)ft_strlen(line));
+		width = ft_max(width, get_line_length(line));
 		i++;
 	}
 	game->map.grid[i] = NULL;
