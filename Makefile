@@ -11,13 +11,9 @@ SRC := src/main.c \
 NAME := cub3d
 CC := cc
 CFLAGS := -Wall -Wextra -Werror -I Libft/include -I includes
+MLXFLAGS = -lmlx -lXext -lX11 -lm  # -lm for the math library
 
 OBJ := $(SRC:.c=.o)
-
-MLX_DIR = minilibx-linux
-MLX     = -L$(MLX_DIR) -lmlx_Linux
-MLX_INC = -I$(MLX_DIR)
-MLX_LIBS= -lXext -lX11 -lm -lz
 
 LIBFT_DIR := libft
 LIBFT := $(LIBFT_DIR)/libft.a
@@ -33,10 +29,10 @@ $(LIBFT):
 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX) $(MLX_LIBS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(MLXFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 
 %.o: %.c
-	@$(CC) $(CFLAGS) $(MLX_INC)  -Iincludes -c $< -o $@
+	@$(CC) $(CFLAGS) -Iincludes -c $< -o $@
 
 clean:
 	@rm -f $(OBJ)

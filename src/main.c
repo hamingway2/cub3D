@@ -39,6 +39,25 @@ int	check_arguments(int ac, char **av)
 	return (TRUE);
 }
 
+void	print_map(char **grid)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (grid[i] != NULL)
+	{
+		j = 0;
+		while (grid[i][j] != '\0')
+		{
+			ft_putchar_fd(grid[i][j], 1);
+			j++;
+		}
+		ft_putchar_fd('\n', 1);
+		i++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	game;
@@ -54,6 +73,8 @@ int	main(int argc, char **argv)
 	game_init(&game);
 	if (parse_file(&game, argv[1]) == FALSE)
 		return (1);
+	//testing map output
+	print_map(game.map.grid);
 	//initialize player
 	//initialize input
 	//mlx loop
