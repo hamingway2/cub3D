@@ -58,9 +58,9 @@ void	print_map(char **grid, int height, int width)
 			ft_putchar_fd(grid[i][j], 1);
 			j++;
 		}
-		ft_putchar_fd('\n', 1);
 		i++;
 	}
+	ft_putchar_fd('\n', 1);
 }
 
 int	main(int argc, char **argv)

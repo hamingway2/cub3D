@@ -36,22 +36,32 @@ static int	get_map_height(char *filename)
 	return (height);
 }
 
-static int read_map(t_game *game, int fd, char *first_line)
+static int read_map(t_game *game, char *filename)
 {
 	char	*line;
 	int		i;
 	int		width;
+	int		fd;
 
 	i = 0;
-	game->map.grid[i] = first_line;
-	width = ft_strlen(first_line);
-	i++;
+	line = NULL;
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (error_msg(OPEN_ERROR));	
 	line = get_next_line(fd);
+	while(is_map_line(line) == FALSE)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	game->map.grid[i] = line;
+	width = ft_strlen(line);
+	i++;
 	while (line)
 	{
+		line = get_next_line(fd);
 		game->map.grid[i] = line;
 		width = ft_max(width, (int)ft_strlen(line));
-		line = get_next_line(fd);
 		i++;
 	}
 	game->map.grid[i] = NULL;
@@ -59,7 +69,7 @@ static int read_map(t_game *game, int fd, char *first_line)
 }
 
 //ALLOCATION HAPPENS HERE!!!
-int	parse_map(t_game *game, int fd, char *first_line, char *filename)
+int	parse_map(t_game *game, char *filename)
 {
 	int		height;
 	int		width;
@@ -70,7 +80,7 @@ int	parse_map(t_game *game, int fd, char *first_line, char *filename)
 	game->map.grid = (char **)ft_calloc(height + 1, sizeof(char *));
 	if (!game->map.grid)
 		return (FALSE);
-	width = read_map(game, fd, first_line);
+	width = read_map(game, filename);
 	game->map.width = width;
 	game->map.height = height;
 	return (TRUE);

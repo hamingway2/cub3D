@@ -88,7 +88,7 @@ int		is_empty_line(char *line);
 int		is_config_line(char *line);
 int		is_map_line(char *line);
 int		parse_config(t_game *game, char *line);
-int		parse_map(t_game *game, int fd, char *first_line, char *filename);
+int		parse_map(t_game *game, char *filename);
 int		ft_max(int a, int b);
 
 #endif

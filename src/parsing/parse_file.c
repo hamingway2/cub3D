@@ -21,7 +21,8 @@ int	parse_file(t_game *game, char *filename)
 		//once the first map line is detected, load the map and break the loop, validate the map in load_map function
 		else if (is_map_line(line))
 		{
-			parse_map(game, fd, line, filename);
+			close(fd);
+			parse_map(game, filename);
 			break ;
 		}
 		//if the line is neither empty, nor a configuration line, nor a map line, it's an invalid line
