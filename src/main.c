@@ -6,11 +6,43 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/26 17:17:30 by azielnic          #+#    #+#             */
-/*   Updated: 2026/09/26 17:20:31 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/02 23:57:23 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	put_pixel(int x, int y, int colour, t_game *game)
+{
+	int	index;
+		
+	if (x >= WIDTH || y >= HEIGHT || x < 0 || y < 0)
+		return ;
+	index = y * game->img.line_length + x * game->img.bits_per_pixel / 8;
+	game->img.addr[index] = colour & 0xFF;
+	game->img.addr[index + 1] = (colour >> 8) & 0xFF;
+	game->img.addr[index + 2] = (colour >> 16)& 0xFF;
+}
+
+void	draw_player(int x, int y, int size, int colour, t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < size)
+	{
+		j = 0;
+		while (j < size)
+		{
+			put_pixel(x + i, y + j, colour, game);
+			j++;
+		}
+		i++;
+	}
+}
+
+//////////////////////////////// Gitis part
 
 int	error_msg(char *msg)
 {
@@ -93,9 +125,13 @@ int	main(int argc, char **argv)
 	//hardcoding real map height for now, as get_map_height() is not working properly yet
 	game.map.height = get_real_map_height(&game.map);
 	//testing map output
-	//print_map(game.map.grid, game.map.height, game.map.width); // Testfunktion
+	// print_map(game.map.grid, game.map.height, game.map.width); // Testfunktion
 	if (player_init(&game) == FALSE)
 		return (1);
+
+	draw_player(WIDTH / 2, HEIGHT / 2, 10, 0x00FF00, &game);
+	mlx_put_image_to_window(game.mlx, game.window, game.img.img, 0, 0);
+		
 	mlx_key_hook(game.window, key_event, &game);
 	//mlx_mouse_hook(game.window, mouse_event, &state);
 	mlx_hook(game.window, 17, 0, game_close, &game);

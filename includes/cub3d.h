@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 20:10:34 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/09/29 20:10:57 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/02 23:30:06 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 # define HELP_FLAG "--help"
 # define EXTENSION ".cub"
 # define BUFFER_SIZE 42
+
+# define WIDTH 1200 // TODO: include in in a struct afterall?
+# define HEIGHT 700 // TODO: include in in a struct afterall?
 
 //Error msg
 # define ERROR "Error\n"
@@ -58,9 +61,9 @@ typedef struct s_img
 {
 	void	*img;
 	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	int		bits_per_pixel;	// how many bits make up one pixel
+	int		line_length;	// how many bytes make up one image row
+	int		endian;			// how the bytes are ordered in memory
 }	t_img;
 
 typedef struct s_map
