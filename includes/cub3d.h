@@ -45,6 +45,14 @@
 # define PLAYER_WEST 'W'
 # define PLAYER_EAST 'E'
 
+//KEY CODES
+# define KEY_ESC 65307
+# define KEY_LEFT 65361
+# define KEY_UP 65362
+# define KEY_RIGHT 65363
+# define KEY_DOWN 65364
+
+
 typedef struct s_img
 {
 	void	*img;
@@ -92,5 +100,7 @@ int		parse_map(t_game *game, char *filename);
 int		ft_max(int a, int b);
 int		get_line_length(char *line);
 int		player_init(t_game *game);
+int		key_event(int key, t_game *game);
+int 	game_close(t_game *game);
 
 #endif
