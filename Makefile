@@ -28,7 +28,7 @@ debug:
 	$(MAKE) CFLAGS="$(CFLAGS) -g" re
 
 $(LIBFT):
-	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)
+	@$(MAKE) -s --no-print-directory -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(MLXFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
@@ -38,11 +38,11 @@ $(NAME): $(OBJ)
 
 clean:
 	@rm -f $(OBJ)
-	@$(MAKE) -C $(LIBFT_DIR) clean
+	@$(MAKE) --no-print-directory -C $(LIBFT_DIR) clean
 
 fclean: clean
 	@rm -f $(NAME)
-	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@$(MAKE) --no-print-directory -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
