@@ -36,6 +36,8 @@
 # define OPEN_ERROR "Failed to open file\n"
 # define INVALID_LINE "Invalid line detected\n"
 # define NO_PLAYER_START "No player start position found in the map\n"
+# define MULTIPLE_PLAYER_STARTS "Multiple player start positions found in the map\n"
+# define INVALID_CONFIG_LINE "Invalid configuration line\n"
 
 //Map elements
 # define WALL '1'
@@ -81,6 +83,12 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*window;
+	char		*texture_north;
+	char		*texture_south;
+	char		*texture_west;
+	char		*texture_east;
+	char		*floor_color;
+	char		*ceiling_color;
 	t_map		map;
 	t_player	player;
 	t_img		img;
@@ -94,6 +102,8 @@ char	*get_next_line(int fd);
 int		is_empty_line(char *line);
 int		is_config_line(char *line);
 int		is_map_line(char *line);
+int		is_texture_line(char *line);
+int		is_color_line(char *line);
 int		parse_config(t_game *game, char *line);
 int		parse_map(t_game *game, char *filename);
 int		ft_max(int a, int b);
