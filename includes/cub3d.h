@@ -35,6 +35,7 @@
 # define WRONG_EXTENSION "Invalid file extension\n"
 # define OPEN_ERROR "Failed to open file\n"
 # define INVALID_LINE "Invalid line detected\n"
+# define NO_PLAYER_START "No player start position found in the map\n"
 
 //Map elements
 # define WALL '1'
@@ -64,8 +65,7 @@ typedef struct s_player
 {
 	double	x;
 	double	y;
-	double	dir_x;
-	double	dir_y;
+	double	direction; // 0 = North, 90 = East, 180 = South, 270 = West
 	double	plane_x;
 	double	plane_y;
 }	t_player;
@@ -91,5 +91,6 @@ int		parse_config(t_game *game, char *line);
 int		parse_map(t_game *game, char *filename);
 int		ft_max(int a, int b);
 int		get_line_length(char *line);
+int		player_init(t_game *game);
 
 #endif

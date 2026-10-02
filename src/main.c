@@ -93,10 +93,12 @@ int	main(int argc, char **argv)
 	//hardcoding real map height for now, as get_map_height() is not working properly yet
 	game.map.height = get_real_map_height(&game.map);
 	//testing map output
-	print_map(game.map.grid, game.map.height, game.map.width); // Testfunktion
+	//print_map(game.map.grid, game.map.height, game.map.width); // Testfunktion
 	//initialize player
-	//initialize input
+	if (player_init(&game) == FALSE)
+		return (1);
 	//mlx loop
+	mlx_loop(game.mlx);
 	ft_putstr_fd("cub3d started!\n", 1);
 	game_destroy(&game, EXIT_SUCCESS);
 	return (0);
