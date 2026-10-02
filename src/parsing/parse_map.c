@@ -16,24 +16,14 @@ static int	get_map_height(char *filename)
 	line = get_next_line(fd);
 	while (line)
 	{
-//		ft_putstr_fd("Test\n", 1);
-//		ft_putstr_fd(line, 1);
-//		ft_putchar_fd('\n', 1);
-		if (map_started == FALSE)
+		if (!map_started && is_map_line(line))
+			map_started = TRUE;
+		if (map_started && !is_empty_line(line))
 		{
-			if (is_map_line(line))
-				map_started = TRUE;
-			else
-			{
-				free(line);
-				line = get_next_line(fd);
-				continue ;
-			}
-		}
-		if (!is_empty_line(line)) //this check ensures that we don't count empty lines in the map height
 			height++;
-		free(line);
-		line = get_next_line(fd);
+		}
+	free(line);
+	line = get_next_line(fd);
 	}
 	close(fd);
 	return (height);
@@ -68,6 +58,7 @@ static int read_map(t_game *game, char *filename)
 		i++;
 	}
 	game->map.grid[i] = NULL;
+	close(fd);
 	return (width);
 }
 
