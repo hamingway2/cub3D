@@ -79,11 +79,11 @@ int	main(int argc, char **argv)
 	if (parse_file(&game, argv[1]) == FALSE)
 		return (1);
 	//testing map output
-	//print_map(game.map.grid, game.map.height, game.map.width); // Testfunktion
+	print_map(game.map.grid, game.map.height, game.map.width); // Testfunktion
 	//initialize player
 	//initialize input
 	//mlx loop
-	//destroy everything
 	ft_putstr_fd("cub3d started!\n", 1);
+	game_destroy(&game, EXIT_SUCCESS);
 	return (0);
 }
