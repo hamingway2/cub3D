@@ -41,8 +41,8 @@ int	check_arguments(int ac, char **av)
 
 void	print_map(char **grid, int height, int width)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	ft_putstr_fd("Printing a map of height ", 1);
 	ft_putnbr_fd(height, 1);

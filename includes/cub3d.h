@@ -52,7 +52,6 @@
 # define KEY_RIGHT 65363
 # define KEY_DOWN 65364
 
-
 typedef struct s_img
 {
 	void	*img;
@@ -101,6 +100,6 @@ int		ft_max(int a, int b);
 int		get_line_length(char *line);
 int		player_init(t_game *game);
 int		key_event(int key, t_game *game);
-int 	game_close(t_game *game);
+int		game_close(t_game *game);
 
 #endif

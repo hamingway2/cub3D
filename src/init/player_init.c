@@ -1,4 +1,4 @@
-# include "cub3d.h"
+#include "cub3d.h"
 
 static int is_player_start(char c)
 {
@@ -21,8 +21,8 @@ static double get_player_direction(char player_start)
 
 int player_init(t_game *game)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (game->map.grid[i] != NULL)

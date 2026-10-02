@@ -22,8 +22,8 @@ static int	get_map_height(char *filename)
 		{
 			height++;
 		}
-	free(line);
-	line = get_next_line(fd);
+		free(line);
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (height);
@@ -42,7 +42,7 @@ static int read_map(t_game *game, char *filename)
 	if (fd < 0)
 		return (error_msg(OPEN_ERROR));	
 	line = get_next_line(fd);
-	while(is_map_line(line) == FALSE)
+	while (is_map_line(line) == FALSE)
 	{
 		free(line);
 		line = get_next_line(fd);

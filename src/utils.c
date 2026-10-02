@@ -16,7 +16,7 @@ int	get_line_length(char *line)
 	i = 0;
 	if (line == NULL)
 		return (0);
-	while(line[i] != '\0' && line[i] != '\n')
+	while (line[i] != '\0' && line[i] != '\n')
 		i++;
-	return(i);
+	return (i);
 }
