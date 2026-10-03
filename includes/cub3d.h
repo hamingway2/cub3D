@@ -10,7 +10,7 @@
 # include <math.h>
 # include "mlx.h"
 
-// Macro Definition
+// Macro definition
 # define TRUE 1
 # define FALSE 0
 # define USAGE_INFO "Usage: ./cub3d maps/<map.cub>\n"
@@ -23,7 +23,13 @@
 # define HEIGHT 1080 // TODO: include in in a struct afterall?
 # define TILE_SIZE 32
 
-//Error msg
+// Minimap dimensions
+# define MINIMAP_X 20	// position of minimap in game window
+# define MINIMAP_Y 20	// position of minimap in game window
+# define MINIMAP_WIDTH 300
+# define MINIMAP_HEIGHT 300
+
+// Error msg
 # define ERROR "Error\n"
 # define INVALID_FILENAME "Invalid file name\n"
 # define WRONG_EXTENSION "Invalid file extension\n"
@@ -33,7 +39,7 @@
 # define MULTIPLE_PLAYER_STARTS "Multiple player start positions found in the map\n"
 # define INVALID_CONFIG_LINE "Invalid configuration line\n"
 
-//Map elements
+// Map elements
 # define WALL '1'
 # define EMPTY '0'
 # define PLAYER_NORTH 'N'
@@ -41,7 +47,7 @@
 # define PLAYER_WEST 'W'
 # define PLAYER_EAST 'E'
 
-//KEY CODES
+// Key codes
 # define KEY_ESC 65307
 # define KEY_LEFT 65361
 # define KEY_UP 65362
@@ -117,7 +123,7 @@ int		game_close(t_game *game);
 
 //execution part
 void	put_pixel(int x, int y, int colour, t_game *game);
-void	draw_map(t_game *game);
-void	draw_square(int x, int y, int size, int colour, t_game *game);
+// void	draw_map(t_game *game);
+void	draw_minimap(t_game *game);
 
 #endif

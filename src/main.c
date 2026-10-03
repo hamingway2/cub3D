@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/26 17:17:30 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/03 16:30:12 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/03 17:37:10 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	game_loop(void *param)
 	
 	game = (t_game *)param;
 	player = &game->player;
-	draw_map(game);
+	// draw_map(game);
+	draw_minimap(game);
 	// move_player(player);
-	draw_square(player->x * TILE_SIZE - 5, player->y * TILE_SIZE - 5, 10, 0x00FF00, game);
 	mlx_put_image_to_window(game->mlx, game->window, game->img.img, 0, 0);
 	return (0);
 }
@@ -126,7 +126,6 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(game.mlx, game_loop, &game);
 
 	mlx_loop(game.mlx);
-	ft_putstr_fd("cub3d started!\n", 1);
 	game_destroy(&game, EXIT_SUCCESS);
 	return (0);
 }

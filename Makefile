@@ -10,6 +10,7 @@ SRC := src/main.c \
 		src/parsing/parsing_utils.c \
 		src/event/event.c \
 		src/rendering/drawing.c \
+		src/rendering/minimap.c \
 
 NAME := cub3d
 CC := cc
