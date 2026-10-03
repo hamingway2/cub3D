@@ -6,40 +6,31 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/26 17:17:30 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/02 23:57:23 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/03 16:30:12 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	put_pixel(int x, int y, int colour, t_game *game)
-{
-	int	index;
-		
-	if (x >= WIDTH || y >= HEIGHT || x < 0 || y < 0)
-		return ;
-	index = y * game->img.line_length + x * game->img.bits_per_pixel / 8;
-	game->img.addr[index] = colour & 0xFF;
-	game->img.addr[index + 1] = (colour >> 8) & 0xFF;
-	game->img.addr[index + 2] = (colour >> 16)& 0xFF;
-}
+// void	move_player(t_player *player)
+// {
+// 	int	speed;
 
-void	draw_player(int x, int y, int size, int colour, t_game *game)
-{
-	int	i;
-	int	j;
+// 	speed = 5;
+// }
 
-	i = 0;
-	while (i < size)
-	{
-		j = 0;
-		while (j < size)
-		{
-			put_pixel(x + i, y + j, colour, game);
-			j++;
-		}
-		i++;
-	}
+int	game_loop(void *param)
+{
+	t_game		*game;
+	t_player	*player;
+	
+	game = (t_game *)param;
+	player = &game->player;
+	draw_map(game);
+	// move_player(player);
+	draw_square(player->x * TILE_SIZE - 5, player->y * TILE_SIZE - 5, 10, 0x00FF00, game);
+	mlx_put_image_to_window(game->mlx, game->window, game->img.img, 0, 0);
+	return (0);
 }
 
 //////////////////////////////// Gitis part
@@ -128,13 +119,12 @@ int	main(int argc, char **argv)
 	// print_map(game.map.grid, game.map.height, game.map.width); // Testfunktion
 	if (player_init(&game) == FALSE)
 		return (1);
-
-	draw_player(WIDTH / 2, HEIGHT / 2, 10, 0x00FF00, &game);
-	mlx_put_image_to_window(game.mlx, game.window, game.img.img, 0, 0);
-		
 	mlx_key_hook(game.window, key_event, &game);
 	//mlx_mouse_hook(game.window, mouse_event, &state);
 	mlx_hook(game.window, 17, 0, game_close, &game);
+
+	mlx_loop_hook(game.mlx, game_loop, &game);
+
 	mlx_loop(game.mlx);
 	ft_putstr_fd("cub3d started!\n", 1);
 	game_destroy(&game, EXIT_SUCCESS);

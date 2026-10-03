@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/29 20:10:34 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/02 23:30:06 by azielnic         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -18,6 +6,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <stdbool.h>
 # include <math.h>
 # include "mlx.h"
 
@@ -29,8 +18,10 @@
 # define EXTENSION ".cub"
 # define BUFFER_SIZE 42
 
-# define WIDTH 1200 // TODO: include in in a struct afterall?
-# define HEIGHT 700 // TODO: include in in a struct afterall?
+// Scaling
+# define WIDTH 1920 // TODO: include in in a struct afterall?
+# define HEIGHT 1080 // TODO: include in in a struct afterall?
+# define TILE_SIZE 32
 
 //Error msg
 # define ERROR "Error\n"
@@ -56,6 +47,10 @@
 # define KEY_UP 65362
 # define KEY_RIGHT 65363
 # define KEY_DOWN 65364
+# define W 119
+# define A 97
+# define S 115
+# define D 100
 
 typedef struct s_img
 {
@@ -80,6 +75,11 @@ typedef struct s_player
 	double	direction; // 0 = North, 90 = East, 180 = South, 270 = West
 	double	plane_x;
 	double	plane_y;
+
+	bool	key_up;
+	bool	key_down;
+	bool	key_right;
+	bool	key_left;
 }	t_player;
 
 typedef struct s_game
@@ -114,5 +114,10 @@ int		get_line_length(char *line);
 int		player_init(t_game *game);
 int		key_event(int key, t_game *game);
 int		game_close(t_game *game);
+
+//execution part
+void	put_pixel(int x, int y, int colour, t_game *game);
+void	draw_map(t_game *game);
+void	draw_square(int x, int y, int size, int colour, t_game *game);
 
 #endif

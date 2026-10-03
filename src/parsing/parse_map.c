@@ -1,5 +1,7 @@
 #include "cub3d.h"
 
+// TODO: Can you also create a file called
+
 static int	get_map_height(char *filename)
 {
 	int		fd;

@@ -1,5 +1,13 @@
 #include "cub3d.h"
 
+static void	init_keys(t_player *player)
+{
+	player->key_up = false;
+	player->key_down = false;
+	player->key_right = false;
+	player->key_left = false;
+}
+
 static int is_player_start(char c)
 {
 	return (c == PLAYER_NORTH || c == PLAYER_SOUTH || c == PLAYER_WEST || c == PLAYER_EAST);
@@ -24,6 +32,7 @@ int player_init(t_game *game)
 	int	i;
 	int	j;
 
+	init_keys(&game->player);
 	i = 0;
 	while (game->map.grid[i] != NULL)
 	{
