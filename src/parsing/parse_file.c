@@ -17,7 +17,14 @@ int	parse_file(t_game *game, char *filename)
 			;
 		//parse configuration lines
 		else if (is_config_line(line))
-			parse_config(game, line);
+		{
+			if(parse_config(game, line) == FALSE)
+			{
+				free(line);
+				close(fd);
+				return (FALSE);
+			}
+		}
 		//once the first map line is detected, load the map and break the loop, validate the map in load_map function
 		else if (is_map_line(line))
 		{
