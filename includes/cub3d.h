@@ -38,6 +38,7 @@
 # define NO_PLAYER_START "No player start position found in the map\n"
 # define MULTIPLE_PLAYER_STARTS "Multiple player start positions found in the map\n"
 # define INVALID_CONFIG_LINE "Invalid configuration line\n"
+# define DUPLICATE_TEXTURE "Duplicate texure line"
 
 //Map elements
 # define WALL '1'

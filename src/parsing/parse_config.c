@@ -4,21 +4,29 @@ int parse_texture(t_game *game, char *line)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
 	{
+		if (game->texture_north != NULL)
+			return (error_msg(DUPLICATE_TEXTURE));
 		game->texture_north = ft_strdup(line + 3);
 		return (TRUE);
 	}
 	if (ft_strncmp(line, "SO ", 3) == 0)
 	{
+		if (game->texture_south != NULL)
+			return (error_msg(DUPLICATE_TEXTURE));
 		game->texture_south = ft_strdup(line + 3);
 		return (TRUE);
 	}
 	if (ft_strncmp(line, "WE ", 3) == 0)
 	{
+		if (game->texture_west != NULL)
+			return (error_msg(DUPLICATE_TEXTURE));
 		game->texture_west = ft_strdup(line + 3);
 		return (TRUE);
 	}
 	if (ft_strncmp(line, "EA ", 3) == 0)
 	{
+		if (game->texture_east != NULL)
+			return (error_msg(DUPLICATE_TEXTURE));
 		game->texture_east = ft_strdup(line + 3);
 		return (TRUE);
 	}
