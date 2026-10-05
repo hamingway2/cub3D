@@ -77,5 +77,5 @@ int	parse_map(t_game *game, char *filename)
 	width = read_map(game, filename);
 	game->map.width = width;
 	game->map.height = height;
-	return (TRUE);
+	return (validate_map(game));
 }

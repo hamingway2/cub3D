@@ -40,6 +40,8 @@
 # define INVALID_CONFIG_LINE "Invalid configuration line\n"
 # define DUPLICATE_TEXTURE "Duplicate texure line\n"
 # define DUPLICATE_COLOR "Duplicate color line\n"
+# define INVALID_MAP_WALLS "Map is not surrounded by walls\n"
+# define INVALID_MAP_CHARACTER "Invalid character in map\n"
 
 //Map elements
 # define WALL '1'
@@ -113,5 +115,6 @@ int		get_line_length(char *line);
 int		player_init(t_game *game);
 int		key_event(int key, t_game *game);
 int		game_close(t_game *game);
+int		validate_map(t_game *game);
 
 #endif
