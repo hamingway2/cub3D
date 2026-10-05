@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/03 16:49:07 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/03 17:43:17 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/03 17:47:47 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	draw_map_row(t_game *game, t_map *map, int y, int cell_size, int off
 	{
 		if (map->grid[y][x] == '1')
 		{
-			draw_square(offset_x + x * cell_size, offset_y + y * cell_size, cell_size, 0xFFFF00, game);
+			draw_square(offset_x + x * cell_size, offset_y + y * cell_size, cell_size, 0x708090, game);
 		}
 		x++;
 	}

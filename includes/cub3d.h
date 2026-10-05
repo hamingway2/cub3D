@@ -25,9 +25,9 @@
 
 // Minimap dimensions
 # define MINIMAP_X 20	// position of minimap in game window
-# define MINIMAP_Y 20	// position of minimap in game window
-# define MINIMAP_WIDTH 300
-# define MINIMAP_HEIGHT 300
+# define MINIMAP_Y 5	// position of minimap in game window
+# define MINIMAP_WIDTH 200
+# define MINIMAP_HEIGHT 200
 
 // Error msg
 # define ERROR "Error\n"
@@ -53,10 +53,10 @@
 # define KEY_UP 65362
 # define KEY_RIGHT 65363
 # define KEY_DOWN 65364
-# define W 119
-# define A 97
-# define S 115
-# define D 100
+// # define W 119
+// # define A 97
+// # define S 115
+// # define D 100
 
 typedef struct s_img
 {
