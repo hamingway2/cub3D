@@ -6,29 +6,11 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/03 16:49:07 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/05 15:23:04 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/05 17:27:12 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-void	draw_square(int x, int y, int size, int colour, t_game *game)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < size)
-	{
-		j = 0;
-		while (j < size)
-		{
-			put_pixel(x + i, y + j, colour, game);
-			j++;
-		}
-		i++;
-	}
-}
 
 static float	get_minimap_scale(t_map *map)
 {
@@ -123,8 +105,10 @@ void	draw_minimap(t_game *game)
 	cell_size = (int)get_minimap_scale(map);
 	rendered_width = map->width * cell_size;
 	rendered_height = map->height * cell_size;
-	offset_x = MINIMAP_X + (MINIMAP_WIDTH - rendered_width) / 2;
-	offset_y = MINIMAP_Y + (MINIMAP_HEIGHT - rendered_height) / 2;
+	offset_x = MINIMAP_X;
+	offset_y = MINIMAP_Y;
+	// offset_x = MINIMAP_X + (MINIMAP_WIDTH - rendered_width) / 2;
+	// offset_y = MINIMAP_Y + (MINIMAP_HEIGHT - rendered_height) / 2;
 	y = 0;
 	while (y < map->height)
 	{

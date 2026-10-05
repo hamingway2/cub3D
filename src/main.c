@@ -6,32 +6,72 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/26 17:17:30 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/03 17:37:10 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/05 17:23:23 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-// void	move_player(t_player *player)
-// {
-// 	int	speed;
-
-// 	speed = 5;
-// }
-
-int	game_loop(void *param)
+void	move_player(t_player *player)
 {
-	t_game		*game;
+	double	speed;
+
+	speed = 0.05;
+	if (player->key_up)
+		player->y -= speed;
+	if (player->key_down)
+		player->y += speed;
+	if (player->key_left)
+		player->x -= speed;
+	if (player->key_right)
+		player->x += speed;
+}
+
+void	clear_image(t_game *game)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			put_pixel(x, y, 0x000000, game);
+			x++;
+		}
+		y++;
+	}
+}
+
+int	game_loop(t_game *game)
+{
 	t_player	*player;
 	
-	game = (t_game *)param;
 	player = &game->player;
-	// draw_map(game);
+	clear_image(game);
+	move_player(player);
 	draw_minimap(game);
-	// move_player(player);
+	// draw_map(game);
 	mlx_put_image_to_window(game->mlx, game->window, game->img.img, 0, 0);
 	return (0);
 }
+
+// int	game_loop(void *param)
+// {
+// 	t_game		*game;
+// 	t_player	*player;
+	
+// 	game = (t_game *)param;
+// 	player = &game->player;
+// 	move_player(player);
+// 	draw_minimap(game);
+// 	// draw_map(game);
+// 	// draw_square(player->x, player->y, 10, 0x00FF00, game);
+// 	mlx_put_image_to_window(game->mlx, game->window, game->img.img, 0, 0);
+// 	return (0);
+// }
 
 //////////////////////////////// Gitis part
 
@@ -119,7 +159,8 @@ int	main(int argc, char **argv)
 	// print_map(game.map.grid, game.map.height, game.map.width); // Testfunktion
 	if (player_init(&game) == FALSE)
 		return (1);
-	mlx_key_hook(game.window, key_event, &game);
+	mlx_hook(game.window, 2, 1L << 0, key_event, &game);
+	mlx_hook(game.window, 3, 1L << 1, key_release, &game);
 	//mlx_mouse_hook(game.window, mouse_event, &state);
 	mlx_hook(game.window, 17, 0, game_close, &game);
 
