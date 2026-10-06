@@ -7,9 +7,6 @@ int	is_empty_line(char *line)
 	return (*line == '\0' || *line == '\n');
 }
 
-//int	is_texture_line(char *line);
-//int	is_color_line(char *line);
-
 int	is_texture_line(char *line)
 {
 	while (*line == ' ' || *line == '\t')
@@ -55,10 +52,14 @@ int	is_config_line(char *line)
 	return (FALSE);
 }
 
+int	is_player_char(char c)
+{
+	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
+}
+
 int	is_map_line(char *line)
 {
 	while (*line == ' ' || *line == '\t')
 		line++;
-	return (*line == WALL || *line == EMPTY || *line == PLAYER_NORTH || *line == PLAYER_SOUTH
-		|| *line == PLAYER_WEST || *line == PLAYER_EAST); // valid map lines start with a map character (might still be invalid)
+	return (*line == WALL || *line == EMPTY || is_player_char(*line) == TRUE); // valid map lines start with a map character (might still be invalid)
 }

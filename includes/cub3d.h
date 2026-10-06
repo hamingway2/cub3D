@@ -108,6 +108,7 @@ int		is_config_line(char *line);
 int		is_map_line(char *line);
 int		is_texture_line(char *line);
 int		is_color_line(char *line);
+int		is_player_char(char c);
 int		parse_config(t_game *game, char *line);
 int		parse_map(t_game *game, char *filename);
 int		ft_max(int a, int b);

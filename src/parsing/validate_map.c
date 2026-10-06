@@ -32,7 +32,7 @@ static int	validate_map_walls(t_game *game)
 		while (j < game->map.width)
 		{
 			if (game->map.grid[i][j] == '0'
-				|| is_player_position(game->map.grid[i][j]))
+				|| is_player_char(game->map.grid[i][j]))
 			{
 				if (!check_wall_direction(&game->map, i, j, -1, 0)
 					|| !check_wall_direction(&game->map, i, j, 1, 0)
