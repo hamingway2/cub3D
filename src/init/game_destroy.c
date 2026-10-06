@@ -17,11 +17,8 @@ void	free_map(t_map *map)
 	}
 }
 
-void	game_destroy(t_game *game, int exit_status)
+void	mlx_cleanup(t_game *game)
 {
-	if (game->map.grid)
-		free_map(&game->map);
-	//todo: destroy textures
 	if (game->img.img)
 		mlx_destroy_image(game->mlx, game->img.img);
 	if (game->window)
@@ -29,5 +26,22 @@ void	game_destroy(t_game *game, int exit_status)
 	if (game->mlx)
 		mlx_destroy_display(game->mlx);
 	free(game->mlx);
+}
+
+void	game_cleanup(t_game *game)
+{
+	free(game->texture_north);
+	free(game->texture_south);
+	free(game->texture_west);
+	free(game->texture_east);
+	free(game->floor_color);
+	free(game->ceiling_color);
+	free_map(&game->map);
+	mlx_cleanup(game);
+}
+
+void	game_destroy(t_game *game, int exit_status)
+{
+	game_cleanup(game);
 	exit(exit_status);
 }
