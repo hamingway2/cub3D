@@ -18,7 +18,7 @@ int	parse_file(t_game *game, char *filename)
 		//parse configuration lines
 		else if (is_config_line(line))
 		{
-			if(parse_config(game, line) == FALSE)
+			if (parse_config(game, line) == FALSE)
 			{
 				free(line);
 				close(fd);
