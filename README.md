@@ -5,26 +5,28 @@ _This project has been created as part of the 42 curriculum by azielnic, gkhavar
 ## Description
 
 cub3D is a 42 project inspired by the classic Wolfenstein 3D raycasting engine.
-The current implementation focuses on parsing and validating `.cub` map files,
-initializing a MiniLibX window, and preparing the game state for a future
-raycasting renderer.
+The project has progressed from raw map parsing into a working game foundation:
+it validates input files, loads the map, initializes the MiniLibX window, places
+the player, and prepares the event loop for the next rendering stage.
 
 ## Current functionality
 
-The project now includes the following features:
+The project currently includes the following features:
 
 - Command-line argument validation for a single `.cub` file
-- Parsing of config lines such as:
+- Parsing of configuration lines such as:
   - `NO ...`, `SO ...`, `WE ...`, `EA ...`
   - `F ...`, `C ...`
 - Loading the map grid from the input file
 - Detection of the player's starting position (`N`, `S`, `E`, `W`)
-- Basic wall and character validation for the map
-- MiniLibX window initialization and clean shutdown with `Esc`
+- Basic map validation for borders and allowed characters
+- MiniLibX initialization and window creation
+- Player initialization with position and direction values
+- Keyboard exit handling with `Esc`
+- Clean shutdown of the game resources
 
-The project already stores the texture paths and color values in the game
-structure, and it enforces basic validation rules before continuing the game
-setup.
+The current implementation is a game-state and window foundation for the
+raycasting engine; actual raycasting rendering is still the next major step.
 
 ## Instructions
 
@@ -98,14 +100,15 @@ After the input file is checked, the parser reads the file and identifies:
 2. the beginning of the map
 3. the player's spawn point
 
-The map is then validated to ensure it is bounded by walls and that only valid
-characters are used.
+The map is then validated to confirm it is enclosed by walls and contains only
+valid map characters.
 
 ### Controls and exit
 
 - Press `Esc` to quit the program.
 - Closing the window also ends the session.
-- On shutdown, the program frees the allocated map and MiniLibX resources.
+- The program frees the allocated map, image, and MiniLibX resources during
+  shutdown.
 
 ### Error handling
 
@@ -119,6 +122,21 @@ The program reports errors for cases such as:
 - invalid map walls
 - invalid map characters
 - missing player start position
+
+## Validation TODO
+
+The following validation work is still needed before the project fully matches a
+complete cub3D map parser:
+
+- Check that all required texture identifiers are present exactly once:
+  - `NO`, `SO`, `WE`, `EA`
+- Check that all required color entries are present exactly once:
+  - `F`, `C`
+- Validate the floor and ceiling color values as proper RGB triplets
+- Ensure texture paths are non-empty and valid
+- Reject empty or malformed config lines before the map starts
+- Validate that the player start position appears exactly once
+- Verify that the map does not contain trailing garbage after the final row
 
 ## Resources
 

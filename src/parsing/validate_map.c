@@ -1,25 +1,48 @@
 #include "cub3d.h"
 
-static int validate_map_walls(t_game *game)
+static int	check_wall_direction(t_map *map, int i, int j, int di, int dj)
+{
+	while (i >= 0 && i < map->height
+		&& j >= 0 && j < map->width)
+	{
+		if (map->grid[i][j] == '1')
+			return (TRUE);
+		i += di;
+		j += dj;
+	}
+	return (FALSE);
+}
+
+/**
+Validate that the map is surrounded by walls ('1') in all four directions, 
+not assuming the map is rectangular. This function checks each cell in the map grid 
+and ensures that if it is a '0' or a player position, there are walls in all four cardinal 
+directions (up, down, left, right). If any of these checks fail, it returns an error message 
+indicating that the map walls are invalid.
+*/
+static int	validate_map_walls(t_game *game)
 {
 	int	i;
 	int	j;
 
-	//check top and bottom walls
 	i = 0;
-	while (i < game->map.width)
+	while (i < game->map.height)
 	{
-		if (game->map.grid[0][i] != '1' || game->map.grid[game->map.height - 1][i] != '1')
-			return (error_msg(INVALID_MAP_WALLS));
+		j = 0;
+		while (j < game->map.width)
+		{
+			if (game->map.grid[i][j] == '0'
+				|| is_player_position(game->map.grid[i][j]))
+			{
+				if (!check_wall_direction(&game->map, i, j, -1, 0)
+					|| !check_wall_direction(&game->map, i, j, 1, 0)
+					|| !check_wall_direction(&game->map, i, j, 0, -1)
+					|| !check_wall_direction(&game->map, i, j, 0, 1))
+					return (error_msg(INVALID_MAP_WALLS));
+			}
+			j++;
+		}
 		i++;
-	}
-	//check left and right walls
-	j = 0;
-	while (j < game->map.height)
-	{
-		if (game->map.grid[j][0] != '1' || game->map.grid[j][game->map.width - 1] != '1')
-			return (error_msg(INVALID_MAP_WALLS));
-		j++;
 	}
 	return (TRUE);
 }
