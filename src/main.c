@@ -6,11 +6,23 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/26 17:17:30 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/05 17:23:23 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/07 22:08:17 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+bool	collision_minimap(double px, double py, t_game *game)
+{
+	int	x;
+	int	y;
+
+	x = (int)floor(px);
+	y = (int)floor(py);
+	if (x < 0 || x >= game->map.width || y < 0 || y >= game->map.height)
+		return (true);
+	return (game->map.grid[y][x] == WALL);
+}
 
 void	move_player(t_player *player)
 {
@@ -48,30 +60,35 @@ void	clear_image(t_game *game)
 int	game_loop(t_game *game)
 {
 	t_player	*player;
+	// TODO: angle can be avoided if direction directly stores radians instead of degrees
+	double		angle; 
+	double		ray_x;
+	double		ray_y;
+	double		step_x;
+	double		step_y;
 	
 	player = &game->player;
 	clear_image(game);
 	move_player(player);
 	draw_minimap(game);
 	// draw_map(game);
+
+	ray_x = player->x;
+	ray_y = player->y;
+	angle = player->direction * PI / 180.0;
+	step_x = +sin(angle);
+	step_y = -cos(angle);
+	
+	while (!collision_minimap(ray_x, ray_y, game))
+	{
+		put_pixel(ray_x, ray_y, 0xFF0000, game);
+		ray_x += step_x;
+		ray_y += step_y;
+	}
+	
 	mlx_put_image_to_window(game->mlx, game->window, game->img.img, 0, 0);
 	return (0);
 }
-
-// int	game_loop(void *param)
-// {
-// 	t_game		*game;
-// 	t_player	*player;
-	
-// 	game = (t_game *)param;
-// 	player = &game->player;
-// 	move_player(player);
-// 	draw_minimap(game);
-// 	// draw_map(game);
-// 	// draw_square(player->x, player->y, 10, 0x00FF00, game);
-// 	mlx_put_image_to_window(game->mlx, game->window, game->img.img, 0, 0);
-// 	return (0);
-// }
 
 //////////////////////////////// Gitis part
 

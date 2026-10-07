@@ -17,6 +17,7 @@
 # define HELP_FLAG "--help"
 # define EXTENSION ".cub"
 # define BUFFER_SIZE 42
+# define PI 3.14159265359
 
 // Scaling
 # define WIDTH 1920 // TODO: include in in a struct afterall?
@@ -128,5 +129,6 @@ void	draw_square(int x, int y, int size, int colour, t_game *game);
 // void	draw_map(t_game *game);
 void	draw_minimap(t_game *game);
 void	move_player(t_player *player);
+bool	collision_minimap(double px, double py, t_game *game);
 
 #endif
