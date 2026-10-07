@@ -17,10 +17,18 @@ static int	get_map_height(char *filename)
 	while (line)
 	{
 		if (!map_started && is_map_line(line))
-			map_started = TRUE;
-		if (map_started && !is_empty_line(line))
 		{
+			map_started = TRUE;
 			height++;
+		}
+		else if (map_started)
+		{
+			if (is_empty_line(line))
+				break ;
+			if (is_map_line(line))
+				height++;
+			else
+				break ;
 		}
 		free(line);
 		line = get_next_line(fd);
@@ -113,6 +121,7 @@ int	parse_map(t_game *game, char *filename)
 		return (FALSE);
 	width = read_map(game, filename);
 	game->map.width = width;
+//	game->map.height = height;
 	game->map.height = get_real_map_height(&game->map);
 	return (validate_map(game));
 }

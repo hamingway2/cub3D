@@ -1,6 +1,8 @@
 SRC := src/main.c \
 		src/get_next_line.c \
 		src/utils.c \
+		src/check_input.c \
+		src/testing_functions.c \
 		src/init/game_init.c \
 		src/init/game_destroy.c \
 		src/init/player_init.c \

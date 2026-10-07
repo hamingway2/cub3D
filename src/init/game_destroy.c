@@ -1,5 +1,12 @@
 #include "cub3d.h"
 
+int	error_msg(char *msg)
+{
+	ft_putstr_fd(ERROR, 2);
+	ft_putstr_fd(msg, 2);
+	return (FALSE);
+}
+
 void	free_map(t_map *map)
 {
 	int	i;

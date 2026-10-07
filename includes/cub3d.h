@@ -119,5 +119,7 @@ void	game_cleanup(t_game *game);
 int		game_close(t_game *game);
 int		validate_map(t_game *game);
 int		get_real_map_height(t_map *map);
+void	print_map(char **grid, int height, int width);
+int		check_arguments(int ac, char **av);
 
 #endif
