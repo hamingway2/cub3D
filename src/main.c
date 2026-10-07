@@ -94,6 +94,7 @@ int	main(int argc, char **argv)
 	game.map.height = get_real_map_height(&game.map);
 	//testing map output
 	//print_map(game.map.grid, game.map.height, game.map.width); // Testfunktion
+	//TODO print_game_struct function schreiben
 	if (player_init(&game) == FALSE)
 		return (1);
 	mlx_key_hook(game.window, key_event, &game);

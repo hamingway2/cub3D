@@ -31,8 +31,7 @@ int	parse_file(t_game *game, char *filename)
 			free(line);
 			close(fd);
 			fd = -1; //set fd to -1 to avoid closing it again in the end of the function
-			parse_map(game, filename);
-			break ;
+			return(parse_map(game, filename));
 		}
 		//if the line is neither empty, nor a configuration line, nor a map line, it's an invalid line
 		else

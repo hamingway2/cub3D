@@ -38,7 +38,10 @@ static int	validate_map_walls(t_game *game)
 					|| !check_wall_direction(&game->map, i, j, 1, 0)
 					|| !check_wall_direction(&game->map, i, j, 0, -1)
 					|| !check_wall_direction(&game->map, i, j, 0, 1))
+				{
+					game_cleanup(game);
 					return (error_msg(INVALID_MAP_WALLS));
+				}
 			}
 			j++;
 		}
@@ -64,7 +67,10 @@ static int validate_map_characters(t_game *game)
 		while (game->map.grid[i][j])
 		{
 			if (!is_valid_map_character(game->map.grid[i][j]))
+			{
+				game_cleanup(game);
 				return (error_msg(INVALID_MAP_CHARACTER));
+			}
 			j++;
 		}
 		i++;

@@ -91,8 +91,8 @@ typedef struct s_game
 	char		*texture_south;
 	char		*texture_west;
 	char		*texture_east;
-	char		*floor_color;
-	char		*ceiling_color;
+	char		*floor_color; // als int[3] parsen
+	char		*ceiling_color; // als int[3] parsen
 	t_map		map;
 	t_player	player;
 	t_img		img;
@@ -115,6 +115,7 @@ int		ft_max(int a, int b);
 int		get_line_length(char *line);
 int		player_init(t_game *game);
 int		key_event(int key, t_game *game);
+void	game_cleanup(t_game *game);
 int		game_close(t_game *game);
 int		validate_map(t_game *game);
 
