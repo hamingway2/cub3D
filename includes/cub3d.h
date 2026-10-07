@@ -118,5 +118,6 @@ int		key_event(int key, t_game *game);
 void	game_cleanup(t_game *game);
 int		game_close(t_game *game);
 int		validate_map(t_game *game);
+int		get_real_map_height(t_map *map);
 
 #endif

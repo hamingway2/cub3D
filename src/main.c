@@ -58,6 +58,7 @@ void	print_map(char **grid, int height, int width)
 			ft_putchar_fd(grid[i][j], 1);
 			j++;
 		}
+		ft_putchar_fd('\n', 1);
 		i++;
 	}
 	ft_putchar_fd('\n', 1);
@@ -93,7 +94,7 @@ int	main(int argc, char **argv)
 	//hardcoding real map height for now, as get_map_height() is not working properly yet
 	game.map.height = get_real_map_height(&game.map);
 	//testing map output
-	//print_map(game.map.grid, game.map.height, game.map.width); // Testfunktion
+	print_map(game.map.grid, game.map.height, game.map.width); // Testfunktion
 	//TODO print_game_struct function schreiben
 	if (player_init(&game) == FALSE)
 		return (1);

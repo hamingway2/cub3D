@@ -81,8 +81,14 @@ static int validate_map_characters(t_game *game)
 int validate_map(t_game *game)
 {
 	if (validate_map_walls(game) == FALSE)
+	{
+		game_cleanup(game);
 		return (FALSE);
+	}
 	if (validate_map_characters(game) == FALSE)
+	{
+		game_cleanup(game);
 		return (FALSE);
+	}
 	return (TRUE);
 }
