@@ -22,7 +22,7 @@
 // Scaling
 # define WIDTH 1920 // TODO: include in in a struct afterall?
 # define HEIGHT 1080 // TODO: include in in a struct afterall?
-# define TILE_SIZE 32
+// # define TILE_SIZE 32
 
 // Minimap dimensions
 # define MINIMAP_X 20	// position of minimap in game window
@@ -128,7 +128,7 @@ void	put_pixel(int x, int y, int colour, t_game *game);
 void	draw_square(int x, int y, int size, int colour, t_game *game);
 // void	draw_map(t_game *game);
 void	draw_minimap(t_game *game);
-void	move_player(t_player *player);
-bool	collision_minimap(double px, double py, t_game *game);
+void	move_player(t_player *player, t_game *game);
+bool	collision_minimap(double x, double y, t_game *game);
 
 #endif

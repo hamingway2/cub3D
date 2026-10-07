@@ -6,13 +6,13 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/03 16:49:07 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/07 22:07:33 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/07 23:08:11 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
 
-static void	draw_player_ray(t_game *game, int cell_size, int offset_y, int offset_x)
+static void	draw_player_ray(t_game *game, int cell_size, int offset_x, int offset_y)
 {
 	double	ray_x;
 	double	ray_y;
@@ -32,7 +32,7 @@ static void	draw_player_ray(t_game *game, int cell_size, int offset_y, int offse
 		screen_y = offset_y + (int)(ray_y * cell_size);
 		put_pixel(screen_x, screen_y, 0xFF0000, game);
 		ray_x += sin(angle) * step;
-		ray_y += cos(angle) * step;
+		ray_y -= cos(angle) * step;
 
 	}
 	
@@ -123,14 +123,10 @@ void	draw_minimap(t_game *game)
 	int		cell_size;
 	int		offset_x;
 	int		offset_y;
-	// int		rendered_width;
-	// int		rendered_height;
 	int		y;
 	
 	map = &game->map;
 	cell_size = (int)get_minimap_scale(map);
-	// rendered_width = map->width * cell_size;
-	// rendered_height = map->height * cell_size;
 	offset_x = MINIMAP_X;
 	offset_y = MINIMAP_Y;
 	y = 0;
