@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/26 17:17:30 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/07 22:08:17 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/07 22:22:42 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,36 @@ bool	collision_minimap(double px, double py, t_game *game)
 void	move_player(t_player *player)
 {
 	double	speed;
+	double	angle;
+	double	move_x;
+	double	move_y;
 
 	speed = 0.05;
+	angle = player->direction * PI / 180.0;
+	move_x = 0.0;
+	move_y = 0.0;
 	if (player->key_up)
-		player->y -= speed;
+	{
+		move_x += sin(angle) * speed;
+		move_y -= cos(angle) * speed;
+	}
 	if (player->key_down)
-		player->y += speed;
+	{
+		move_x -= sin(angle) * speed;
+		move_y += cos(angle) * speed;
+	}
 	if (player->key_left)
-		player->x -= speed;
+	{
+		move_x -= cos(angle) * speed;
+		move_y -= sin(angle) * speed;
+	}
 	if (player->key_right)
-		player->x += speed;
+	{
+		move_x += cos(angle) * speed;
+		move_y += sin(angle) * speed;
+	}
+	player->x += move_x;
+	player->y += move_y;
 }
 
 void	clear_image(t_game *game)
