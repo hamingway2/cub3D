@@ -11,6 +11,7 @@ SRC := src/main.c \
 		src/event/event.c \
 		src/rendering/drawing.c \
 		src/rendering/minimap.c \
+		src/player/movement.c \
 
 NAME := cub3d
 CC := cc

@@ -20,12 +20,11 @@
 # define PI 3.14159265359
 
 // Scaling
-# define WIDTH 1920 // TODO: include in in a struct afterall?
-# define HEIGHT 1080 // TODO: include in in a struct afterall?
+# define WIDTH 1920
+# define HEIGHT 1080
 # define PLAYER_RADIUS 0.1
 # define PLAYER_SPEED 3.0
 # define TURN_SPEED 90.0
-// # define TILE_SIZE 32
 
 // Minimap dimensions
 # define MINIMAP_X 20	// position of minimap in game window
@@ -129,11 +128,14 @@ int		key_release(int key, t_game *game);
 int		game_close(t_game *game);
 
 //execution part
+int		game_loop(t_game *game);
 void	put_pixel(int x, int y, int colour, t_game *game);
 void	draw_square(int x, int y, int size, int colour, t_game *game);
 // void	draw_map(t_game *game);
 void	draw_minimap(t_game *game);
+void	rotate_player(t_player *player, double delta_time);
 void	move_player(t_player *player, t_game *game, double delta_time);
 bool	collision_minimap(double x, double y, t_game *game);
+void	clear_image(t_game *game);
 
 #endif

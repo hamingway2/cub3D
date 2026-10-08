@@ -6,11 +6,29 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/03 15:22:15 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/05 15:44:06 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/08 17:56:21 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void	clear_image(t_game *game)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			put_pixel(x, y, 0x000000, game);
+			x++;
+		}
+		y++;
+	}
+}
 
 void	draw_square(int x, int y, int size, int colour, t_game *game)
 {
