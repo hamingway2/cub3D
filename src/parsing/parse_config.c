@@ -12,11 +12,21 @@
 
 #include "cub3d.h"
 
+static char	*dup_without_newline(char *str)
+{
+	size_t	len;
+
+	len = ft_strlen(str);
+	if (len > 0 && str[len - 1] == '\n')
+		len--;
+	return (ft_substr(str, 0, len));
+}
+
 static int	set_texture(char **texture, char *path)
 {
 	if (*texture != NULL)
 		return (error_msg(DUPLICATE_TEXTURE));
-	*texture = ft_strdup(path);
+	*texture = dup_without_newline(path);
 	return (TRUE);
 }
 
@@ -24,7 +34,7 @@ static int	set_color(char **color, char *value)
 {
 	if (*color != NULL)
 		return (error_msg(DUPLICATE_COLOR));
-	*color = ft_strdup(value);
+	*color = dup_without_newline(value);
 	return (TRUE);
 }
 
