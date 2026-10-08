@@ -9,7 +9,8 @@ SRC := src/main.c \
 		src/parsing/parse_file.c \
 		src/parsing/parse_config.c \
 		src/parsing/parse_map.c \
-		src/parsing/parsing_utils.c \
+		src/parsing/parse_config_utils.c \
+		src/parsing/parse_map_config.c \
 		src/parsing/validate_map.c \
 		src/event/event.c \
 
