@@ -13,6 +13,16 @@
 #include "../../includes/cub3d.h"
 //TODO: maybe add error message for mlx function failure
 
+static void	init_keys(t_player *player)
+{
+	player->key_up = false;
+	player->key_down = false;
+	player->key_right = false;
+	player->key_left = false;
+	player->key_turn_left = false;
+	player->key_turn_right = false;
+}
+
 static double	get_player_direction(char player_start)
 {
 	if (player_start == PLAYER_NORTH)
@@ -32,6 +42,7 @@ int	player_init(t_game *game)
 	int	i;
 	int	j;
 
+	init_keys(&game->player);
 	i = 0;
 	while (game->map.grid[i] != NULL)
 	{
@@ -65,6 +76,8 @@ int	game_setup(t_game *game, char *file)
 
 void	game_loop(t_game *game)
 {
+	mlx_hook(game->window, 2, 1L << 0, key_event, game);
+	mlx_hook(game->window, 3, 1L << 1, key_release, game);
 	mlx_key_hook(game->window, key_event, game);
 	mlx_hook(game->window, 17, 0, game_close, game);
 	mlx_loop(game->mlx);
