@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
 //TODO: maybe add error message for mlx function failure
 
 static void	init_keys(t_player *player)
@@ -79,7 +79,9 @@ void	game_loop(t_game *game)
 	mlx_hook(game->window, 2, 1L << 0, key_event, game);
 	mlx_hook(game->window, 3, 1L << 1, key_release, game);
 	mlx_key_hook(game->window, key_event, game);
+	//mlx_mouse_hook(game.window, mouse_event, &state);
 	mlx_hook(game->window, 17, 0, game_close, game);
+	mlx_loop_hook(game->mlx, draw_loop, game);
 	mlx_loop(game->mlx);
 }
 
