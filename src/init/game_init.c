@@ -33,7 +33,3 @@ void	game_init(t_game *game)
 	if (!game->img.addr)
 		game_destroy(game, EXIT_FAILURE);
 }
-
-//Later
-// int	window_init(t_game *game);
-// int	image_init(t_game *game);
