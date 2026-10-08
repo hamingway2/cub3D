@@ -60,6 +60,13 @@
 # define KEY_RIGHT 65363
 # define KEY_DOWN 65364
 
+typedef struct s_parse
+{
+	int	map_started;
+	int	map_height;
+	int	capacity;
+}	t_parse;
+
 typedef struct s_img
 {
 	void	*img;

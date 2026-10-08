@@ -1,4 +1,16 @@
-# include  "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   testing_functions.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/08 15:11:16 by gkhavari          #+#    #+#             */
+/*   Updated: 2026/10/08 15:11:18 by gkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
 
 static void	print_texture(t_game *game)
 {
@@ -32,10 +44,9 @@ static void	print_map(t_game *game)
 			i++;
 		}
 	}
-
 }
 
-static void print_player(t_game *game)
+static void	print_player(t_game *game)
 {
 	printf("\n--- Player ---\n");
 	printf("X:         %.2f\n", game->player.x);
@@ -53,16 +64,4 @@ void	print_game(t_game *game)
 	print_map(game);
 	print_player(game);
 	printf("\n==========================\n");
-}
-
-//this will be used to get the real height of the map, as get_map_height() is not working properly yet (to be deleted later)
-int	get_real_map_height(t_map *map)
-{
-	int	i;
-
-	i = 0;
-	while (map->grid[i] != NULL)
-		i++;
-	map->height = i;
-	return (i);
 }

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/08 15:14:24 by gkhavari          #+#    #+#             */
+/*   Updated: 2026/10/08 15:14:26 by gkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-static int	check_wall_direction(t_map *map, int i, int j, int di, int dj)
+static int	check_wall_direction(t_map *map, int i, int j, int direction[2])
 {
 	while (i >= 0 && i < map->height
 		&& j >= 0 && j < map->width)
@@ -9,19 +21,37 @@ static int	check_wall_direction(t_map *map, int i, int j, int di, int dj)
 			return (TRUE);
 		if (map->grid[i][j] == ' ')
 			return (FALSE);
-		i += di;
-		j += dj;
+		i += direction[0];
+		j += direction[1];
 	}
 	return (FALSE);
 }
 
-/**
-Validate that the map is surrounded by walls ('1') in all four directions, 
-not assuming the map is rectangular. This function checks each cell in the map grid 
-and ensures that if it is a '0' or a player position, there are walls in all four cardinal 
-directions (up, down, left, right). If any of these checks fail, it returns an error message 
-indicating that the map walls are invalid.
-*/
+static int	is_walkable_tile(char tile)
+{
+	return (tile == '0' || is_player_char(tile));
+}
+
+static int	check_cell_walls(t_map *map, int i, int j)
+{
+	static int	directions[4][2] = {
+	{-1, 0},
+	{1, 0},
+	{0, -1},
+	{0, 1}
+	};
+	int			d;
+
+	d = 0;
+	while (d < 4)
+	{
+		if (!check_wall_direction(map, i, j, directions[d]))
+			return (FALSE);
+		d++;
+	}
+	return (TRUE);
+}
+
 static int	validate_map_walls(t_game *game)
 {
 	int	i;
@@ -33,17 +63,11 @@ static int	validate_map_walls(t_game *game)
 		j = 0;
 		while (j < game->map.width)
 		{
-			if (game->map.grid[i][j] == '0'
-				|| is_player_char(game->map.grid[i][j]))
+			if (is_walkable_tile(game->map.grid[i][j])
+				&& !check_cell_walls(&game->map, i, j))
 			{
-				if (!check_wall_direction(&game->map, i, j, -1, 0)
-					|| !check_wall_direction(&game->map, i, j, 1, 0)
-					|| !check_wall_direction(&game->map, i, j, 0, -1)
-					|| !check_wall_direction(&game->map, i, j, 0, 1))
-				{
-					game_cleanup(game);
-					return (error_msg(INVALID_MAP_WALLS));
-				}
+				game_cleanup(game);
+				return (error_msg(INVALID_MAP_WALLS));
 			}
 			j++;
 		}
@@ -52,12 +76,13 @@ static int	validate_map_walls(t_game *game)
 	return (TRUE);
 }
 
-static int is_valid_map_character(char c)
+static int	is_valid_map_character(char c)
 {
-	return (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == ' ');
+	return (c == '0' || c == '1' || c == 'N' || c == 'S'
+		|| c == 'E' || c == 'W' || c == ' ');
 }
 
-static int validate_map_characters(t_game *game)
+static int	validate_map_characters(t_game *game)
 {
 	int	i;
 	int	j;
@@ -80,7 +105,7 @@ static int validate_map_characters(t_game *game)
 	return (TRUE);
 }
 
-int validate_map(t_game *game)
+int	validate_map(t_game *game)
 {
 	if (validate_map_walls(game) == FALSE)
 	{

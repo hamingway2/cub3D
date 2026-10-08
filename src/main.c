@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 	if (player_init(&game) == FALSE)
 		return (1);
 	// Test if parsed correctly
-	// print_game(&game);
+	print_game(&game);
 	mlx_key_hook(game.window, key_event, &game);
 	//mlx_mouse_hook(game.window, mouse_event, &state);
 	mlx_hook(game.window, 17, 0, game_close, &game);
