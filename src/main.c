@@ -13,7 +13,7 @@
 #include "cub3d.h"
 #include <sys/time.h>
 
-int	game_loop(t_game *game)
+int	draw_loop(t_game *game)
 {
 	t_player				*player;
 	static struct timeval	last_frame_time;
@@ -41,96 +41,19 @@ int	game_loop(t_game *game)
 
 //////////////////////////////// Gitis part
 
-int	error_msg(char *msg)
-{
-	ft_putstr_fd(ERROR, 2);
-	ft_putstr_fd(msg, 2);
-	return (FALSE);
-}
-
-int	has_cub_extension(char *filename)
-{
-	size_t	len;
-
-	len = ft_strlen(filename);
-	if (len < 5)
-		return (FALSE);
-	return (ft_strncmp(filename + len - ft_strlen(EXTENSION),
-			EXTENSION, ft_strlen(EXTENSION) + 1) == 0);
-}
-
-int	check_arguments(int ac, char **av)
-{
-	if (ac != 2)
-		return (error_msg(USAGE_INFO));
-	if (has_cub_extension(av[1]) == FALSE)
-		return (error_msg(WRONG_EXTENSION));
-	return (TRUE);
-}
-
-void	print_map(char **grid, int height, int width)
-{
-	int	i;
-	int	j;
-
-	ft_putstr_fd("Printing a map of height ", 1);
-	ft_putnbr_fd(height, 1);
-	ft_putstr_fd(" and width ", 1);
-	ft_putnbr_fd(width, 1);
-	ft_putstr_fd(".\n\n", 1);
-	i = 0;
-	while (grid[i] != NULL)
-	{
-		j = 0;
-		while (grid[i][j] != '\0')
-		{
-			ft_putchar_fd(grid[i][j], 1);
-			j++;
-		}
-		i++;
-	}
-	ft_putchar_fd('\n', 1);
-}
-
-//this will be used to get the real height of the map, as get_map_height() is not working properly yet (to be deleted later)
-int	get_real_map_height(t_map *map)
-{
-	int	i;
-
-	i = 0;
-	while (map->grid[i] != NULL)
-		i++;
-	map->height = i;
-	return (i);
-}
-
 int	main(int argc, char **argv)
 {
 	t_game	game;
 
 	if (argc == 2 && ft_strncmp(argv[1], HELP_FLAG,
 			ft_strlen(HELP_FLAG) + 1) == 0)
-	{
-		ft_putstr_fd(USAGE_INFO, 1);
-		return (0);
-	}
+		return (ft_putstr_fd(USAGE_INFO, 1), EXIT_SUCCESS);
 	if (check_arguments(argc, argv) == FALSE)
-		return (1);
-	game_init(&game);
-	if (parse_file(&game, argv[1]) == FALSE)
-		return (1);
-	//hardcoding real map height for now, as get_map_height() is not working properly yet
-	game.map.height = get_real_map_height(&game.map);
-	//testing map output
-	// print_map(game.map.grid, game.map.height, game.map.width); // Testfunktion
-	if (player_init(&game) == FALSE)
-		return (1);
-	mlx_hook(game.window, 2, 1L << 0, key_event, &game);
-	mlx_hook(game.window, 3, 1L << 1, key_release, &game);
-	//mlx_mouse_hook(game.window, mouse_event, &state);
-	mlx_hook(game.window, 17, 0, game_close, &game);
-	mlx_loop_hook(game.mlx, game_loop, &game);
-	mlx_loop(game.mlx);
+		return (EXIT_FAILURE);
+	if (game_setup(&game, argv[1]) == FALSE)
+		return (EXIT_FAILURE);
+	print_game(&game); // Print the game state for debugging purposes
+	game_loop(&game);
 	game_destroy(&game, EXIT_SUCCESS);
-	return (0);
+	return (EXIT_SUCCESS);
 }

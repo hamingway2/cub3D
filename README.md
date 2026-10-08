@@ -1,107 +1,156 @@
 _This project has been created as part of the 42 curriculum by azielnic, gkhavari._
 
 # cub3D
+
 ## Description
 
+cub3D is a 42 project inspired by the classic Wolfenstein 3D raycasting engine.
+The project has progressed from raw map parsing into a working game foundation:
+it validates input files, loads the map, initializes the MiniLibX window, places
+the player, and prepares the event loop for the next rendering stage.
+
+## Current functionality
+
+The project currently includes the following features:
+
+- Command-line argument validation for a single `.cub` file
+- Parsing of configuration lines such as:
+  - `NO ...`, `SO ...`, `WE ...`, `EA ...`
+  - `F ...`, `C ...`
+- Loading the map grid from the input file
+- Detection of the player's starting position (`N`, `S`, `E`, `W`)
+- Basic map validation for borders and allowed characters
+- MiniLibX initialization and window creation
+- Player initialization with position and direction values
+- Keyboard exit handling with `Esc`
+- Clean shutdown of the game resources
+
+The current implementation is a game-state and window foundation for the
+raycasting engine; actual raycasting rendering is still the next major step.
 
 ## Instructions
+
 ### Compilation
-Compile the project using
-```
+
+Compile the project using:
+
+```bash
 make
 ```
+
 This creates the `cub3d` executable.
 
+For a build with debugging information:
 
-For a build with debugging information, use:
-```
+```bash
 make debug
 ```
-This compiles the project with the `-g` flag, allowing the program to be inspected with a debugger such as `gdb`.
 
-To remove the compiled object files:
-```
+To remove object files:
+
+```bash
 make clean
 ```
 
-To remove all compiled files and the executables:
-```
+To remove all generated files:
+
+```bash
 make fclean
 ```
 
-To recompile the project from scratch:
-```
+To rebuild everything from scratch:
+
+```bash
 make re
 ```
-
 
 ### Execution
 
 The program expects a single `.cub` map file:
-```
+
+```bash
 ./cub3d <map.cub>
 ```
 
-For example, run one of the maps included with the project:
-```
+Example:
+
+```bash
 ./cub3d maps/map00.cub
 ```
 
-The `--help` flag displays information about the correct usage:
-```
+The `--help` flag displays usage information:
+
+```bash
 ./cub3d --help
 ```
 
 If the program is executed without arguments or with more than one argument, the
 usage information is displayed:
-```
+
+```bash
 ./cub3d
 ./cub3d map1.cub map2.cub
 ```
 
-#### Argument validation
-Before parsing the map, the program validates the command-line arguments:
-1. Exactly one argument must be provided.
-2. The argument must have the `.cub` extension.
+### Parsing and validation
 
-#### Initialisation and parsing
+After the input file is checked, the parser reads the file and identifies:
 
-After checking the command-line arguments, cub3D initializes MiniLibX and creates
-the game window and image buffer. It then reads the supplied `.cub` file and
-stores the map as a grid of lines.
+1. configuration lines
+2. the beginning of the map
+3. the player's spawn point
 
-The parser skips blank lines and identifies configuration lines and the start of
-the map. Configuration parsing is not implemented yet. Once the map is loaded,
-the program searches it for the player's starting position (`N`, `S`, `E`, or
-`W`) and sets the player's initial coordinates and direction.
+The map is then validated to confirm it is enclosed by walls and contains only
+valid map characters.
 
-Map validation and parsing of texture and floor/ceiling color settings are still
-in progress.
+### Controls and exit
 
-#### Exiting the program
+- Press `Esc` to quit the program.
+- Closing the window also ends the session.
+- The program frees the allocated map, image, and MiniLibX resources during
+  shutdown.
 
-Press **Esc** or close the window to exit. The program releases the map, image,
-window, and MiniLibX resources during shutdown.
+### Error handling
 
-#### Error messages
+The program reports errors for cases such as:
 
-The program reports errors for an incorrect number of arguments, a filename
-without the `.cub` extension, failure to open the map file, an unrecognized line
-before the map, or a map without a player starting position. Full map validation
-is not yet implemented.
+- invalid argument count
+- invalid filename or extension
+- failed file opening
+- invalid configuration lines
+- duplicate texture or color definitions
+- invalid map walls
+- invalid map characters
+- missing player start position
+
+## Validation TODO
+
+The following validation work is still needed before the project fully matches a
+complete cub3D map parser:
+
+- Check that all required texture identifiers are present exactly once:
+  - `NO`, `SO`, `WE`, `EA`
+- Check that all required color entries are present exactly once:
+  - `F`, `C`
+- Validate the floor and ceiling color values as proper RGB triplets
+- Ensure texture paths are non-empty and valid
+- Reject empty or malformed config lines before the map starts
+- Validate that the player start position appears exactly once
+- Verify that the map does not contain trailing garbage after the final row
 
 ## Resources
 
-The project includes the MiniLibX and libft source code. MiniLibX uses the X11
+The project includes the MiniLibX and `libft` source code. MiniLibX uses the X11
 window system on Linux.
 
-### AI Usage
-AI tools (such as ChatGPT) were used as a support resource during the project. 
+## AI usage
 
-Specifically:
-- Clarifying concepts
-- Assisting with debugging and error interpretation
-- Suggesting improvements in code structure and organisation
-- Helping with the creation of this README
+AI tools were used as a support resource during the project for:
 
-AI was not used to produce complete solutions but rather as a learning aid and debugging assistant.
+- clarifying concepts
+- debugging and interpreting errors
+- suggesting code organization improvements
+- helping draft project documentation
+
+AI was not used to generate complete solutions; it was used as a learning aid and
+support tool during development.

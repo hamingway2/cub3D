@@ -41,6 +41,12 @@
 # define NO_PLAYER_START "No player start position found in the map\n"
 # define MULTIPLE_PLAYER_STARTS "Multiple player start positions found in the map\n"
 # define INVALID_CONFIG_LINE "Invalid configuration line\n"
+# define DUPLICATE_TEXTURE "Duplicate texure line\n"
+# define DUPLICATE_COLOR "Duplicate color line\n"
+# define INVALID_MAP_WALLS "Map is not surrounded by walls\n"
+# define INVALID_MAP_CHARACTER "Invalid character in map\n"
+# define INVALID_MAP "Invalid map\n"
+# define MALLOC_ERROR "Malloc faild\n"
 
 // Map elements
 # define WALL '1'
@@ -60,6 +66,13 @@
 # define A 97
 # define S 115
 # define D 100
+
+typedef struct s_parse
+{
+	int	map_started;
+	int	map_height;
+	int	capacity;
+}	t_parse;
 
 typedef struct s_img
 {
@@ -101,8 +114,8 @@ typedef struct s_game
 	char		*texture_south;
 	char		*texture_west;
 	char		*texture_east;
-	char		*floor_color;
-	char		*ceiling_color;
+	int	 		floor_color;
+	int			ceiling_color;
 	t_map		map;
 	t_player	player;
 	t_img		img;
@@ -118,17 +131,24 @@ int		is_config_line(char *line);
 int		is_map_line(char *line);
 int		is_texture_line(char *line);
 int		is_color_line(char *line);
+int		is_player_char(char c);
 int		parse_config(t_game *game, char *line);
-int		parse_map(t_game *game, char *filename);
-int		ft_max(int a, int b);
 int		get_line_length(char *line);
 int		player_init(t_game *game);
 int		key_event(int key, t_game *game);
+void	game_cleanup(t_game *game);
 int		key_release(int key, t_game *game);
 int		game_close(t_game *game);
+int		validate_map(t_game *game);
+void	print_game(t_game *game);
+int		check_arguments(int ac, char **av);
+void	free_map(t_map *map);
+int		normalize_map(t_map *map);
+int		game_setup(t_game *game, char *file);
+void	game_loop(t_game *game);
 
 //execution part
-int		game_loop(t_game *game);
+int		draw_loop(t_game *game);
 void	put_pixel(int x, int y, int colour, t_game *game);
 void	draw_square(int x, int y, int size, int colour, t_game *game);
 // void	draw_map(t_game *game);

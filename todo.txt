@@ -1,0 +1,51 @@
+Recommended final layout
+Yes — this is the structure I would keep for your project:
+
+1) Orchestration
+main.c
+only calls:
+argument validation
+game setup
+game loop
+cleanup and exit
+2) Parsing
+parse_file.c
+read .cub file
+detect config vs map
+collect map rows
+parse_config.c
+parse_texture()
+parse_color()
+parse_config()
+parse_map.c
+normalize_map()
+width alignment helpers
+validate_map.c
+wall checks
+invalid character checks
+3) Initialization
+game_init.c
+only MLX setup:
+mlx_init()
+mlx_new_window()
+mlx_new_image()
+data address setup
+a separate player/setup file
+player_init()
+game_setup()
+4) Input / events
+event.c
+key_event()
+game_close()
+5) Memory / cleanup
+game_destroy.c
+free_map()
+game_cleanup()
+mlx_cleanup()
+game_destroy()
+error_msg()
+6) CLI validation
+check_input.c
+check_arguments()
+has_cub_extension()
+

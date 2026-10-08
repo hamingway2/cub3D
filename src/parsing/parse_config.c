@@ -1,42 +1,81 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_config.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/08 15:13:39 by gkhavari          #+#    #+#             */
+/*   Updated: 2026/10/08 15:13:41 by gkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-int parse_texture(t_game *game, char *line)
+static char	*dup_without_newline(char *str)
+{
+	size_t	len;
+
+	len = ft_strlen(str);
+	if (len > 0 && str[len - 1] == '\n')
+		len--;
+	return (ft_substr(str, 0, len));
+}
+
+static int	set_texture(char **texture, char *path)
+{
+	if (*texture != NULL)
+		return (error_msg(DUPLICATE_TEXTURE));
+	*texture = dup_without_newline(path);
+	return (TRUE);
+}
+
+static int	set_color(int *color, char *value)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	if (*color != 0)
+		return (error_msg(DUPLICATE_COLOR));
+	r = ft_atoi(value);
+	while (*value && *value != ',')
+		value++;
+	if (*value != ',')
+		return (FALSE);
+	value++;
+	g = ft_atoi(value);
+	while (*value && *value != ',')
+		value++;
+	if (*value != ',')
+		return (FALSE);
+	value++;
+	b = ft_atoi(value);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		return (FALSE);
+	*color = (r << 16) | (g << 8) | b;
+	return (TRUE);
+}
+
+int	parse_texture(t_game *game, char *line)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
-	{
-		game->texture_north = ft_strdup(line + 3);
-		return (TRUE);
-	}
+		return (set_texture(&game->texture_north, line + 3));
 	if (ft_strncmp(line, "SO ", 3) == 0)
-	{
-		game->texture_south = ft_strdup(line + 3);
-		return (TRUE);
-	}
+		return (set_texture(&game->texture_south, line + 3));
 	if (ft_strncmp(line, "WE ", 3) == 0)
-	{
-		game->texture_west = ft_strdup(line + 3);
-		return (TRUE);
-	}
+		return (set_texture(&game->texture_west, line + 3));
 	if (ft_strncmp(line, "EA ", 3) == 0)
-	{
-		game->texture_east = ft_strdup(line + 3);
-		return (TRUE);
-	}
+		return (set_texture(&game->texture_east, line + 3));
 	return (FALSE);
 }
 
-int parse_color(t_game *game, char *line)
+int	parse_color(t_game *game, char *line)
 {
 	if (ft_strncmp(line, "F ", 2) == 0)
-	{
-		game->floor_color = ft_strdup(line + 2);
-		return (TRUE);
-	}
+		return (set_color(&game->floor_color, line + 2));
 	if (ft_strncmp(line, "C ", 2) == 0)
-	{
-		game->ceiling_color = ft_strdup(line + 2);
-		return (TRUE);
-	}
+		return (set_color(&game->ceiling_color, line + 2));
 	return (FALSE);
 }
 
