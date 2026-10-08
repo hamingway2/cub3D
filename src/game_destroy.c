@@ -54,8 +54,6 @@ void	game_cleanup(t_game *game)
 	free(game->texture_south);
 	free(game->texture_west);
 	free(game->texture_east);
-	free(game->floor_color);
-	free(game->ceiling_color);
 	free_map(&game->map);
 	mlx_cleanup(game);
 }

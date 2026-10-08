@@ -24,8 +24,8 @@ static void	print_texture(t_game *game)
 static void	print_color(t_game *game)
 {
 	printf("\n--- Colors ---\n");
-	printf("Floor:   %s\n", game->floor_color);
-	printf("Ceiling: %s\n", game->ceiling_color);
+	printf("Floor:   %X\n", game->floor_color);
+	printf("Ceiling: %X\n", game->ceiling_color);
 }
 
 static void	print_map(t_game *game)

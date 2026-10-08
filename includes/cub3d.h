@@ -100,8 +100,8 @@ typedef struct s_game
 	char		*texture_south;
 	char		*texture_west;
 	char		*texture_east;
-	char		*floor_color; // als int[3] parsen
-	char		*ceiling_color; // als int[3] parsen
+	int	 		floor_color;
+	int			ceiling_color;
 	t_map		map;
 	t_player	player;
 	t_img		img;

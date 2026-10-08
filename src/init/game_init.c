@@ -65,7 +65,6 @@ int	game_setup(t_game *game, char *file)
 
 void	game_loop(t_game *game)
 {
-	print_game(game);
 	mlx_key_hook(game->window, key_event, game);
 	mlx_hook(game->window, 17, 0, game_close, game);
 	mlx_loop(game->mlx);

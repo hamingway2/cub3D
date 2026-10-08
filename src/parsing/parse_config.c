@@ -30,11 +30,30 @@ static int	set_texture(char **texture, char *path)
 	return (TRUE);
 }
 
-static int	set_color(char **color, char *value)
+static int	set_color(int *color, char *value)
 {
-	if (*color != NULL)
+	int	r;
+	int	g;
+	int	b;
+
+	if (*color != 0)
 		return (error_msg(DUPLICATE_COLOR));
-	*color = dup_without_newline(value);
+	r = ft_atoi(value);
+	while (*value && *value != ',')
+		value++;
+	if (*value != ',')
+		return (FALSE);
+	value++;
+	g = ft_atoi(value);
+	while (*value && *value != ',')
+		value++;
+	if (*value != ',')
+		return (FALSE);
+	value++;
+	b = ft_atoi(value);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		return (FALSE);
+	*color = (r << 16) | (g << 8) | b;
 	return (TRUE);
 }
 
