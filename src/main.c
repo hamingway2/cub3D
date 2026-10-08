@@ -18,24 +18,12 @@ int	main(int argc, char **argv)
 
 	if (argc == 2 && ft_strncmp(argv[1], HELP_FLAG,
 			ft_strlen(HELP_FLAG) + 1) == 0)
-	{
-		ft_putstr_fd(USAGE_INFO, 1);
-		return (0);
-	}
+		return (ft_putstr_fd(USAGE_INFO, 1), EXIT_SUCCESS);
 	if (check_arguments(argc, argv) == FALSE)
-		return (1);
-	game_init(&game);
-	if (parse_file(&game, argv[1]) == FALSE)
-		return (1);
-	if (player_init(&game) == FALSE)
-		return (1);
-	// Test if parsed correctly
-	print_game(&game);
-	mlx_key_hook(game.window, key_event, &game);
-	//mlx_mouse_hook(game.window, mouse_event, &state);
-	mlx_hook(game.window, 17, 0, game_close, &game);
-	mlx_loop(game.mlx);
-	ft_putstr_fd("cub3d started!\n", 1);
+		return (EXIT_FAILURE);
+	if (game_setup(&game, argv[1]) == FALSE)
+		return (EXIT_FAILURE);
+	game_loop(&game);
 	game_destroy(&game, EXIT_SUCCESS);
-	return (0);
+	return (EXIT_SUCCESS);
 }

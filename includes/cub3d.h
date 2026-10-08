@@ -119,18 +119,17 @@ int		is_texture_line(char *line);
 int		is_color_line(char *line);
 int		is_player_char(char c);
 int		parse_config(t_game *game, char *line);
-int		parse_map(t_game *game, char *filename);
-int		ft_max(int a, int b);
 int		get_line_length(char *line);
 int		player_init(t_game *game);
 int		key_event(int key, t_game *game);
 void	game_cleanup(t_game *game);
 int		game_close(t_game *game);
 int		validate_map(t_game *game);
-int		get_real_map_height(t_map *map);
 void	print_game(t_game *game);
 int		check_arguments(int ac, char **av);
 void	free_map(t_map *map);
 int		normalize_map(t_map *map);
+int		game_setup(t_game *game, char *file);
+void	game_loop(t_game *game);
 
 #endif
