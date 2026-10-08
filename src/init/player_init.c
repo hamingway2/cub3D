@@ -6,6 +6,8 @@ static void	init_keys(t_player *player)
 	player->key_down = false;
 	player->key_right = false;
 	player->key_left = false;
+	player->key_turn_left = false;
+	player->key_turn_right = false;
 }
 
 static int is_player_start(char c)

@@ -10,6 +10,10 @@ int	key_release(int key, t_game *game)
 		game->player.key_right = false;
 	if (key == A)
 		game->player.key_left = false;
+	if (key == KEY_LEFT)
+		game->player.key_turn_left = false;
+	if (key == KEY_RIGHT)
+		game->player.key_turn_right = false;
 	return (0);
 }
 
@@ -26,6 +30,10 @@ int	key_event(int key, t_game *game)
 		game->player.key_right = true;
 	if (key == A)
 		game->player.key_left = true;
+	if (key == KEY_LEFT)
+		game->player.key_turn_left = true;
+	if (key == KEY_RIGHT)
+		game->player.key_turn_right = true;
 	return (0);
 }
 

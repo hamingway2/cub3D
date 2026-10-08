@@ -22,6 +22,9 @@
 // Scaling
 # define WIDTH 1920 // TODO: include in in a struct afterall?
 # define HEIGHT 1080 // TODO: include in in a struct afterall?
+# define PLAYER_RADIUS 0.1
+# define PLAYER_SPEED 3.0
+# define TURN_SPEED 90.0
 // # define TILE_SIZE 32
 
 // Minimap dimensions
@@ -87,6 +90,8 @@ typedef struct s_player
 	bool	key_down;
 	bool	key_right;
 	bool	key_left;
+	bool	key_turn_left;
+	bool	key_turn_right;
 }	t_player;
 
 typedef struct s_game
@@ -128,7 +133,7 @@ void	put_pixel(int x, int y, int colour, t_game *game);
 void	draw_square(int x, int y, int size, int colour, t_game *game);
 // void	draw_map(t_game *game);
 void	draw_minimap(t_game *game);
-void	move_player(t_player *player, t_game *game);
+void	move_player(t_player *player, t_game *game, double delta_time);
 bool	collision_minimap(double x, double y, t_game *game);
 
 #endif
