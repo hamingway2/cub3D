@@ -7,6 +7,8 @@ static int	check_wall_direction(t_map *map, int i, int j, int di, int dj)
 	{
 		if (map->grid[i][j] == '1')
 			return (TRUE);
+		if (map->grid[i][j] == ' ')
+			return (FALSE);
 		i += di;
 		j += dj;
 	}
@@ -82,12 +84,10 @@ int validate_map(t_game *game)
 {
 	if (validate_map_walls(game) == FALSE)
 	{
-		game_cleanup(game);
 		return (FALSE);
 	}
 	if (validate_map_characters(game) == FALSE)
 	{
-		game_cleanup(game);
 		return (FALSE);
 	}
 	return (TRUE);

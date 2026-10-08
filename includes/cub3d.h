@@ -42,6 +42,8 @@
 # define DUPLICATE_COLOR "Duplicate color line\n"
 # define INVALID_MAP_WALLS "Map is not surrounded by walls\n"
 # define INVALID_MAP_CHARACTER "Invalid character in map\n"
+# define INVALID_MAP "Invalid map\n"
+# define MALLOC_ERROR "Malloc faild\n"
 
 //Map elements
 # define WALL '1'
@@ -119,7 +121,9 @@ void	game_cleanup(t_game *game);
 int		game_close(t_game *game);
 int		validate_map(t_game *game);
 int		get_real_map_height(t_map *map);
-void	print_map(char **grid, int height, int width);
+void	print_game(t_game *game);
 int		check_arguments(int ac, char **av);
+void	free_map(t_map *map);
+int		normalize_map(t_map *map);
 
 #endif
