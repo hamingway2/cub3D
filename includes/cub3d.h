@@ -26,6 +26,7 @@
 # define PLAYER_SPEED 3.0
 # define TURN_SPEED 90.0
 # define FOV 60.0
+# define TILE_SIZE 32
 
 // Minimap dimensions
 # define MINIMAP_X 20	// position of minimap in game window
@@ -152,11 +153,11 @@ void	game_loop(t_game *game);
 int		draw_loop(t_game *game);
 void	put_pixel(int x, int y, int colour, t_game *game);
 void	draw_square(int x, int y, int size, int colour, t_game *game);
-// void	draw_map(t_game *game);
+void	draw_raycasting(t_game *game);
 void	draw_minimap(t_game *game);
 void	rotate_player(t_player *player, double delta_time);
 void	move_player(t_player *player, t_game *game, double delta_time);
-bool	collision_minimap(double x, double y, t_game *game);
+bool	collision(double x, double y, t_game *game);
 void	clear_image(t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/08 17:51:45 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/08 17:55:49 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/09 22:12:27 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static bool	is_wall_cell(t_game *game, int map_x, int map_y)
 	return (game->map.grid[map_y][map_x] == WALL);
 }
 
-bool	collision_minimap(double x, double y, t_game *game)
+bool	collision(double x, double y, t_game *game)
 {
 	int	map_x;
 	int	map_y;
@@ -125,8 +125,8 @@ void	move_player(t_player *player, t_game *game, double delta_time)
 	if (delta_time > 0.1)
 		delta_time = 0.1;
 	get_movement_vector(player, delta_time, &move_x, &move_y);
-	if (!collision_minimap(player->x + move_x, player->y, game))
+	if (!collision(player->x + move_x, player->y, game))
 		player->x += move_x;
-	if (!collision_minimap(player->x, player->y + move_y, game))
+	if (!collision(player->x, player->y + move_y, game))
 		player->y += move_y;
 }

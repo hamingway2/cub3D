@@ -14,6 +14,7 @@ SRC := src/main.c \
 		src/rendering/drawing.c \
 		src/rendering/minimap.c \
 		src/player/movement.c \
+		src/raycasting/raycasting.c
 
 NAME := cub3d
 CC := cc

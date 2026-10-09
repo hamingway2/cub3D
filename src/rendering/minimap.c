@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/03 16:49:07 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/09 19:22:34 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/09 22:13:08 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	draw_player_ray(t_game *game, int cell_size, int offset_x, int offse
 	ray_y = game->player.y;
 	step = 0.02;
 
-	while (!collision_minimap(ray_x, ray_y, game))
+	while (!collision(ray_x, ray_y, game))
 	{
 		screen_x = offset_x + (int)(ray_x * cell_size);
 		screen_y = offset_y + (int)(ray_y * cell_size);
