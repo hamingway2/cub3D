@@ -6,13 +6,13 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/03 16:49:07 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/07 23:08:11 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/09 19:22:34 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	draw_player_ray(t_game *game, int cell_size, int offset_x, int offset_y)
+static void	draw_player_ray(t_game *game, int cell_size, int offset_x, int offset_y, double ray_angle)
 {
 	double	ray_x;
 	double	ray_y;
@@ -21,7 +21,7 @@ static void	draw_player_ray(t_game *game, int cell_size, int offset_x, int offse
 	int		screen_x;
 	int		screen_y;
 
-	angle = game->player.direction * PI / 180.0;
+	angle = ray_angle * PI / 180.0;
 	ray_x = game->player.x;
 	ray_y = game->player.y;
 	step = 0.02;
@@ -33,9 +33,23 @@ static void	draw_player_ray(t_game *game, int cell_size, int offset_x, int offse
 		put_pixel(screen_x, screen_y, 0xFF0000, game);
 		ray_x += sin(angle) * step;
 		ray_y -= cos(angle) * step;
-
 	}
-	
+}
+
+static void draw_player_rays(t_game *game, int cell_size, int offset_x, int offset_y)
+{
+	double	ray_direction;
+	double	angle;
+	int		i;
+
+	ray_direction = game->player.direction;
+	i = 0;
+	while (i < WIDTH)
+	{
+		angle = ray_direction - FOV / 2.0 + FOV * i / (WIDTH - 1);
+		draw_player_ray(game, cell_size, offset_x, offset_y, angle);
+		i++;
+	}
 }
 
 static float	get_minimap_scale(t_map *map)
@@ -136,6 +150,6 @@ void	draw_minimap(t_game *game)
 		y++;
 	}
 	draw_grid(game, cell_size, offset_x, offset_y);
-	draw_player_ray(game, cell_size, offset_x, offset_y);
+	draw_player_rays(game, cell_size, offset_x, offset_y);
 	draw_minimap_player(game, cell_size, offset_x, offset_y);
 }
