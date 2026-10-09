@@ -25,6 +25,7 @@
 # define PLAYER_RADIUS 0.1
 # define PLAYER_SPEED 3.0
 # define TURN_SPEED 90.0
+# define FOV 60.0
 
 // Minimap dimensions
 # define MINIMAP_X 20	// position of minimap in game window

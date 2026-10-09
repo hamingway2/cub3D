@@ -37,6 +37,17 @@ static double	get_player_direction(char player_start)
 		return (-1.0); // Invalid player start character
 }
 
+void	init_player_plane(t_player *player)
+{
+	double	angle;
+	double	plane_length;
+
+	angle = player->direction * PI / 180;
+	plane_length = tan((FOV / 2.0) * PI / 180.0);
+	player->plane_x = cos(angle) * plane_length;
+	player->plane_y = -sin(angle) * plane_length;
+}
+
 int	player_init(t_game *game)
 {
 	int	i;
@@ -55,6 +66,7 @@ int	player_init(t_game *game)
 				game->player.y = i + 0.5; // Center of the cell
 				game->player.direction
 					= get_player_direction(game->map.grid[i][j]);
+				init_player_plane(&game->player);
 				return (TRUE);
 			}
 			j++;
