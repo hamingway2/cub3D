@@ -112,7 +112,7 @@ static void	get_map_width(t_game *game, int map_height)
 	i = 0;
 	while (i < map_height)
 	{
-		len = ft_strlen(game->map.grid[i]);
+		len = get_line_length(game->map.grid[i]);
 		if (len > game->map.width)
 			game->map.width = len;
 		i++;
