@@ -29,6 +29,18 @@ int	key_release(int key, t_game *game)
 	return (0);
 }
 
+int	key_focus_out(int event, t_game *game)
+{
+	(void)event;
+	game->player.key_up = false;
+	game->player.key_down = false;
+	game->player.key_left = false;
+	game->player.key_right = false;
+	game->player.key_turn_left = false;
+	game->player.key_turn_right = false;
+	return (0);
+}
+
 // TODO: Could be renamed to key_press instead of event
 int	key_event(int key, t_game *game)
 {
