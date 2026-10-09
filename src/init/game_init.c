@@ -74,16 +74,6 @@ int	game_setup(t_game *game, char *file)
 	return (TRUE);
 }
 
-void	game_loop(t_game *game)
-{
-	mlx_hook(game->window, 2, 1L << 0, key_event, game);
-	mlx_hook(game->window, 3, 1L << 1, key_release, game);
-	//mlx_mouse_hook(game.window, mouse_event, &state);
-	mlx_hook(game->window, 17, 0, game_close, game);
-	mlx_loop_hook(game->mlx, draw_loop, game);
-	mlx_loop(game->mlx);
-}
-
 void	game_init(t_game *game)
 {
 	int	width;
