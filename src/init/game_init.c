@@ -1,17 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 20:17:53 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/09/29 20:17:55 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/11 16:00:39 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 //TODO: maybe add error message for mlx function failure
+
+int	load_textures(t_game *game, t_texture *texture, char *path)
+{
+	mlx_xpm_file_to_image(game->mlx, path, WIDTH, HEIGHT);
+
+	// 1. Write a helper to load one texture
+	// 2. Load all textures
+}
 
 static void	init_keys(t_player *player)
 {
@@ -81,6 +89,8 @@ int	game_setup(t_game *game, char *file)
 	game_init(game);
 	if (parse_file(game, file) == FALSE)
 		return (FALSE);
+	// if (!load_textures(game))
+	// 	return (FALSE);
 	if (player_init(game) == FALSE)
 		return (FALSE);
 	return (TRUE);

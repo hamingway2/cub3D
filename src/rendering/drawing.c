@@ -6,11 +6,33 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/03 15:22:15 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/08 17:56:21 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/11 12:41:29 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
+
+void	draw_background(t_game *game)
+{
+	int		y;
+	int		x;
+	int		colour;
+	
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		colour = 0x564F43;
+		if (y <= HEIGHT / 2)
+			colour = 0xBDE0FE;
+		while (x < WIDTH)
+		{
+			put_pixel(x, y, colour, game);
+			x++;
+		}
+		y++;
+	}
+}
 
 void	clear_image(t_game *game)
 {

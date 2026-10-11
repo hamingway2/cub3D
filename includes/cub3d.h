@@ -76,6 +76,15 @@ typedef struct s_parse
 	int	capacity;
 }	t_parse;
 
+typedef struct s_texture
+{
+	t_img	img;		// stores MLX image handling
+	char	*path;
+	int		width;
+	int		height;
+}	t_texture;
+
+
 typedef struct s_img
 {
 	void	*img;
@@ -112,10 +121,10 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*window;
-	char		*texture_north;
-	char		*texture_south;
-	char		*texture_west;
-	char		*texture_east;
+	t_texture	north;
+	t_texture	south;
+	t_texture	west;
+	t_texture	east;
 	int	 		floor_color;
 	int			ceiling_color;
 	t_map		map;
@@ -159,5 +168,6 @@ void	rotate_player(t_player *player, double delta_time);
 void	move_player(t_player *player, t_game *game, double delta_time);
 bool	collision(double x, double y, t_game *game);
 void	clear_image(t_game *game);
+void	draw_background(t_game *game);
 
 #endif

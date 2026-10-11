@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_config.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/08 15:13:39 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/08 15:13:41 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/11 15:40:24 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ static int	set_color(int *color, char *value)
 int	parse_texture(t_game *game, char *line)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
-		return (set_texture(&game->texture_north, line + 3));
+		return (set_texture(&game->north.path, line + 3));
 	if (ft_strncmp(line, "SO ", 3) == 0)
-		return (set_texture(&game->texture_south, line + 3));
+		return (set_texture(&game->south.path, line + 3));
 	if (ft_strncmp(line, "WE ", 3) == 0)
-		return (set_texture(&game->texture_west, line + 3));
+		return (set_texture(&game->west.path, line + 3));
 	if (ft_strncmp(line, "EA ", 3) == 0)
-		return (set_texture(&game->texture_east, line + 3));
+		return (set_texture(&game->east.path, line + 3));
 	return (FALSE);
 }
 
