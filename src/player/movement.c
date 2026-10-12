@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/08 17:51:45 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/09 22:12:27 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/12 21:05:50 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,63 +40,6 @@ bool	collision(double x, double y, t_game *game)
 	if (is_wall_cell(game, map_x, map_y))
 		return (true);
 	return (false);
-}
-
-static void	get_movement_vector(t_player *player, double delta_time,
-		double *move_x, double *move_y)
-{
-	double	angle;
-	double	forward_x;
-	double	forward_y;
-	double	strafe_x;
-	double	strafe_y;
-	int		move_count;
-
-	angle = player->direction * PI / 180.0;
-	forward_x = sin(angle);
-	forward_y = -cos(angle);
-	strafe_x = cos(angle);
-	strafe_y = sin(angle);
-	*move_x = 0.0;
-	*move_y = 0.0;
-	move_count = 0;
-	if (player->key_up)
-		move_count++;
-	if (player->key_down)
-		move_count++;
-	if (player->key_left)
-		move_count++;
-	if (player->key_right)
-		move_count++;
-	if (move_count == 0)
-		return ;
-	if (player->key_up)
-	{
-		*move_x += forward_x;
-		*move_y += forward_y;
-	}
-	if (player->key_down)
-	{
-		*move_x -= forward_x;
-		*move_y -= forward_y;
-	}
-	if (player->key_left)
-	{
-		*move_x -= strafe_x;
-		*move_y -= strafe_y;
-	}
-	if (player->key_right)
-	{
-		*move_x += strafe_x;
-		*move_y += strafe_y;
-	}
-	if (move_count > 1)
-	{
-		*move_x /= sqrt(2.0);
-		*move_y /= sqrt(2.0);
-	}
-	*move_x *= PLAYER_SPEED * delta_time;
-	*move_y *= PLAYER_SPEED * delta_time;
 }
 
 void	rotate_player(t_player *player, double delta_time)

@@ -6,68 +6,62 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/03 16:49:07 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/09 22:12:38 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/12 18:34:47 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static double	distance(double x, double y)
+static void	step_ray(t_ray *ray)
 {
-	return (sqrt(x * x + y * y));
+	if (ray->side_x < ray->side_y)
+	{
+		ray->side_x += ray->delta_x;
+		ray->map_x += ray->step_x;
+		ray->side = 0;
+	}
+	else
+	{
+		ray->side_y += ray->delta_y;
+		ray->map_y += ray->step_y;
+		ray->side = 1;
+	}
+}
+
+static void	cast_ray(t_ray *ray, t_game *game)
+{
+	while (ray->map_x >= 0 && ray->map_y >= 0
+		&& ray->map_x < game->map.width && ray->map_y < game->map.height
+		&& game->map.grid[ray->map_y][ray->map_x] != WALL)
+		step_ray(ray);
+	if (ray->side == 0)
+		ray->perp_dist = ray->side_x - ray->delta_x;
+	else
+		ray->perp_dist = ray->side_y - ray->delta_y;
+	if (ray->perp_dist < 0.001)
+		ray->perp_dist = 0.001;
 }
 
 static void	draw_walls(t_game *game, double ray_angle, int screen_x)
 {
-	double	ray_x;
-	double	ray_y;
-	double	angle;
-	double	dist;
-	double	height;
-	double	projection_plane;
-	int		start_y;
-	int		end_y;
-	int		y;
+	t_ray	ray;
 
-	angle = ray_angle * PI / 180.0;
-	ray_x = game->player.x;
-	ray_y = game->player.y;
-	while (!collision(ray_x, ray_y, game))
-	{
-		ray_x += sin(angle) * 0.02;
-		ray_y -= cos(angle) * 0.02;
-	}
-
-	dist = distance(ray_x - game->player.x, ray_y - game->player.y);
-	dist *= cos((ray_angle - game->player.direction) * PI / 180.0);
-	if (dist < 0.001)
-		dist = 0.001;
-	projection_plane = (WIDTH / 2.0);
-	height = projection_plane / dist;
-	start_y = (HEIGHT - (int)height) / 2;
-	end_y = start_y + (int)height;
-	if (start_y < 0)
-		start_y = 0;
-	if (end_y >= HEIGHT)
-		end_y = HEIGHT - 1;
-	y = start_y;
-	while (y <= end_y)
-	{
-		put_pixel(screen_x, y, 0x0000FF, game);
-		y++;
-	}
+	init_ray(&ray, game, ray_angle);
+	cast_ray(&ray, game);
+	draw_textured_column(game, &ray, screen_x);
 }
 
 void	draw_raycasting(t_game *game)
 {
-	double	angle;
+	double	ray_angle;
 	int		x;
 
 	x = 0;
 	while (x < WIDTH)
 	{
-		angle = game->player.direction - FOV / 2.0 + FOV * x / (WIDTH - 1.0);
-		draw_walls(game, angle, x);
+		ray_angle = game->player.direction - FOV / 2.0
+			+ FOV * x / (WIDTH - 1.0);
+		draw_walls(game, ray_angle, x);
 		x++;
 	}
 }

@@ -6,12 +6,13 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/08 15:13:39 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/12 16:54:47 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/12 20:37:12 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+// TODO: Needs to be commented back in
 // static char	*dup_without_newline(char *str)
 // {
 // 	size_t	len;
@@ -57,6 +58,7 @@ static int	set_color(int *color, char *value)
 	return (TRUE);
 }
 
+// TODO: We nned to comment this back in
 // int	parse_texture(t_game *game, char *line)
 // {
 // 	if (ft_strncmp(line, "NO ", 3) == 0)
@@ -88,6 +90,7 @@ int	parse_texture(t_game *game, char *line)
 	return (TRUE);
 }
 
+// Might not be needed if defined in header
 int	parse_color(t_game *game, char *line)
 {
 	if (ft_strncmp(line, "F ", 2) == 0)

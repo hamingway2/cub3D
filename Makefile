@@ -13,9 +13,13 @@ SRC := src/main.c \
 		src/parsing/validate_map.c \
 		src/event/event.c \
 		src/rendering/drawing.c \
-		src/rendering/minimap.c \
+		src/rendering/draw_minimap.c \
+		src/rendering/draw_mini_player.c \
 		src/player/movement.c \
-		src/raycasting/raycasting.c
+		src/player/movement_vector.c \
+		src/raycasting/raycasting.c \
+		src/raycasting/ray_setup.c \
+		src/raycasting/texture_mapping.c
 
 NAME := cub3d
 CC := cc
