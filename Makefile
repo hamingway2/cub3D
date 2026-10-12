@@ -3,6 +3,7 @@ SRC := src/main.c \
 		src/check_input.c \
 		src/testing_functions.c \
 		src/init/game_init.c \
+		src/init/init_textures.c \
 		src/game_destroy.c \
 		src/parsing/parse_file.c \
 		src/parsing/parse_config.c \

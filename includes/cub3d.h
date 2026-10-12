@@ -76,15 +76,6 @@ typedef struct s_parse
 	int	capacity;
 }	t_parse;
 
-typedef struct s_texture
-{
-	t_img	img;		// stores MLX image handling
-	char	*path;
-	int		width;
-	int		height;
-}	t_texture;
-
-
 typedef struct s_img
 {
 	void	*img;
@@ -93,6 +84,14 @@ typedef struct s_img
 	int		line_length;	// how many bytes make up one image row
 	int		endian;			// how the bytes are ordered in memory
 }	t_img;
+
+typedef struct s_texture
+{
+	t_img	img;		// stores MLX image handling
+	char	*path;
+	int		width;
+	int		height;
+}	t_texture;
 
 typedef struct s_map
 {
@@ -159,6 +158,7 @@ int		game_setup(t_game *game, char *file);
 void	game_loop(t_game *game);
 
 //execution part
+int		load_all_textures(t_game *game);
 int		draw_loop(t_game *game);
 void	put_pixel(int x, int y, int colour, t_game *game);
 void	draw_square(int x, int y, int size, int colour, t_game *game);
