@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/27 19:59:54 by gkhavari          #+#    #+#             */
+/*   Updated: 2026/10/27 20:00:01 by gkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -9,11 +21,5 @@
 # include <stdbool.h>
 # include <math.h>
 # include "mlx.h"
-
-# include "cub3d_defines.h"
-# include "cub3d_structs.h"
-# include "cub3d_game.h"
-# include "cub3d_parsing.h"
-# include "cub3d_render.h"
 
 #endif
