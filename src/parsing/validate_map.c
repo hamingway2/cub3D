@@ -66,7 +66,6 @@ static int	validate_map_walls(t_game *game)
 			if (is_walkable_tile(game->map.grid[i][j])
 				&& !check_cell_walls(&game->map, i, j))
 			{
-				game_cleanup(game);
 				return (error_msg(INVALID_MAP_WALLS));
 			}
 			j++;
@@ -107,7 +106,6 @@ static int	validate_map_characters(t_game *game)
 			if (!is_valid_map_character(game->map.grid[i][j]))
 			{
 				map_character_error(i, j);
-				game_cleanup(game);
 				return (FALSE);
 			}
 			j++;
