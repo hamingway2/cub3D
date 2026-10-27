@@ -53,9 +53,9 @@ static int	process_after_map(t_game *game, char *line, t_parse *parse)
 {
 	if (is_config_line(line))
 		return (error_msg(CONFIG_AFTER_MAP));
-	if (!is_empty_line(line))
-		return (add_map_line(game, line, &parse->map_height, &parse->capacity));
-	return (TRUE);
+	if (is_empty_line(line))
+		return (error_line(INVALID_LINE, line));
+	return (add_map_line(game, line, &parse->map_height, &parse->capacity));
 }
 
 int	read_map_file(t_game *game, int fd, t_parse *parse)
