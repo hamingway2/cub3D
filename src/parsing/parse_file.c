@@ -62,7 +62,7 @@ static int	process_before_map(t_game *game, char *line, t_parse *parse)
 		parse->map_started = TRUE;
 		return (add_map_line(game, line, &parse->map_height, &parse->capacity));
 	}
-	return (error_msg(INVALID_LINE));
+	return (error_line(INVALID_LINE, line));
 }
 
 static int	process_after_map(t_game *game, char *line, t_parse *parse)

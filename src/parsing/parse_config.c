@@ -30,14 +30,15 @@ static int	duplicate_config(char *identifier)
 	return (FALSE);
 }
 
-static int	set_texture(char **texture, char *path, char *identifier)
+static int	set_texture(char **texture, char *path, char *identifier,
+		char *line)
 {
 	if (*texture != NULL)
 		return (duplicate_config(identifier));
 	while (*path == ' ' || *path == '\t')
 		path++;
 	if (*path == '\0' || *path == '\n')
-		return (error_msg(INVALID_LINE));
+		return (error_line(INVALID_LINE, line));
 	*texture = dup_without_newline(path);
 	if (!*texture)
 		return (error_msg(MALLOC_ERROR));
@@ -99,16 +100,23 @@ static int	set_color(int *color, bool *color_set, char *value,
 
 int	parse_texture(t_game *game, char *line)
 {
+	char	*original_line;
+
+	original_line = line;
 	while (*line == ' ' || *line == '\t')
 		line++;
 	if (ft_strncmp(line, "NO", 2) == 0)
-		return (set_texture(&game->texture_north, line + 2, "NO"));
+		return (set_texture(&game->texture_north, line + 2, "NO",
+				original_line));
 	if (ft_strncmp(line, "SO", 2) == 0)
-		return (set_texture(&game->texture_south, line + 2, "SO"));
+		return (set_texture(&game->texture_south, line + 2, "SO",
+				original_line));
 	if (ft_strncmp(line, "WE", 2) == 0)
-		return (set_texture(&game->texture_west, line + 2, "WE"));
+		return (set_texture(&game->texture_west, line + 2, "WE",
+				original_line));
 	if (ft_strncmp(line, "EA", 2) == 0)
-		return (set_texture(&game->texture_east, line + 2, "EA"));
+		return (set_texture(&game->texture_east, line + 2, "EA",
+				original_line));
 	return (FALSE);
 }
 

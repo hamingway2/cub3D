@@ -38,7 +38,7 @@
 # define WRONG_EXTENSION "Invalid map file extension (expected .cub)\n"
 # define OPEN_ERROR "Could not open map file\n"
 # define EMPTY_FILE "Map file is empty\n"
-# define INVALID_LINE "Invalid line in map file\n"
+# define INVALID_LINE "Invalid line in map file:\n"
 # define NO_PLAYER_START "Map must contain a player start (N, S, E, or W)\n"
 # define MULTIPLE_PLAYER_STARTS "Map contains more than one player start\n"
 # define INVALID_CONFIG_LINE "Invalid config: expected NO/SO/WE/EA texture " \
@@ -134,6 +134,7 @@ void	game_init(t_game *game);
 int		parse_file(t_game *game, char *filename);
 void	game_destroy(t_game *game, int exit_code);
 int		error_msg(char *msg);
+int		error_line(char *msg, char *line);
 char	*get_next_line(int fd);
 int		is_empty_line(char *line);
 int		is_config_line(char *line);

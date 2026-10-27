@@ -19,6 +19,16 @@ int	error_msg(char *msg)
 	return (FALSE);
 }
 
+int	error_line(char *msg, char *line)
+{
+	error_msg(msg);
+	ft_putchar_fd('"', 2);
+	while (*line && *line != '\n')
+		ft_putchar_fd(*line++, 2);
+	ft_putstr_fd("\"\n", 2);
+	return (FALSE);
+}
+
 void	free_map(t_map *map)
 {
 	int	i;
