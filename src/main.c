@@ -59,7 +59,10 @@ int	main(int argc, char **argv)
 	if (check_arguments(argc, argv) == FALSE)
 		return (EXIT_FAILURE);
 	if (game_setup(&game, argv[1]) == FALSE)
+	{
+		game_destroy(&game, EXIT_FAILURE);
 		return (EXIT_FAILURE);
+	}
 	print_game(&game); // Print the game state for debugging purposes
 	game_loop(&game);
 	game_destroy(&game, EXIT_SUCCESS);
