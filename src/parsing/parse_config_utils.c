@@ -17,6 +17,14 @@ static int	is_config_separator(char c)
 	return (c == ' ' || c == '\t' || c == '\n' || c == '\0');
 }
 
+int	duplicate_config(char *identifier)
+{
+	error_msg(DUPLICATE_CONFIG_LINE);
+	ft_putstr_fd(identifier, 2);
+	ft_putchar_fd('\n', 2);
+	return (FALSE);
+}
+
 int	is_texture_line(char *line)
 {
 	while (*line == ' ' || *line == '\t')
