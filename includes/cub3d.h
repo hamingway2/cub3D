@@ -46,8 +46,6 @@
 # define CONFIG_AFTER_MAP "Configuration lines must appear before the map\n"
 # define INVALID_COLOR_VALUE "Invalid color: expected R,G,B values " \
 	"from 0 to 255\n"
-# define DUPLICATE_TEXTURE "Duplicate texture definition\n"
-# define DUPLICATE_COLOR "Duplicate color definition\n"
 # define INVALID_MAP_WALLS "Map is open: every walkable tile must be " \
 	"enclosed by walls\n"
 # define INVALID_MAP_CHARACTER "Invalid map character at row "
