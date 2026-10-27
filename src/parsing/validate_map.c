@@ -96,8 +96,10 @@ static int	validate_map_characters(t_game *game)
 {
 	int	i;
 	int	j;
+	int	player_count;
 
 	i = 0;
+	player_count = 0;
 	while (game->map.grid[i])
 	{
 		j = 0;
@@ -107,6 +109,12 @@ static int	validate_map_characters(t_game *game)
 			{
 				map_character_error(i, j);
 				return (FALSE);
+			}
+			if (is_player_char(game->map.grid[i][j]))
+			{
+				player_count++;
+				if (player_count > 1)
+					return (error_msg(MULTIPLE_PLAYER_STARTS));
 			}
 			j++;
 		}
