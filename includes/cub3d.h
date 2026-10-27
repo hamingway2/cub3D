@@ -34,7 +34,6 @@
 
 // Error msg
 # define ERROR "Error\n"
-# define INVALID_FILENAME "Invalid map filename\n"
 # define WRONG_EXTENSION "Invalid map file extension (expected .cub)\n"
 # define OPEN_ERROR "Could not open map file\n"
 # define EMPTY_FILE "Map file is empty\n"
