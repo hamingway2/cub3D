@@ -12,32 +12,41 @@
 
 #include "../includes/cub3d.h"
 
-static char	*fill_line(int fd, char *new_line, char *buffer);
+static char	*fill_line(int fd, char *new_line, char *buffer, int *read_error);
 static char	*setup_line(char *line_buffer);
 static char	*free_and_return(char *to_free, char *to_return);
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, int *read_error)
 {
 	char		*buffer;
 	char		*next_line;
 	static char	*left_over_chars = NULL;
 
+	if (read_error)
+		*read_error = FALSE;
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (free_and_return(left_over_chars, NULL));
+	{
+		left_over_chars = free_and_return(left_over_chars, NULL);
+		return (NULL);
+	}
 	buffer = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!buffer)
-		return (free_and_return(left_over_chars, NULL));
-	next_line = fill_line(fd, left_over_chars, buffer);
+	{
+		left_over_chars = free_and_return(left_over_chars, NULL);
+		return (NULL);
+	}
+	next_line = fill_line(fd, left_over_chars, buffer, read_error);
+	left_over_chars = NULL;
 	free(buffer);
 	if (!next_line)
-		return (free_and_return(left_over_chars, NULL));
+		return (NULL);
 	left_over_chars = setup_line(next_line);
 	if (!next_line[0])
 		return (free_and_return(next_line, NULL));
 	return (next_line);
 }
 
-static char	*fill_line(int fd, char *new_line, char *buffer)
+static char	*fill_line(int fd, char *new_line, char *buffer, int *read_error)
 {
 	int		bytes_read;
 
@@ -59,7 +68,11 @@ static char	*fill_line(int fd, char *new_line, char *buffer)
 						ft_strjoin(new_line, buffer));
 		}
 		else
-			new_line = free_and_return(new_line, NULL);
+		{
+			if (read_error)
+				*read_error = TRUE;
+			return (free_and_return(new_line, NULL));
+		}
 	}
 	return (new_line);
 }

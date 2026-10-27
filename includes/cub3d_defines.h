@@ -36,6 +36,7 @@
 # define WRONG_EXTENSION "Invalid map file extension (expected .cub)\n"
 # define OPEN_ERROR "Could not open map file\n"
 # define EMPTY_FILE "Map file is empty\n"
+# define FILE_READ_ERROR "Could not read map file\n"
 # define INVALID_LINE "Invalid line in map file:\n"
 # define NO_PLAYER_START "Map must contain a player start (N, S, E, or W)\n"
 # define MULTIPLE_PLAYER_STARTS "Map contains more than one player start\n"

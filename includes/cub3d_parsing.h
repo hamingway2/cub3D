@@ -31,6 +31,6 @@ int		is_texture_line(char *line);
 int		is_color_line(char *line);
 int		is_player_char(char c);
 int		get_line_length(char *line);
-char	*get_next_line(int fd);
+char	*get_next_line(int fd, int *read_error);
 
 #endif

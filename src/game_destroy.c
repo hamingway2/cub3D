@@ -42,7 +42,7 @@ void	mlx_cleanup(t_game *game)
 
 void	game_cleanup(t_game *game)
 {
-	get_next_line(-1); //cleanup gnl buffer in case of failure
+	get_next_line(-1, NULL); //cleanup gnl buffer in case of failure
 	free(game->texture_north);
 	free(game->texture_south);
 	free(game->texture_west);

@@ -62,8 +62,11 @@ int	read_map_file(t_game *game, int fd, t_parse *parse)
 {
 	char	*line;
 	int		result;
+	int		read_error;
 
-	line = get_next_line(fd);
+	line = get_next_line(fd, &read_error);
+	if (read_error)
+		return (error_msg(FILE_READ_ERROR));
 	if (!line)
 		return (error_msg(EMPTY_FILE));
 	while (line)
@@ -75,7 +78,9 @@ int	read_map_file(t_game *game, int fd, t_parse *parse)
 		free(line);
 		if (!result)
 			return (FALSE);
-		line = get_next_line(fd);
+		line = get_next_line(fd, &read_error);
+		if (read_error)
+			return (error_msg(FILE_READ_ERROR));
 	}
 	if (!parse->map_started || parse->map_height == 0)
 		return (error_msg(INVALID_MAP));
