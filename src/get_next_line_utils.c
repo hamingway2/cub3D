@@ -6,11 +6,12 @@
 /*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 22:40:00 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/27 22:40:00 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/27 22:43:21 by gkhavari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+#include "../includes/get_next_line_internal.h"
 
 static char	*append_buffer(char *line, char *buffer, int bytes_read)
 {

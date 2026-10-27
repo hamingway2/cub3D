@@ -43,6 +43,8 @@ all: $(LIBFT) $(NAME)
 $(OBJ): includes/cub3d.h includes/cub3d_defines.h includes/cub3d_structs.h \
 		includes/cub3d_game.h includes/cub3d_parsing.h includes/cub3d_render.h
 
+src/get_next_line.o src/get_next_line_utils.o: includes/get_next_line_internal.h
+
 debug:
 	$(MAKE) CFLAGS="$(CFLAGS) -g" re
 

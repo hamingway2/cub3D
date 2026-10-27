@@ -13,6 +13,7 @@
 #include "cub3d.h"
 #include <sys/time.h>
 
+//@AJ: I'd like to move this to drawing.c
 int	draw_loop(t_game *game)
 {
 	t_player				*player;
@@ -39,16 +40,6 @@ int	draw_loop(t_game *game)
 	return (0);
 }
 
-void	game_loop(t_game *game)
-{
-	mlx_hook(game->window, 2, 1L << 0, key_event, game);
-	mlx_hook(game->window, 3, 1L << 1, key_release, game);
-	//mlx_mouse_hook(game.window, mouse_event, &state);
-	mlx_hook(game->window, 17, 0, game_close, game);
-	mlx_loop_hook(game->mlx, draw_loop, game);
-	mlx_loop(game->mlx);
-}
-
 int	main(int argc, char **argv)
 {
 	t_game	game;
@@ -60,11 +51,11 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (game_setup(&game, argv[1]) == FALSE)
 	{
-		game_destroy(&game, EXIT_FAILURE);
+		game_cleanup(&game);
 		return (EXIT_FAILURE);
 	}
 	print_game(&game); // Print the game state for debugging purposes
 	game_loop(&game);
-	game_destroy(&game, EXIT_SUCCESS);
+	game_cleanup(&game);
 	return (EXIT_SUCCESS);
 }

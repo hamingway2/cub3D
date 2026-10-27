@@ -32,7 +32,5 @@ int		is_color_line(char *line);
 int		is_player_char(char c);
 int		get_line_length(char *line);
 char	*get_next_line(int fd, int *read_error);
-char	*gnl_read_line(int fd, char *left_over_chars, int *read_error);
-void	gnl_setup_line(char *line_buffer, char **left_over_chars);
 
 #endif

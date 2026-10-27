@@ -50,9 +50,3 @@ void	game_cleanup(t_game *game)
 	free_map(&game->map);
 	mlx_cleanup(game);
 }
-
-void	game_destroy(t_game *game, int exit_status)
-{
-	game_cleanup(game);
-	exit(exit_status);
-}

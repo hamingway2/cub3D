@@ -15,11 +15,10 @@
 
 # include "cub3d_structs.h"
 
-void	game_init(t_game *game);
+int		game_init(t_game *game);
 int		player_init(t_game *game);
 int		game_setup(t_game *game, char *file);
 void	game_loop(t_game *game);
-void	game_destroy(t_game *game, int exit_code);
 void	game_cleanup(t_game *game);
 void	free_map(t_map *map);
 int		error_msg(char *msg);
