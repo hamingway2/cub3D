@@ -43,15 +43,17 @@
 # define MULTIPLE_PLAYER_STARTS "Map contains more than one player start\n"
 # define INVALID_CONFIG_LINE "Invalid config: expected NO/SO/WE/EA texture " \
 	"or F/C color\n"
+# define DUPLICATE_CONFIG_LINE "Duplicate config line: "
+# define MISSING_CONFIG_LINES "Missing config line(s):\n"
 # define CONFIG_AFTER_MAP "Configuration lines must appear before the map\n"
 # define INVALID_COLOR_VALUE "Invalid color: expected R,G,B values " \
 	"from 0 to 255\n"
 # define INVALID_MAP_WALLS "Map is open: every walkable tile must be " \
 	"enclosed by walls\n"
 # define INVALID_MAP_CHARACTER "Invalid map character at row "
+# define INVALID_MAP_COLUMN ", column "
 # define INVALID_MAP "Map section is missing or empty\n"
 # define MALLOC_ERROR "Memory allocation failed\n"
-# define CONFIG_MISSING "Missing required config (NO, SO, WE, EA, F, or C)\n"
 
 // Map elements
 # define WALL '1'

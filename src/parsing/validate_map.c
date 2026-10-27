@@ -87,7 +87,7 @@ static int	map_character_error(int row, int column)
 	ft_putstr_fd(ERROR, 2);
 	ft_putstr_fd(INVALID_MAP_CHARACTER, 2);
 	ft_putnbr_fd(row + 1, 2);
-	ft_putstr_fd(", column ", 2);
+	ft_putstr_fd(INVALID_MAP_COLUMN, 2);
 	ft_putnbr_fd(column + 1, 2);
 	ft_putchar_fd('\n', 2);
 	return (FALSE);

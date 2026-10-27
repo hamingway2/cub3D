@@ -24,8 +24,7 @@ static char	*dup_without_newline(char *str)
 
 static int	duplicate_config(char *identifier)
 {
-	ft_putstr_fd(ERROR, 2);
-	ft_putstr_fd("Duplicate config line: ", 2);
+	error_msg(DUPLICATE_CONFIG_LINE);
 	ft_putstr_fd(identifier, 2);
 	ft_putchar_fd('\n', 2);
 	return (FALSE);
