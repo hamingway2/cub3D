@@ -74,6 +74,7 @@ int	game_setup(t_game *game, char *file)
 	return (TRUE);
 }
 
+/*Initializes game structure, handles mlx failures*/
 void	game_init(t_game *game)
 {
 	int	width;

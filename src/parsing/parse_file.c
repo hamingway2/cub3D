@@ -46,7 +46,7 @@ static int	init_map_file(t_game *game, char *filename,
 	if (!game->map.grid)
 	{
 		close(*fd);
-		return (FALSE);
+		return (error_msg(MALLOC_ERROR));
 	}
 	return (TRUE);
 }
@@ -128,6 +128,15 @@ static int	finish_map(t_game *game, int map_height)
 	return (validate_map(game));
 }
 
+int	validate_config(t_game *game)
+{
+	if (!game->texture_north || !game->texture_south
+		|| !game->texture_west || !game->texture_east
+		|| !game->floor_color_set || !game->ceiling_color_set)
+		return (error_msg(CONFIG_MISSING));
+	return (TRUE);
+}
+
 int	parse_file(t_game *game, char *filename)
 {
 	int		fd;
@@ -144,5 +153,7 @@ int	parse_file(t_game *game, char *filename)
 		return (FALSE);
 	}
 	close(fd);
+	if (!validate_config(game))
+		return (FALSE);
 	return (finish_map(game, parse.map_height));
 }

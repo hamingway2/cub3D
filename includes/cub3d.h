@@ -47,6 +47,7 @@
 # define INVALID_MAP_CHARACTER "Invalid character in map\n"
 # define INVALID_MAP "Invalid map\n"
 # define MALLOC_ERROR "Malloc faild\n"
+# define CONFIG_MISSING "Missing texture or color configuration\n"
 
 // Map elements
 # define WALL '1'
@@ -116,6 +117,8 @@ typedef struct s_game
 	char		*texture_east;
 	int	 		floor_color;
 	int			ceiling_color;
+	bool		floor_color_set;
+	bool		ceiling_color_set;
 	t_map		map;
 	t_player	player;
 	t_img		img;

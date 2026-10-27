@@ -30,30 +30,55 @@ static int	set_texture(char **texture, char *path)
 	return (TRUE);
 }
 
-static int	set_color(int *color, char *value)
+static int	is_color_space(char c)
+{
+	return (c == ' ' || c == '\t' || c == '\r' || c == '\n');
+}
+
+static int	parse_color_component(char **value, int *component,
+		char separator)
+{
+	int	result;
+	int	digits;
+
+	while (is_color_space(**value))
+		(*value)++;
+	result = 0;
+	digits = 0;
+	while (**value >= '0' && **value <= '9')
+	{
+		result = result * 10 + (**value - '0');
+		if (result > 255)
+			return (FALSE);
+		(*value)++;
+		digits++;
+	}
+	while (is_color_space(**value))
+		(*value)++;
+	if (digits == 0 || **value != separator)
+		return (FALSE);
+	if (separator != '\0')
+		(*value)++;
+	else if (**value != '\0')
+		return (FALSE);
+	*component = result;
+	return (TRUE);
+}
+
+static int	set_color(int *color, bool *color_set, char *value)
 {
 	int	r;
 	int	g;
 	int	b;
 
-	if (*color != 0)
+	if (*color_set)
 		return (error_msg(DUPLICATE_COLOR));
-	r = ft_atoi(value);
-	while (*value && *value != ',')
-		value++;
-	if (*value != ',')
-		return (FALSE);
-	value++;
-	g = ft_atoi(value);
-	while (*value && *value != ',')
-		value++;
-	if (*value != ',')
-		return (FALSE);
-	value++;
-	b = ft_atoi(value);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		return (FALSE);
+	if (!parse_color_component(&value, &r, ',')
+		|| !parse_color_component(&value, &g, ',')
+		|| !parse_color_component(&value, &b, '\0'))
+		return (error_msg(INVALID_CONFIG_LINE));
 	*color = (r << 16) | (g << 8) | b;
+	*color_set = TRUE;
 	return (TRUE);
 }
 
@@ -72,10 +97,14 @@ int	parse_texture(t_game *game, char *line)
 
 int	parse_color(t_game *game, char *line)
 {
+	while (*line == ' ' || *line == '\t')
+		line++;
 	if (ft_strncmp(line, "F ", 2) == 0)
-		return (set_color(&game->floor_color, line + 2));
+		return (set_color(&game->floor_color, &game->floor_color_set,
+				line + 2));
 	if (ft_strncmp(line, "C ", 2) == 0)
-		return (set_color(&game->ceiling_color, line + 2));
+		return (set_color(&game->ceiling_color, &game->ceiling_color_set,
+				line + 2));
 	return (FALSE);
 }
 
