@@ -37,6 +37,7 @@
 # define INVALID_FILENAME "Invalid map filename\n"
 # define WRONG_EXTENSION "Invalid map file extension (expected .cub)\n"
 # define OPEN_ERROR "Could not open map file\n"
+# define EMPTY_FILE "Map file is empty\n"
 # define INVALID_LINE "Invalid line in map file\n"
 # define NO_PLAYER_START "Map must contain a player start (N, S, E, or W)\n"
 # define MULTIPLE_PLAYER_STARTS "Map contains more than one player start\n"
@@ -49,7 +50,7 @@
 # define DUPLICATE_COLOR "Duplicate color definition\n"
 # define INVALID_MAP_WALLS "Map is open: every walkable tile must be " \
 	"enclosed by walls\n"
-# define INVALID_MAP_CHARACTER "Map contains an invalid character\n"
+# define INVALID_MAP_CHARACTER "Invalid map character at row "
 # define INVALID_MAP "Map section is missing or empty\n"
 # define MALLOC_ERROR "Memory allocation failed\n"
 # define CONFIG_MISSING "Missing required config (NO, SO, WE, EA, F, or C)\n"

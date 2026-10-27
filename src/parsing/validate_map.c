@@ -82,6 +82,17 @@ static int	is_valid_map_character(char c)
 		|| c == 'E' || c == 'W' || c == ' ');
 }
 
+static int	map_character_error(int row, int column)
+{
+	ft_putstr_fd(ERROR, 2);
+	ft_putstr_fd(INVALID_MAP_CHARACTER, 2);
+	ft_putnbr_fd(row + 1, 2);
+	ft_putstr_fd(", column ", 2);
+	ft_putnbr_fd(column + 1, 2);
+	ft_putchar_fd('\n', 2);
+	return (FALSE);
+}
+
 static int	validate_map_characters(t_game *game)
 {
 	int	i;
@@ -95,8 +106,9 @@ static int	validate_map_characters(t_game *game)
 		{
 			if (!is_valid_map_character(game->map.grid[i][j]))
 			{
+				map_character_error(i, j);
 				game_cleanup(game);
-				return (error_msg(INVALID_MAP_CHARACTER));
+				return (FALSE);
 			}
 			j++;
 		}

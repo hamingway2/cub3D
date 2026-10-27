@@ -92,6 +92,8 @@ static int	read_map_file(t_game *game, int fd, t_parse *parse)
 	int		result;
 
 	line = get_next_line(fd);
+	if (!line)
+		return (error_msg(EMPTY_FILE));
 	while (line)
 	{
 		result = process_line(game, line, parse);
