@@ -34,7 +34,8 @@ LIBFT := $(LIBFT_DIR)/libft.a
 
 all: $(LIBFT) $(NAME)
 
-$(OBJ): includes/cub3d.h
+$(OBJ): includes/cub3d.h includes/cub3d_defines.h includes/cub3d_structs.h \
+		includes/cub3d_game.h includes/cub3d_parsing.h includes/cub3d_render.h
 
 debug:
 	$(MAKE) CFLAGS="$(CFLAGS) -g" re
