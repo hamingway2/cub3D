@@ -13,7 +13,7 @@
 // Macro definition
 # define TRUE 1
 # define FALSE 0
-# define USAGE_INFO "Usage: ./cub3d maps/<map.cub>\n"
+# define USAGE_INFO "Usage: ./cub3d <map.cub>\n"
 # define HELP_FLAG "--help"
 # define EXTENSION ".cub"
 # define BUFFER_SIZE 42
@@ -34,20 +34,24 @@
 
 // Error msg
 # define ERROR "Error\n"
-# define INVALID_FILENAME "Invalid file name\n"
-# define WRONG_EXTENSION "Invalid file extension\n"
-# define OPEN_ERROR "Failed to open file\n"
-# define INVALID_LINE "Invalid line detected\n"
-# define NO_PLAYER_START "No player start position found in the map\n"
-# define MULTIPLE_PLAYER_STARTS "Multiple player start positions found in the map\n"
-# define INVALID_CONFIG_LINE "Invalid configuration line\n"
-# define DUPLICATE_TEXTURE "Duplicate texure line\n"
-# define DUPLICATE_COLOR "Duplicate color line\n"
-# define INVALID_MAP_WALLS "Map is not surrounded by walls\n"
-# define INVALID_MAP_CHARACTER "Invalid character in map\n"
-# define INVALID_MAP "Invalid map\n"
-# define MALLOC_ERROR "Malloc faild\n"
-# define CONFIG_MISSING "Missing texture or color configuration\n"
+# define INVALID_FILENAME "Invalid map filename\n"
+# define WRONG_EXTENSION "Invalid map file extension (expected .cub)\n"
+# define OPEN_ERROR "Could not open map file\n"
+# define INVALID_LINE "Invalid line in map file\n"
+# define NO_PLAYER_START "Map must contain a player start (N, S, E, or W)\n"
+# define MULTIPLE_PLAYER_STARTS "Map contains more than one player start\n"
+# define INVALID_CONFIG_LINE "Invalid config: expected NO/SO/WE/EA texture " \
+	"or F/C color\n"
+# define INVALID_COLOR_VALUE "Invalid color: expected R,G,B values " \
+	"from 0 to 255\n"
+# define DUPLICATE_TEXTURE "Duplicate texture definition\n"
+# define DUPLICATE_COLOR "Duplicate color definition\n"
+# define INVALID_MAP_WALLS "Map is open: every walkable tile must be " \
+	"enclosed by walls\n"
+# define INVALID_MAP_CHARACTER "Map contains an invalid character\n"
+# define INVALID_MAP "Map section is missing or empty\n"
+# define MALLOC_ERROR "Memory allocation failed\n"
+# define CONFIG_MISSING "Missing required config (NO, SO, WE, EA, F, or C)\n"
 
 // Map elements
 # define WALL '1'

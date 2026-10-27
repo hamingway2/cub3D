@@ -76,7 +76,7 @@ static int	set_color(int *color, bool *color_set, char *value)
 	if (!parse_color_component(&value, &r, ',')
 		|| !parse_color_component(&value, &g, ',')
 		|| !parse_color_component(&value, &b, '\0'))
-		return (error_msg(INVALID_CONFIG_LINE));
+		return (error_msg(INVALID_COLOR_VALUE));
 	*color = (r << 16) | (g << 8) | b;
 	*color_set = TRUE;
 	return (TRUE);
