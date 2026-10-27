@@ -29,9 +29,9 @@ static int	parse_color_component(char **value, int *component,
 	digits = 0;
 	while (**value >= '0' && **value <= '9')
 	{
-		result = result * 10 + (**value - '0');
-		if (result > 255)
+		if (result > (255 - (**value - '0')) / 10)
 			return (FALSE);
+		result = result * 10 + (**value - '0');
 		(*value)++;
 		digits++;
 	}
