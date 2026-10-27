@@ -67,6 +67,8 @@ static int	process_before_map(t_game *game, char *line, t_parse *parse)
 
 static int	process_after_map(t_game *game, char *line, t_parse *parse)
 {
+	if (is_config_line(line))
+		return (error_msg(CONFIG_AFTER_MAP));
 	if (is_map_line(line))
 		return (add_map_line(game, line, &parse->map_height, &parse->capacity));
 	if (!is_empty_line(line))

@@ -42,6 +42,7 @@
 # define MULTIPLE_PLAYER_STARTS "Map contains more than one player start\n"
 # define INVALID_CONFIG_LINE "Invalid config: expected NO/SO/WE/EA texture " \
 	"or F/C color\n"
+# define CONFIG_AFTER_MAP "Configuration lines must appear before the map\n"
 # define INVALID_COLOR_VALUE "Invalid color: expected R,G,B values " \
 	"from 0 to 255\n"
 # define DUPLICATE_TEXTURE "Duplicate texture definition\n"
