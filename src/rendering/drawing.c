@@ -48,9 +48,9 @@ void	draw_background(t_game *game)
 	while (y < game->screen_height)
 	{
 		x = 0;
-		colour = 0x564F43;
+		colour = game->floor_color;
 		if (y <= game->screen_height / 2)
-			colour = 0xBDE0FE;
+			colour = game->ceiling_color;
 		while (x < game->screen_width)
 		{
 			put_pixel(x, y, colour, game);
