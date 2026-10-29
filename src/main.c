@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/26 17:17:30 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/11 12:30:05 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:02:11 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int argc, char **argv)
 		game_cleanup(&game);
 		return (EXIT_FAILURE);
 	}
-	print_game(&game); // Print the game state for debugging purposes
 	game_loop(&game);
 	game_cleanup(&game);
 	return (EXIT_SUCCESS);

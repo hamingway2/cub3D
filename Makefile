@@ -2,7 +2,6 @@ SRC := src/main.c \
 		src/get_next_line.c \
 		src/get_next_line_utils.c \
 		src/check_input.c \
-		src/testing_functions.c \
 		src/error.c \
 		src/init/game_init.c \
 		src/init/init_textures.c \
