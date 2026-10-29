@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 20:17:53 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/09/29 20:17:55 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/12 16:50:15 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@ static double	get_player_direction(char player_start)
 		return (-1.0); // Invalid player start character
 }
 
+void	init_player_plane(t_player *player)
+{
+	double	angle;
+	double	plane_length;
+
+	angle = player->direction * PI / 180;
+	plane_length = tan((FOV / 2.0) * PI / 180.0);
+	player->plane_x = cos(angle) * plane_length;
+	player->plane_y = -sin(angle) * plane_length;
+}
+
 int	player_init(t_game *game)
 {
 	int	i;
@@ -54,6 +65,7 @@ int	player_init(t_game *game)
 				game->player.y = i + 0.5; // Center of the cell
 				game->player.direction
 					= get_player_direction(game->map.grid[i][j]);
+				init_player_plane(&game->player);
 				return (TRUE);
 			}
 			j++;
@@ -67,6 +79,8 @@ int	game_setup(t_game *game, char *file)
 {
 	ft_bzero(game, sizeof(*game));
 	if (parse_file(game, file) == FALSE)
+		return (FALSE);
+	if (!load_all_textures(game))
 		return (FALSE);
 	if (player_init(game) == FALSE)
 		return (FALSE);
@@ -89,7 +103,7 @@ int	game_init(t_game *game)
 	if (!game->img.img)
 		return (error_msg("Could not create MiniLibX image\n"));
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bits_per_pixel,
-			&game->img.line_length, &game->img.endian);
+		&game->img.line_length, &game->img.endian);
 	if (!game->img.addr)
 		return (error_msg("Could not access MiniLibX image data\n"));
 	return (TRUE);

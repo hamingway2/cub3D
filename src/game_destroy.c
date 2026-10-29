@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_destroy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/08 15:13:15 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/08 15:13:17 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/12 16:36:38 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	free_map(t_map *map)
 
 void	mlx_cleanup(t_game *game)
 {
+	if (!game)
+		return ;
 	if (game->img.img)
 		mlx_destroy_image(game->mlx, game->img.img);
 	if (game->window)

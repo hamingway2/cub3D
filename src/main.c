@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/26 17:17:30 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/08 17:56:48 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/11 12:30:05 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 #include <sys/time.h>
 
 //@AJ: I'd like to move this to drawing.c
+static void	draw_game(t_game *game)
+{
+	draw_background(game);
+	draw_raycasting(game);
+	draw_minimap(game);
+	mlx_put_image_to_window(game->mlx, game->window, game->img.img, 0, 0);
+}
+
 int	draw_loop(t_game *game)
 {
 	t_player				*player;
@@ -34,9 +42,7 @@ int	draw_loop(t_game *game)
 	clear_image(game);
 	rotate_player(player, frame_delta);
 	move_player(player, game, frame_delta);
-	draw_minimap(game);
-	// draw_map(game);
-	mlx_put_image_to_window(game->mlx, game->window, game->img.img, 0, 0);
+	draw_game(game);
 	return (0);
 }
 

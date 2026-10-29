@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   testing_functions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/08 15:11:16 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/08 15:11:18 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/12 16:23:22 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 static void	print_texture(t_game *game)
 {
 	printf("\n--- Textures ---\n");
-	printf("North:   %s\n", game->texture_north);
-	printf("South:   %s\n", game->texture_south);
-	printf("West:    %s\n", game->texture_west);
-	printf("East:    %s\n", game->texture_east);
+	printf("North:   %s\n", game->north.path);
+	printf("South:   %s\n", game->south.path);
+	printf("West:    %s\n", game->west.path);
+	printf("East:    %s\n", game->east.path);
 }
 
 static void	print_color(t_game *game)
