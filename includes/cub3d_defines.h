@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_defines.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 19:58:44 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/27 19:58:46 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/29 17:54:27 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@
 # define MALLOC_ERROR "Memory allocation failed\n"
 
 # define WALL '1'
-# define EMPTY '0'
 # define PLAYER_NORTH 'N'
 # define PLAYER_SOUTH 'S'
 # define PLAYER_WEST 'W'
@@ -62,9 +61,7 @@
 
 # define KEY_ESC 65307
 # define KEY_LEFT 65361
-# define KEY_UP 65362
 # define KEY_RIGHT 65363
-# define KEY_DOWN 65364
 # define W 119
 # define A 97
 # define S 115
