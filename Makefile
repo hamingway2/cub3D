@@ -1,11 +1,6 @@
 SRC := src/main.c \
-		src/get_next_line.c \
-		src/get_next_line_utils.c \
-		src/check_input.c \
-		src/error.c \
 		src/init/game_init.c \
 		src/init/init_textures.c \
-		src/game_destroy.c \
 		src/parsing/parse_file.c \
 		src/parsing/parse_file_read.c \
 		src/parsing/validate_config.c \
@@ -16,6 +11,11 @@ SRC := src/main.c \
 		src/parsing/parse_map_utils.c \
 		src/parsing/validate_map.c \
 		src/parsing/validate_map_walls.c \
+		src/utils/get_next_line.c \
+		src/utils/get_next_line_utils.c \
+		src/utils/check_input.c \
+		src/utils/error.c \
+		src/utils/game_destroy.c \
 		src/event/event.c \
 		src/rendering/drawing.c \
 		src/rendering/draw_minimap.c \
