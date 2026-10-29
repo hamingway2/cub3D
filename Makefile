@@ -28,7 +28,7 @@ SRC := src/main.c \
 
 NAME := cub3d
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -I Libft/include -I includes
+CFLAGS := -Wall -Wextra -Werror -I libft -I includes
 MLXFLAGS = -lmlx -lXext -lX11 -lm  # -lm for the math library
 
 MLX_DIR = minilibx-linux
