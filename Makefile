@@ -1,5 +1,6 @@
 SRC := src/main.c \
-		src/init/game_init.c \
+		src/init/init_game.c \
+		src/init/init_player.c \
 		src/init/init_textures.c \
 		src/parsing/parse_file.c \
 		src/parsing/parse_file_read.c \

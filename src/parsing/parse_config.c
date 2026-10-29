@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/08 15:13:39 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/29 18:11:25 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/29 20:47:24 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,5 @@ int	parse_config(t_game *game, char *line)
 	else if (is_color_line(line))
 		return (parse_color(game, line));
 	else
-		return (error_msg(INVALID_CONFIG_LINE));
+		return (error_msg(INVALID_CONFIG_LINE_1 INVALID_CONFIG_LINE_2));
 }

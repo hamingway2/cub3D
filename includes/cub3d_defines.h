@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 19:58:44 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/29 18:11:29 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/29 20:49:10 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@
 # define INVALID_LINE "Invalid line in map file:\n"
 # define NO_PLAYER_START "Map must contain a player start (N, S, E, or W)\n"
 # define MULTIPLE_PLAYER_STARTS "Map contains more than one player start\n"
-# define INVALID_CONFIG_LINE "Invalid config: expected NO/SO/WE/EA texture " \
-	"or F/C color\n"
+# define INVALID_CONFIG_LINE_1 "Invalid config: expected NO/SO/WE/EA texture"
+# define INVALID_CONFIG_LINE_2 " or F/C color\n"
 # define DUPLICATE_CONFIG_LINE "Duplicate config line: "
 # define MISSING_CONFIG_LINES "Missing config line(s):\n"
 # define CONFIG_AFTER_MAP "Configuration lines must appear before the map\n"
-# define INVALID_COLOR_VALUE "Invalid color: expected R,G,B values " \
-	"from 0 to 255\n"
-# define INVALID_MAP_WALLS "Map is open: every walkable tile must be " \
-	"enclosed by walls\n"
+# define INVALID_COLOR_VALUE_1 "Invalid color: expected R,G,B values"
+# define INVALID_COLOR_VALUE_2 " from 0 to 255\n"
+# define INVALID_MAP_WALLS_1 "Map is open: every walkable tile must be "
+# define INVALID_MAP_WALLS_2 "enclosed by walls\n"
 # define INVALID_MAP_CHARACTER "Invalid map character at row "
 # define INVALID_MAP_COLUMN ", column "
 # define INVALID_MAP "Map section is missing or empty\n"

@@ -6,12 +6,11 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 22:40:00 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/29 18:10:48 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/29 20:19:11 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
-#include "../includes/get_next_line_internal.h"
+#include "cub3d.h"
 
 static char	*append_buffer(char *line, char *buffer, int bytes_read)
 {

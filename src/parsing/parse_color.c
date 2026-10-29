@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 20:15:12 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/29 18:11:25 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/29 20:48:42 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	set_color(int *color, bool *color_set, char *value,
 	if (!parse_color_component(&value, &r, ',')
 		|| !parse_color_component(&value, &g, ',')
 		|| !parse_color_component(&value, &b, '\0'))
-		return (error_msg(INVALID_COLOR_VALUE));
+		return (error_msg(INVALID_COLOR_VALUE_1 INVALID_COLOR_VALUE_2));
 	*color = (r << 16) | (g << 8) | b;
 	*color_set = true;
 	return (true);

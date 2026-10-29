@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 20:16:04 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/29 18:11:25 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/29 20:49:24 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	validate_map_walls(t_game *game)
 			if (is_walkable_tile(game->map.grid[i][j])
 				&& !check_cell_walls(&game->map, i, j))
 			{
-				return (error_msg(INVALID_MAP_WALLS));
+				return (error_msg(INVALID_MAP_WALLS_1 INVALID_MAP_WALLS_2));
 			}
 			j++;
 		}

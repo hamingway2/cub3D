@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_internal.h                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 22:49:29 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/27 22:49:29 by gkhavari          ###   ########.fr       */
+/*   Updated: 2026/10/29 20:20:05 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
