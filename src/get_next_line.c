@@ -11,84 +11,24 @@
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+#include "../includes/get_next_line_internal.h"
 
-static char	*fill_line(int fd, char *new_line, char *buffer);
-static char	*setup_line(char *line_buffer);
-static char	*free_and_return(char *to_free, char *to_return);
-
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, int *read_error)
 {
-	char		*buffer;
 	char		*next_line;
 	static char	*left_over_chars = NULL;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (free_and_return(left_over_chars, NULL));
-	buffer = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!buffer)
-		return (free_and_return(left_over_chars, NULL));
-	next_line = fill_line(fd, left_over_chars, buffer);
-	free(buffer);
+	if (read_error)
+		*read_error = FALSE;
+	next_line = gnl_read_line(fd, left_over_chars, read_error);
+	left_over_chars = NULL;
 	if (!next_line)
-		return (free_and_return(left_over_chars, NULL));
-	left_over_chars = setup_line(next_line);
+		return (NULL);
+	gnl_setup_line(next_line, &left_over_chars);
 	if (!next_line[0])
-		return (free_and_return(next_line, NULL));
+	{
+		free(next_line);
+		return (NULL);
+	}
 	return (next_line);
-}
-
-static char	*fill_line(int fd, char *new_line, char *buffer)
-{
-	int		bytes_read;
-
-	bytes_read = 0;
-	while (bytes_read >= 0)
-	{
-		if (new_line && ft_strchr(new_line, '\n'))
-			break ;
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_read == 0)
-			return (new_line);
-		else if (bytes_read > 0)
-		{
-			buffer[bytes_read] = '\0';
-			if (!new_line)
-				new_line = ft_strjoin("", buffer);
-			else
-				new_line = free_and_return(new_line,
-						ft_strjoin(new_line, buffer));
-		}
-		else
-			new_line = free_and_return(new_line, NULL);
-	}
-	return (new_line);
-}
-
-static char	*setup_line(char *line_buffer)
-{
-	size_t	i;
-	char	*left_over_chars;
-
-	i = 0;
-	while (line_buffer[i] != '\n' && line_buffer[i] != '\0')
-		i++;
-	if (line_buffer[i] == '\n')
-	{
-		left_over_chars = ft_substr(line_buffer, i + 1,
-				ft_strlen(line_buffer) - i);
-		if (!left_over_chars)
-			return (NULL);
-		line_buffer[i + 1] = '\0';
-		return (left_over_chars);
-	}
-	else if (line_buffer[i] == '\0')
-		return (NULL);
-	else
-		return (NULL);
-}
-
-static char	*free_and_return(char *to_free, char *to_return)
-{
-	free(to_free);
-	return (to_return);
 }

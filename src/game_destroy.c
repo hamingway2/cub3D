@@ -12,13 +12,6 @@
 
 #include "cub3d.h"
 
-int	error_msg(char *msg)
-{
-	ft_putstr_fd(ERROR, 2);
-	ft_putstr_fd(msg, 2);
-	return (FALSE);
-}
-
 void	free_map(t_map *map)
 {
 	int	i;
@@ -49,17 +42,11 @@ void	mlx_cleanup(t_game *game)
 
 void	game_cleanup(t_game *game)
 {
-	get_next_line(-1); //cleanup gnl buffer in case of failure
+	get_next_line(-1, NULL); //cleanup gnl buffer in case of failure
 	free(game->texture_north);
 	free(game->texture_south);
 	free(game->texture_west);
 	free(game->texture_east);
 	free_map(&game->map);
 	mlx_cleanup(game);
-}
-
-void	game_destroy(t_game *game, int exit_status)
-{
-	game_cleanup(game);
-	exit(exit_status);
 }

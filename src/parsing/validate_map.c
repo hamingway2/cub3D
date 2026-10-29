@@ -12,95 +12,60 @@
 
 #include "cub3d.h"
 
-static int	check_wall_direction(t_map *map, int i, int j, int direction[2])
-{
-	while (i >= 0 && i < map->height
-		&& j >= 0 && j < map->width)
-	{
-		if (map->grid[i][j] == '1')
-			return (TRUE);
-		if (map->grid[i][j] == ' ')
-			return (FALSE);
-		i += direction[0];
-		j += direction[1];
-	}
-	return (FALSE);
-}
-
-static int	is_walkable_tile(char tile)
-{
-	return (tile == '0' || is_player_char(tile));
-}
-
-static int	check_cell_walls(t_map *map, int i, int j)
-{
-	static int	directions[4][2] = {
-	{-1, 0},
-	{1, 0},
-	{0, -1},
-	{0, 1}
-	};
-	int			d;
-
-	d = 0;
-	while (d < 4)
-	{
-		if (!check_wall_direction(map, i, j, directions[d]))
-			return (FALSE);
-		d++;
-	}
-	return (TRUE);
-}
-
-static int	validate_map_walls(t_game *game)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < game->map.height)
-	{
-		j = 0;
-		while (j < game->map.width)
-		{
-			if (is_walkable_tile(game->map.grid[i][j])
-				&& !check_cell_walls(&game->map, i, j))
-			{
-				game_cleanup(game);
-				return (error_msg(INVALID_MAP_WALLS));
-			}
-			j++;
-		}
-		i++;
-	}
-	return (TRUE);
-}
-
 static int	is_valid_map_character(char c)
 {
 	return (c == '0' || c == '1' || c == 'N' || c == 'S'
 		|| c == 'E' || c == 'W' || c == ' ');
 }
 
+static int	map_character_error(int row, int column)
+{
+	ft_putstr_fd(ERROR, 2);
+	ft_putstr_fd(INVALID_MAP_CHARACTER, 2);
+	ft_putnbr_fd(row + 1, 2);
+	ft_putstr_fd(INVALID_MAP_COLUMN, 2);
+	ft_putnbr_fd(column + 1, 2);
+	ft_putchar_fd('\n', 2);
+	return (FALSE);
+}
+
+static int	validate_map_character_row(char *row, int row_index,
+		int *player_count)
+{
+	int	column;
+
+	column = 0;
+	while (row[column])
+	{
+		if (!is_valid_map_character(row[column]))
+		{
+			map_character_error(row_index, column);
+			return (FALSE);
+		}
+		if (is_player_char(row[column]))
+		{
+			(*player_count)++;
+			if (*player_count > 1)
+				return (error_msg(MULTIPLE_PLAYER_STARTS));
+		}
+		column++;
+	}
+	return (TRUE);
+}
+
 static int	validate_map_characters(t_game *game)
 {
-	int	i;
-	int	j;
+	int	row;
+	int	player_count;
 
-	i = 0;
-	while (game->map.grid[i])
+	row = 0;
+	player_count = 0;
+	while (game->map.grid[row])
 	{
-		j = 0;
-		while (game->map.grid[i][j])
-		{
-			if (!is_valid_map_character(game->map.grid[i][j]))
-			{
-				game_cleanup(game);
-				return (error_msg(INVALID_MAP_CHARACTER));
-			}
-			j++;
-		}
-		i++;
+		if (!validate_map_character_row(game->map.grid[row], row,
+				&player_count))
+			return (FALSE);
+		row++;
 	}
 	return (TRUE);
 }

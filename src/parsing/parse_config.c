@@ -22,60 +22,40 @@ static char	*dup_without_newline(char *str)
 	return (ft_substr(str, 0, len));
 }
 
-static int	set_texture(char **texture, char *path)
+static int	set_texture(char **texture, char *path, char *identifier,
+		char *line)
 {
 	if (*texture != NULL)
-		return (error_msg(DUPLICATE_TEXTURE));
+		return (duplicate_config(identifier));
+	while (*path == ' ' || *path == '\t')
+		path++;
+	if (*path == '\0' || *path == '\n')
+		return (error_line(INVALID_LINE, line));
 	*texture = dup_without_newline(path);
-	return (TRUE);
-}
-
-static int	set_color(int *color, char *value)
-{
-	int	r;
-	int	g;
-	int	b;
-
-	if (*color != 0)
-		return (error_msg(DUPLICATE_COLOR));
-	r = ft_atoi(value);
-	while (*value && *value != ',')
-		value++;
-	if (*value != ',')
-		return (FALSE);
-	value++;
-	g = ft_atoi(value);
-	while (*value && *value != ',')
-		value++;
-	if (*value != ',')
-		return (FALSE);
-	value++;
-	b = ft_atoi(value);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		return (FALSE);
-	*color = (r << 16) | (g << 8) | b;
+	if (!*texture)
+		return (error_msg(MALLOC_ERROR));
 	return (TRUE);
 }
 
 int	parse_texture(t_game *game, char *line)
 {
-	if (ft_strncmp(line, "NO ", 3) == 0)
-		return (set_texture(&game->texture_north, line + 3));
-	if (ft_strncmp(line, "SO ", 3) == 0)
-		return (set_texture(&game->texture_south, line + 3));
-	if (ft_strncmp(line, "WE ", 3) == 0)
-		return (set_texture(&game->texture_west, line + 3));
-	if (ft_strncmp(line, "EA ", 3) == 0)
-		return (set_texture(&game->texture_east, line + 3));
-	return (FALSE);
-}
+	char	*original_line;
 
-int	parse_color(t_game *game, char *line)
-{
-	if (ft_strncmp(line, "F ", 2) == 0)
-		return (set_color(&game->floor_color, line + 2));
-	if (ft_strncmp(line, "C ", 2) == 0)
-		return (set_color(&game->ceiling_color, line + 2));
+	original_line = line;
+	while (*line == ' ' || *line == '\t')
+		line++;
+	if (ft_strncmp(line, "NO", 2) == 0)
+		return (set_texture(&game->texture_north, line + 2, "NO",
+				original_line));
+	if (ft_strncmp(line, "SO", 2) == 0)
+		return (set_texture(&game->texture_south, line + 2, "SO",
+				original_line));
+	if (ft_strncmp(line, "WE", 2) == 0)
+		return (set_texture(&game->texture_west, line + 2, "WE",
+				original_line));
+	if (ft_strncmp(line, "EA", 2) == 0)
+		return (set_texture(&game->texture_east, line + 2, "EA",
+				original_line));
 	return (FALSE);
 }
 
