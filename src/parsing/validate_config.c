@@ -14,21 +14,21 @@
 
 static int	has_missing_config(t_game *game)
 {
-	return (!game->texture_north || !game->texture_south
-		|| !game->texture_west || !game->texture_east
+	return (!game->north.path || !game->south.path
+		|| !game->west.path || !game->east.path
 		|| !game->floor_color_set || !game->ceiling_color_set);
 }
 
 static int	missing_config_error(t_game *game)
 {
 	error_msg(MISSING_CONFIG_LINES);
-	if (!game->texture_north)
+	if (!game->north.path)
 		ft_putstr_fd("NO\n", 2);
-	if (!game->texture_south)
+	if (!game->south.path)
 		ft_putstr_fd("SO\n", 2);
-	if (!game->texture_west)
+	if (!game->west.path)
 		ft_putstr_fd("WE\n", 2);
-	if (!game->texture_east)
+	if (!game->east.path)
 		ft_putstr_fd("EA\n", 2);
 	if (!game->floor_color_set)
 		ft_putstr_fd("F\n", 2);

@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   parse_config.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/08 15:13:39 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/08 15:13:41 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/12 20:37:12 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+// TODO: Needs to be commented back in
+// static char	*dup_without_newline(char *str)
+// {
+// 	size_t	len;
+
+// 	len = ft_strlen(str);
+// 	if (len > 0 && str[len - 1] == '\n')
+// 		len--;
+// 	return (ft_substr(str, 0, len));
+// }
 
 static char	*dup_without_newline(char *str)
 {
@@ -37,6 +48,20 @@ static int	set_texture(char **texture, char *path, char *identifier,
 	return (TRUE);
 }
 
+// TODO: We nned to comment this back in
+// int	parse_texture(t_game *game, char *line)
+// {
+// 	if (ft_strncmp(line, "NO ", 3) == 0)
+// 		return (set_texture(&game->north.path, line + 3));
+// 	if (ft_strncmp(line, "SO ", 3) == 0)
+// 		return (set_texture(&game->south.path, line + 3));
+// 	if (ft_strncmp(line, "WE ", 3) == 0)
+// 		return (set_texture(&game->west.path, line + 3));
+// 	if (ft_strncmp(line, "EA ", 3) == 0)
+// 		return (set_texture(&game->east.path, line + 3));
+// 	return (FALSE);
+// }
+
 int	parse_texture(t_game *game, char *line)
 {
 	char	*original_line;
@@ -45,16 +70,16 @@ int	parse_texture(t_game *game, char *line)
 	while (*line == ' ' || *line == '\t')
 		line++;
 	if (ft_strncmp(line, "NO", 2) == 0)
-		return (set_texture(&game->texture_north, line + 2, "NO",
+		return (set_texture(&game->north.path, line + 2, "NO",
 				original_line));
 	if (ft_strncmp(line, "SO", 2) == 0)
-		return (set_texture(&game->texture_south, line + 2, "SO",
+		return (set_texture(&game->south.path, line + 2, "SO",
 				original_line));
 	if (ft_strncmp(line, "WE", 2) == 0)
-		return (set_texture(&game->texture_west, line + 2, "WE",
+		return (set_texture(&game->west.path, line + 2, "WE",
 				original_line));
 	if (ft_strncmp(line, "EA", 2) == 0)
-		return (set_texture(&game->texture_east, line + 2, "EA",
+		return (set_texture(&game->east.path, line + 2, "EA",
 				original_line));
 	return (FALSE);
 }

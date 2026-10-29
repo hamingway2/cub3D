@@ -6,39 +6,11 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/26 17:17:30 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/08 17:56:48 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/11 12:30:05 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <sys/time.h>
-
-//@AJ: I'd like to move this to drawing.c
-int	draw_loop(t_game *game)
-{
-	t_player				*player;
-	static struct timeval	last_frame_time;
-	struct timeval			current_time;
-	double					frame_delta;
-
-	gettimeofday(&current_time, NULL);
-	frame_delta = (double)current_time.tv_sec
-		+ (double)current_time.tv_usec / 1000000.0;
-	if (last_frame_time.tv_sec != 0 || last_frame_time.tv_usec != 0)
-		frame_delta -= (double)last_frame_time.tv_sec
-			+ (double)last_frame_time.tv_usec / 1000000.0;
-	else
-		frame_delta = 0.0;
-	last_frame_time = current_time;
-	player = &game->player;
-	clear_image(game);
-	rotate_player(player, frame_delta);
-	move_player(player, game, frame_delta);
-	draw_minimap(game);
-	// draw_map(game);
-	mlx_put_image_to_window(game->mlx, game->window, game->img.img, 0, 0);
-	return (0);
-}
 
 int	main(int argc, char **argv)
 {
