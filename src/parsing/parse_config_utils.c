@@ -12,17 +12,30 @@
 
 #include "cub3d.h"
 
+static int	is_config_separator(char c)
+{
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\0');
+}
+
+int	duplicate_config(char *identifier)
+{
+	error_msg(DUPLICATE_CONFIG_LINE);
+	ft_putstr_fd(identifier, 2);
+	ft_putchar_fd('\n', 2);
+	return (FALSE);
+}
+
 int	is_texture_line(char *line)
 {
 	while (*line == ' ' || *line == '\t')
 		line++;
-	if (ft_strncmp(line, "NO ", 3) == 0)
+	if (ft_strncmp(line, "NO", 2) == 0 && is_config_separator(line[2]))
 		return (TRUE);
-	if (ft_strncmp(line, "SO ", 3) == 0)
+	if (ft_strncmp(line, "SO", 2) == 0 && is_config_separator(line[2]))
 		return (TRUE);
-	if (ft_strncmp(line, "WE ", 3) == 0)
+	if (ft_strncmp(line, "WE", 2) == 0 && is_config_separator(line[2]))
 		return (TRUE);
-	if (ft_strncmp(line, "EA ", 3) == 0)
+	if (ft_strncmp(line, "EA", 2) == 0 && is_config_separator(line[2]))
 		return (TRUE);
 	return (FALSE);
 }
@@ -31,9 +44,9 @@ int	is_color_line(char *line)
 {
 	while (*line == ' ' || *line == '\t')
 		line++;
-	if (ft_strncmp(line, "F ", 2) == 0)
+	if (ft_strncmp(line, "F", 1) == 0 && is_config_separator(line[1]))
 		return (TRUE);
-	if (ft_strncmp(line, "C ", 2) == 0)
+	if (ft_strncmp(line, "C", 1) == 0 && is_config_separator(line[1]))
 		return (TRUE);
 	return (FALSE);
 }

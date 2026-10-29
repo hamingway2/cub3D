@@ -5,28 +5,31 @@ _This project has been created as part of the 42 curriculum by azielnic, gkhavar
 ## Description
 
 cub3D is a 42 project inspired by the classic Wolfenstein 3D raycasting engine.
-The project has progressed from raw map parsing into a working game foundation:
-it validates input files, loads the map, initializes the MiniLibX window, places
-the player, and prepares the event loop for the next rendering stage.
+The project currently provides map parsing and validation, a MiniLibX window,
+player movement, and a minimap. The 3D raycasting renderer and textured walls
+have not yet been implemented.
 
 ## Current functionality
 
 The project currently includes the following features:
 
 - Command-line argument validation for a single `.cub` file
-- Parsing of configuration lines such as:
-  - `NO ...`, `SO ...`, `WE ...`, `EA ...`
-  - `F ...`, `C ...`
-- Loading the map grid from the input file
-- Detection of the player's starting position (`N`, `S`, `E`, `W`)
-- Basic map validation for borders and allowed characters
-- MiniLibX initialization and window creation
-- Player initialization with position and direction values
-- Keyboard exit handling with `Esc`
-- Clean shutdown of the game resources
+- Checks for one `.cub` input file and parses texture (`NO`, `SO`, `WE`, `EA`)
+  and floor/ceiling color (`F`, `C`) configuration lines
+- RGB color validation and detection of missing or duplicate configuration
+  entries
+- Map loading, allowed-character checks, wall-enclosure checks, and player
+  start detection
+- MiniLibX window and image initialization
+- Player movement with WASD, rotation with the left/right arrow keys, and
+  collision checks
+- A top-down minimap showing the walls, player, and facing direction
+- Exit handling with `Esc` or by closing the window
 
-The current implementation is a game-state and window foundation for the
-raycasting engine; actual raycasting rendering is still the next major step.
+The window does not yet show a 3D scene. Parsed texture paths are not loaded or
+drawn, and the configured floor and ceiling colors are not yet used for
+rendering. The program currently prints parsed game state to standard output
+for debugging.
 
 ## Instructions
 
@@ -75,7 +78,7 @@ The program expects a single `.cub` map file:
 Example:
 
 ```bash
-./cub3d maps/map00.cub
+./cub3d maps/valid/map00.cub
 ```
 
 The `--help` flag displays usage information:
@@ -100,15 +103,19 @@ After the input file is checked, the parser reads the file and identifies:
 2. the beginning of the map
 3. the player's spawn point
 
-The map is then validated to confirm it is enclosed by walls and contains only
-valid map characters.
+The parser checks required and duplicate configuration entries, validates
+color values, and checks map characters, wall enclosure, and player count.
+Texture paths are required to be non-empty, but the referenced files are not
+currently checked or loaded.
 
 ### Controls and exit
 
 - Press `Esc` to quit the program.
+- Use `W`/`S` to move forward/backward, `A`/`D` to strafe, and the left/right
+  arrow keys to turn.
 - Closing the window also ends the session.
-- The program frees the allocated map, image, and MiniLibX resources during
-  shutdown.
+- The program frees allocated map, texture-path, image, and MiniLibX resources
+  during shutdown.
 
 ### Error handling
 
@@ -123,25 +130,10 @@ The program reports errors for cases such as:
 - invalid map characters
 - missing player start position
 
-## Validation TODO
-
-The following validation work is still needed before the project fully matches a
-complete cub3D map parser:
-
-- Check that all required texture identifiers are present exactly once:
-  - `NO`, `SO`, `WE`, `EA`
-- Check that all required color entries are present exactly once:
-  - `F`, `C`
-- Validate the floor and ceiling color values as proper RGB triplets
-- Ensure texture paths are non-empty and valid
-- Reject empty or malformed config lines before the map starts
-- Validate that the player start position appears exactly once
-- Verify that the map does not contain trailing garbage after the final row
-
 ## Resources
 
-The project includes the MiniLibX and `libft` source code. MiniLibX uses the X11
-window system on Linux.
+The project includes `libft`. On Linux, MiniLibX and its X11 development
+dependencies must be available to the system linker;
 
 ## AI usage
 

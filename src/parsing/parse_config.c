@@ -23,38 +23,18 @@
 // 	return (ft_substr(str, 0, len));
 // }
 
-// static int	set_texture(char **texture, char *path)
-// {
-// 	if (*texture != NULL)
-// 		return (error_msg(DUPLICATE_TEXTURE));
-// 	*texture = dup_without_newline(path);
-// 	return (TRUE);
-// }
-
-static int	set_color(int *color, char *value)
+static int	set_texture(char **texture, char *path, char *identifier,
+		char *line)
 {
-	int	r;
-	int	g;
-	int	b;
-
-	if (*color != 0)
-		return (error_msg(DUPLICATE_COLOR));
-	r = ft_atoi(value);
-	while (*value && *value != ',')
-		value++;
-	if (*value != ',')
-		return (FALSE);
-	value++;
-	g = ft_atoi(value);
-	while (*value && *value != ',')
-		value++;
-	if (*value != ',')
-		return (FALSE);
-	value++;
-	b = ft_atoi(value);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		return (FALSE);
-	*color = (r << 16) | (g << 8) | b;
+	if (*texture != NULL)
+		return (duplicate_config(identifier));
+	while (*path == ' ' || *path == '\t')
+		path++;
+	if (*path == '\0' || *path == '\n')
+		return (error_line(INVALID_LINE, line));
+	*texture = dup_without_newline(path);
+	if (!*texture)
+		return (error_msg(MALLOC_ERROR));
 	return (TRUE);
 }
 
@@ -75,28 +55,23 @@ static int	set_color(int *color, char *value)
 // FOR TEXTURE TESTING
 int	parse_texture(t_game *game, char *line)
 {
-	(void)line;
-	if (!game->north.path)
-		game->north.path = ft_strdup("./texture/wolfenstein_north.xpm");
-	if (!game->south.path)
-		game->south.path = ft_strdup("./texture/wolfenstein_south.xpm");
-	if (!game->west.path)
-		game->west.path = ft_strdup("./texture/wolfenstein_west.xpm");
-	if (!game->east.path)
-		game->east.path = ft_strdup("./texture/wolfenstein_east.xpm");
-	if (!game->north.path || !game->south.path
-		|| !game->west.path || !game->east.path)
-		return (error_msg(MALLOC_ERROR));
-	return (TRUE);
-}
+	char	*original_line;
 
-// Might not be needed if defined in header
-int	parse_color(t_game *game, char *line)
-{
-	if (ft_strncmp(line, "F ", 2) == 0)
-		return (set_color(&game->floor_color, line + 2));
-	if (ft_strncmp(line, "C ", 2) == 0)
-		return (set_color(&game->ceiling_color, line + 2));
+	original_line = line;
+	while (*line == ' ' || *line == '\t')
+		line++;
+	if (ft_strncmp(line, "NO", 2) == 0)
+		return (set_texture(&game->texture_north, line + 2, "NO",
+				original_line));
+	if (ft_strncmp(line, "SO", 2) == 0)
+		return (set_texture(&game->texture_south, line + 2, "SO",
+				original_line));
+	if (ft_strncmp(line, "WE", 2) == 0)
+		return (set_texture(&game->texture_west, line + 2, "WE",
+				original_line));
+	if (ft_strncmp(line, "EA", 2) == 0)
+		return (set_texture(&game->texture_east, line + 2, "EA",
+				original_line));
 	return (FALSE);
 }
 

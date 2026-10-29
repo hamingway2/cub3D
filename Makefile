@@ -1,18 +1,26 @@
 SRC := src/main.c \
-		src/get_next_line.c \
 		src/check_input.c \
 		src/testing_functions.c \
-		src/init/game_init.c \
+    src/error.c \
+    src/game_destroy.c \
+		src/get_next_line.c \
+		src/get_next_line_utils.c \
+    src/init/game_init.c \
 		src/init/init_textures.c \
-		src/game_destroy.c \
 		src/parsing/parse_file.c \
 		src/parsing/parse_config.c \
-		src/parsing/parse_map.c \
 		src/parsing/parse_config_utils.c \
+    src/parsing/parse_color.c \
+		src/parsing/parse_map.c \
 		src/parsing/parse_map_utils.c \
+    src/parsing/parse_file_read.c \
+    src/parsing/validate_config.c \
 		src/parsing/validate_map.c \
-		src/event/event.c \
-		src/rendering/drawing.c \
+    src/parsing/validate_map_walls.c \
+    src/event/event.c \
+    src/rendering/drawing.c \
+    src/rendering/minimap.c \
+    src/player/movement.c \
 		src/rendering/draw_minimap.c \
 		src/rendering/draw_mini_player.c \
 		src/player/movement.c \
@@ -39,6 +47,11 @@ LIBFT := $(LIBFT_DIR)/libft.a
 .SILENT: all $(NAME)
 
 all: $(LIBFT) $(NAME)
+
+$(OBJ): includes/cub3d.h includes/cub3d_defines.h includes/cub3d_structs.h \
+		includes/cub3d_game.h includes/cub3d_parsing.h includes/cub3d_render.h
+
+src/get_next_line.o src/get_next_line_utils.o: includes/get_next_line_internal.h
 
 debug:
 	$(MAKE) CFLAGS="$(CFLAGS) -g" re

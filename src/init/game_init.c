@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-//TODO: maybe add error message for mlx function failure
 
 static void	init_keys(t_player *player)
 {
@@ -78,34 +77,34 @@ int	player_init(t_game *game)
 
 int	game_setup(t_game *game, char *file)
 {
-	game_init(game);
+	ft_bzero(game, sizeof(*game));
 	if (parse_file(game, file) == FALSE)
 		return (FALSE);
 	if (!load_all_textures(game))
 		return (FALSE);
 	if (player_init(game) == FALSE)
 		return (FALSE);
-	return (TRUE);
+	return (game_init(game));
 }
 
-void	game_init(t_game *game)
+int	game_init(t_game *game)
 {
 	int	width;
 	int	height;
 
-	ft_bzero(game, sizeof(*game));
 	game->mlx = mlx_init();
 	if (!game->mlx)
-		game_destroy(game, EXIT_FAILURE);
+		return (error_msg("MiniLibX initialization failed\n"));
 	mlx_get_screen_size(game->mlx, &width, &height);
 	game->window = mlx_new_window(game->mlx, width, height, "cub3d");
 	if (!game->window)
-		game_destroy(game, EXIT_FAILURE);
+		return (error_msg("Could not create MiniLibX window\n"));
 	game->img.img = mlx_new_image(game->mlx, width, height);
 	if (!game->img.img)
-		game_destroy(game, EXIT_FAILURE);
+		return (error_msg("Could not create MiniLibX image\n"));
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bits_per_pixel,
 		&game->img.line_length, &game->img.endian);
 	if (!game->img.addr)
-		game_destroy(game, EXIT_FAILURE);
+		return (error_msg("Could not access MiniLibX image data\n"));
+	return (TRUE);
 }

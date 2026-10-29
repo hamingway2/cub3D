@@ -12,6 +12,9 @@
 
 #include "cub3d.h"
 
+/*checks if filename ends in .cub, returns FALSE if filename has less than 5 
+characters
+returns TRUE/FALSE*/
 int	has_cub_extension(char *filename)
 {
 	size_t	len;
@@ -23,6 +26,8 @@ int	has_cub_extension(char *filename)
 			EXTENSION, ft_strlen(EXTENSION) + 1) == 0);
 }
 
+/*checks the number of arguments and if there is a .cub extension
+prints error message and returns TRUE/FALSE*/
 int	check_arguments(int ac, char **av)
 {
 	if (ac != 2)
