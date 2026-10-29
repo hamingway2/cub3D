@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/08 15:17:48 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/08 15:17:49 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:07:10 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	key_release(int key, t_game *game)
 }
 
 // TODO: Could be renamed to key_press instead of event
-int	key_event(int key, t_game *game)
+int	key_press(int key, t_game *game)
 {
 	if (key == KEY_ESC)
 		game_close(game);
@@ -57,7 +57,7 @@ int	game_close(t_game *game)
 
 void	game_loop(t_game *game)
 {
-	mlx_hook(game->window, 2, 1L << 0, key_event, game);
+	mlx_hook(game->window, 2, 1L << 0, key_press, game);
 	mlx_hook(game->window, 3, 1L << 1, key_release, game);
 	mlx_hook(game->window, 17, 0, game_close, game);
 	mlx_loop_hook(game->mlx, draw_loop, game);

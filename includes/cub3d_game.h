@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_game.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 19:58:54 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/27 19:58:56 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:07:05 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		error_msg(char *msg);
 int		error_line(char *msg, char *line);
 int		check_arguments(int ac, char **av);
 void	print_game(t_game *game);
-int		key_event(int key, t_game *game);
+int		key_press(int key, t_game *game);
 int		key_release(int key, t_game *game);
 int		game_close(t_game *game);
 void	rotate_player(t_player *player, double delta_time);
