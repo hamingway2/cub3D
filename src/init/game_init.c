@@ -89,17 +89,19 @@ int	game_setup(t_game *game, char *file)
 
 int	game_init(t_game *game)
 {
-	int	width;
-	int	height;
-
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return (error_msg("MiniLibX initialization failed\n"));
-	mlx_get_screen_size(game->mlx, &width, &height);
-	game->window = mlx_new_window(game->mlx, width, height, "cub3d");
+	mlx_get_screen_size(game->mlx, &game->screen_width,
+		&game->screen_height);
+	if (game->screen_width < 2 || game->screen_height < 1)
+		return (error_msg("Could not determine screen dimensions\n"));
+	game->window = mlx_new_window(game->mlx, game->screen_width,
+			game->screen_height, "cub3d");
 	if (!game->window)
 		return (error_msg("Could not create MiniLibX window\n"));
-	game->img.img = mlx_new_image(game->mlx, width, height);
+	game->img.img = mlx_new_image(game->mlx, game->screen_width,
+			game->screen_height);
 	if (!game->img.img)
 		return (error_msg("Could not create MiniLibX image\n"));
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bits_per_pixel,

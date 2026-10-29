@@ -45,13 +45,13 @@ void	draw_background(t_game *game)
 	int		colour;
 
 	y = 0;
-	while (y < HEIGHT)
+	while (y < game->screen_height)
 	{
 		x = 0;
 		colour = 0x564F43;
-		if (y <= HEIGHT / 2)
+		if (y <= game->screen_height / 2)
 			colour = 0xBDE0FE;
-		while (x < WIDTH)
+		while (x < game->screen_width)
 		{
 			put_pixel(x, y, colour, game);
 			x++;
@@ -66,10 +66,10 @@ void	clear_image(t_game *game)
 	int	y;
 
 	y = 0;
-	while (y < HEIGHT)
+	while (y < game->screen_height)
 	{
 		x = 0;
-		while (x < WIDTH)
+		while (x < game->screen_width)
 		{
 			put_pixel(x, y, 0x000000, game);
 			x++;
@@ -100,7 +100,7 @@ void	put_pixel(int x, int y, int colour, t_game *game)
 {
 	int	index;
 
-	if (x >= WIDTH || y >= HEIGHT || x < 0 || y < 0)
+	if (x >= game->screen_width || y >= game->screen_height || x < 0 || y < 0)
 		return ;
 	index = y * game->img.line_length + x * game->img.bits_per_pixel / 8;
 	*(unsigned int *)(game->img.addr + index) = colour;

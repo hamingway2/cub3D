@@ -57,10 +57,10 @@ void	draw_raycasting(t_game *game)
 	int		x;
 
 	x = 0;
-	while (x < WIDTH)
+	while (x < game->screen_width)
 	{
 		ray_angle = game->player.direction - FOV / 2.0
-			+ FOV * x / (WIDTH - 1.0);
+			+ FOV * x / (game->screen_width - 1.0);
 		draw_walls(game, ray_angle, x);
 		x++;
 	}

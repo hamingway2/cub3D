@@ -100,6 +100,8 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*window;
+	int			screen_width;
+	int			screen_height;
 	t_texture	north;
 	t_texture	south;
 	t_texture	west;

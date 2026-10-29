@@ -53,11 +53,12 @@ static void	prepare_wall(t_game *game, t_ray *ray, t_wall *wall)
 {
 	wall->texture = wall_texture(game, ray);
 	wall->tex_x = wall_texture_x(game, ray, wall->texture);
-	wall->height = (int)((WIDTH / (2.0 * tan(FOV * PI / 360.0)))
+	wall->height = (int)((game->screen_width
+				/ (2.0 * tan(FOV * PI / 360.0)))
 			/ ray->perp_dist);
 	if (wall->height < 1)
 		wall->height = 1;
-	wall->start_y = (HEIGHT - wall->height) / 2;
+	wall->start_y = (game->screen_height - wall->height) / 2;
 	wall->end_y = wall->start_y + wall->height;
 	wall->tex_step = (double)wall->texture->height / wall->height;
 	wall->tex_pos = 0.0;
@@ -65,8 +66,8 @@ static void	prepare_wall(t_game *game, t_ray *ray, t_wall *wall)
 		wall->tex_pos = -wall->start_y * wall->tex_step;
 	if (wall->start_y < 0)
 		wall->start_y = 0;
-	if (wall->end_y >= HEIGHT)
-		wall->end_y = HEIGHT - 1;
+	if (wall->end_y >= game->screen_height)
+		wall->end_y = game->screen_height - 1;
 }
 
 void	draw_textured_column(t_game *game, t_ray *ray, int screen_x)

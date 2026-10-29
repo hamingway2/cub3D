@@ -22,8 +22,6 @@
 # define PI 3.14159265359
 # define FOV 60.0
 
-# define WIDTH 1920
-# define HEIGHT 1080
 # define PLAYER_RADIUS 0.1
 # define PLAYER_SPEED 3.0
 # define TURN_SPEED 90.0

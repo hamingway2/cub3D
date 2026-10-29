@@ -41,9 +41,10 @@ void	draw_player_rays(t_game *game, int cell_size)
 
 	ray_direction = game->player.direction;
 	i = 0;
-	while (i < WIDTH)
+	while (i < game->screen_width)
 	{
-		angle = ray_direction - FOV / 2.0 + FOV * i / (WIDTH - 1);
+		angle = ray_direction - FOV / 2.0
+			+ FOV * i / (game->screen_width - 1.0);
 		draw_player_ray(game, cell_size, angle);
 		i++;
 	}
