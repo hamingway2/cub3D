@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 20:15:12 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/27 20:15:15 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:11:25 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	parse_color_component(char **value, int *component,
 	while (**value >= '0' && **value <= '9')
 	{
 		if (result > (255 - (**value - '0')) / 10)
-			return (FALSE);
+			return (false);
 		result = result * 10 + (**value - '0');
 		(*value)++;
 		digits++;
@@ -38,13 +38,13 @@ static int	parse_color_component(char **value, int *component,
 	while (is_color_space(**value))
 		(*value)++;
 	if (digits == 0 || **value != separator)
-		return (FALSE);
+		return (false);
 	if (separator != '\0')
 		(*value)++;
 	else if (**value != '\0')
-		return (FALSE);
+		return (false);
 	*component = result;
-	return (TRUE);
+	return (true);
 }
 
 static int	set_color(int *color, bool *color_set, char *value,
@@ -61,8 +61,8 @@ static int	set_color(int *color, bool *color_set, char *value,
 		|| !parse_color_component(&value, &b, '\0'))
 		return (error_msg(INVALID_COLOR_VALUE));
 	*color = (r << 16) | (g << 8) | b;
-	*color_set = TRUE;
-	return (TRUE);
+	*color_set = true;
+	return (true);
 }
 
 int	parse_color(t_game *game, char *line)
@@ -75,5 +75,5 @@ int	parse_color(t_game *game, char *line)
 	if (ft_strncmp(line, "C", 1) == 0)
 		return (set_color(&game->ceiling_color, &game->ceiling_color_set,
 				line + 1, "C"));
-	return (FALSE);
+	return (false);
 }

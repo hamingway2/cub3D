@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/08 15:21:25 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/08 15:21:27 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:11:25 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	parse_file(t_game *game, char *filename)
 	int		fd;
 	t_parse	parse;
 
-	parse.map_started = FALSE;
+	parse.map_started = false;
 	parse.map_height = 0;
 	parse.capacity = 8;
 	fd = open(filename, O_RDONLY);
@@ -57,10 +57,10 @@ int	parse_file(t_game *game, char *filename)
 	if (!read_map_file(game, fd, &parse))
 	{
 		close(fd);
-		return (FALSE);
+		return (false);
 	}
 	close(fd);
 	if (!validate_config(game))
-		return (FALSE);
+		return (false);
 	return (finish_map(game, parse.map_height));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_config_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/08 17:20:11 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/08 17:20:13 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:11:25 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	duplicate_config(char *identifier)
 	error_msg(DUPLICATE_CONFIG_LINE);
 	ft_putstr_fd(identifier, 2);
 	ft_putchar_fd('\n', 2);
-	return (FALSE);
+	return (false);
 }
 
 int	is_texture_line(char *line)
@@ -30,14 +30,14 @@ int	is_texture_line(char *line)
 	while (*line == ' ' || *line == '\t')
 		line++;
 	if (ft_strncmp(line, "NO", 2) == 0 && is_config_separator(line[2]))
-		return (TRUE);
+		return (true);
 	if (ft_strncmp(line, "SO", 2) == 0 && is_config_separator(line[2]))
-		return (TRUE);
+		return (true);
 	if (ft_strncmp(line, "WE", 2) == 0 && is_config_separator(line[2]))
-		return (TRUE);
+		return (true);
 	if (ft_strncmp(line, "EA", 2) == 0 && is_config_separator(line[2]))
-		return (TRUE);
-	return (FALSE);
+		return (true);
+	return (false);
 }
 
 int	is_color_line(char *line)
@@ -45,10 +45,10 @@ int	is_color_line(char *line)
 	while (*line == ' ' || *line == '\t')
 		line++;
 	if (ft_strncmp(line, "F", 1) == 0 && is_config_separator(line[1]))
-		return (TRUE);
+		return (true);
 	if (ft_strncmp(line, "C", 1) == 0 && is_config_separator(line[1]))
-		return (TRUE);
-	return (FALSE);
+		return (true);
+	return (false);
 }
 
 int	is_config_line(char *line)

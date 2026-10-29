@@ -6,15 +6,13 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 19:58:44 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/29 17:54:27 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:11:29 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_DEFINES_H
 # define CUB3D_DEFINES_H
 
-# define TRUE 1
-# define FALSE 0
 # define USAGE_INFO "Usage: ./cub3d <map.cub>\n"
 # define HELP_FLAG "--help"
 # define EXTENSION ".cub"

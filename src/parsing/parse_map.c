@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/08 15:14:02 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/08 15:14:04 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:11:25 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ int	normalize_map(t_map *map)
 	{
 		new_line = resize_line(map->grid[i], map->width);
 		if (!new_line)
-			return (FALSE);
+			return (false);
 		map->grid[i] = new_line;
 		i++;
 	}
-	return (TRUE);
+	return (true);
 }

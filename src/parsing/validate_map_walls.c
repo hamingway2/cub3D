@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map_walls.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 20:16:04 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/27 20:16:05 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:11:25 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static int	check_wall_direction(t_map *map, int i, int j, int direction[2])
 		&& j >= 0 && j < map->width)
 	{
 		if (map->grid[i][j] == '1')
-			return (TRUE);
+			return (true);
 		if (map->grid[i][j] == ' ')
-			return (FALSE);
+			return (false);
 		i += direction[0];
 		j += direction[1];
 	}
-	return (FALSE);
+	return (false);
 }
 
 static int	is_walkable_tile(char tile)
@@ -46,10 +46,10 @@ static int	check_cell_walls(t_map *map, int i, int j)
 	while (d < 4)
 	{
 		if (!check_wall_direction(map, i, j, directions[d]))
-			return (FALSE);
+			return (false);
 		d++;
 	}
-	return (TRUE);
+	return (true);
 }
 
 int	validate_map_walls(t_game *game)
@@ -72,5 +72,5 @@ int	validate_map_walls(t_game *game)
 		}
 		i++;
 	}
-	return (TRUE);
+	return (true);
 }

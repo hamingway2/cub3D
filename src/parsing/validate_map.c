@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/08 15:14:24 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/08 15:14:26 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:11:25 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	map_character_error(int row, int column)
 	ft_putstr_fd(INVALID_MAP_COLUMN, 2);
 	ft_putnbr_fd(column + 1, 2);
 	ft_putchar_fd('\n', 2);
-	return (FALSE);
+	return (false);
 }
 
 static int	validate_map_character_row(char *row, int row_index,
@@ -40,7 +40,7 @@ static int	validate_map_character_row(char *row, int row_index,
 		if (!is_valid_map_character(row[column]))
 		{
 			map_character_error(row_index, column);
-			return (FALSE);
+			return (false);
 		}
 		if (is_player_char(row[column]))
 		{
@@ -50,7 +50,7 @@ static int	validate_map_character_row(char *row, int row_index,
 		}
 		column++;
 	}
-	return (TRUE);
+	return (true);
 }
 
 static int	validate_map_characters(t_game *game)
@@ -64,21 +64,21 @@ static int	validate_map_characters(t_game *game)
 	{
 		if (!validate_map_character_row(game->map.grid[row], row,
 				&player_count))
-			return (FALSE);
+			return (false);
 		row++;
 	}
-	return (TRUE);
+	return (true);
 }
 
 int	validate_map(t_game *game)
 {
-	if (validate_map_walls(game) == FALSE)
+	if (validate_map_walls(game) == false)
 	{
-		return (FALSE);
+		return (false);
 	}
-	if (validate_map_characters(game) == FALSE)
+	if (validate_map_characters(game) == false)
 	{
-		return (FALSE);
+		return (false);
 	}
-	return (TRUE);
+	return (true);
 }

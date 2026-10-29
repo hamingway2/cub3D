@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 15:54:10 by gkhavari          #+#    #+#             */
-/*   Updated: 2025/06/10 11:58:40 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:11:25 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_next_line(int fd, int *read_error)
 	static char	*left_over_chars = NULL;
 
 	if (read_error)
-		*read_error = FALSE;
+		*read_error = false;
 	next_line = gnl_read_line(fd, left_over_chars, read_error);
 	left_over_chars = NULL;
 	if (!next_line)

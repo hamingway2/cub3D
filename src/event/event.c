@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/08 15:17:48 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/29 18:07:10 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:08:24 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	key_release(int key, t_game *game)
 	return (0);
 }
 
-// TODO: Could be renamed to key_press instead of event
 int	key_press(int key, t_game *game)
 {
 	if (key == KEY_ESC)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_config.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 20:15:49 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/27 20:15:51 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:11:25 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ static int	missing_config_error(t_game *game)
 		ft_putstr_fd("F\n", 2);
 	if (!game->ceiling_color_set)
 		ft_putstr_fd("C\n", 2);
-	return (FALSE);
+	return (false);
 }
 
 int	validate_config(t_game *game)
 {
 	if (has_missing_config(game))
 		return (missing_config_error(game));
-	return (TRUE);
+	return (true);
 }

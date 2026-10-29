@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file_read.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 20:15:27 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/27 20:15:29 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:11:25 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	add_map_line(t_game *game, char *line,
 		*capacity *= 2;
 		new_grid = ft_calloc(*capacity + 1, sizeof(char *));
 		if (!new_grid)
-			return (FALSE);
+			return (false);
 		ft_memcpy(new_grid, game->map.grid,
 			(*map_height) * sizeof(char *));
 		free(game->map.grid);
@@ -30,20 +30,20 @@ static int	add_map_line(t_game *game, char *line,
 	}
 	game->map.grid[*map_height] = ft_strdup(line);
 	if (!game->map.grid[*map_height])
-		return (FALSE);
+		return (false);
 	(*map_height)++;
-	return (TRUE);
+	return (true);
 }
 
 static int	process_before_map(t_game *game, char *line, t_parse *parse)
 {
 	if (is_empty_line(line))
-		return (TRUE);
+		return (true);
 	if (is_config_line(line))
 		return (parse_config(game, line));
 	if (is_map_line(line))
 	{
-		parse->map_started = TRUE;
+		parse->map_started = true;
 		return (add_map_line(game, line, &parse->map_height, &parse->capacity));
 	}
 	return (error_line(INVALID_LINE, line));
@@ -77,12 +77,12 @@ int	read_map_file(t_game *game, int fd, t_parse *parse)
 			result = process_after_map(game, line, parse);
 		free(line);
 		if (!result)
-			return (FALSE);
+			return (false);
 		line = get_next_line(fd, &read_error);
 		if (read_error)
 			return (error_msg(FILE_READ_ERROR));
 	}
 	if (!parse->map_started || parse->map_height == 0)
 		return (error_msg(INVALID_MAP));
-	return (TRUE);
+	return (true);
 }

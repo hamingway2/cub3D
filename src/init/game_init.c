@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 20:17:53 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/12 16:50:15 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:11:25 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,25 +66,13 @@ int	player_init(t_game *game)
 				game->player.direction
 					= get_player_direction(game->map.grid[i][j]);
 				init_player_plane(&game->player);
-				return (TRUE);
+				return (true);
 			}
 			j++;
 		}
 		i++;
 	}
 	return (error_msg(NO_PLAYER_START));
-}
-
-int	game_setup(t_game *game, char *file)
-{
-	ft_bzero(game, sizeof(*game));
-	if (parse_file(game, file) == FALSE)
-		return (FALSE);
-	if (player_init(game) == FALSE)
-		return (FALSE);
-	if (game_init(game) == FALSE)
-		return (FALSE);
-	return (load_all_textures(game));
 }
 
 int	game_init(t_game *game)
@@ -108,5 +96,17 @@ int	game_init(t_game *game)
 		&game->img.line_length, &game->img.endian);
 	if (!game->img.addr)
 		return (error_msg("Could not access MiniLibX image data\n"));
-	return (TRUE);
+	return (true);
+}
+
+int	game_setup(t_game *game, char *file)
+{
+	ft_bzero(game, sizeof(*game));
+	if (parse_file(game, file) == false)
+		return (false);
+	if (player_init(game) == false)
+		return (false);
+	if (game_init(game) == false)
+		return (false);
+	return (load_all_textures(game));
 }

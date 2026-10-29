@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/08 15:21:58 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/08 17:20:21 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:11:25 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,19 @@ int	is_map_line(char *line)
 	int	i;
 
 	if (!line)
-		return (FALSE);
+		return (false);
 	if (is_empty_line(line))
-		return (FALSE);
+		return (false);
 	if (is_config_line(line))
-		return (FALSE);
+		return (false);
 	i = 0;
 	while (line[i] && line[i] != '\n')
 	{
 		if (!is_map_character(line[i]))
-			return (FALSE);
+			return (false);
 		i++;
 	}
 	if (line[i] == '\n' && line[i + 1] != '\0')
-		return (FALSE);
-	return (TRUE);
+		return (false);
+	return (true);
 }

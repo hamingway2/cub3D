@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 22:40:00 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/27 22:43:21 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:10:48 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char	*append_buffer(char *line, char *buffer, int bytes_read)
 static char	*read_error_line(char *line, int *read_error)
 {
 	if (read_error)
-		*read_error = TRUE;
+		*read_error = true;
 	free(line);
 	return (NULL);
 }

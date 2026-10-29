@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/08 15:13:39 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/12 20:37:12 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:11:25 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	set_texture(char **texture, char *path, char *identifier,
 	*texture = dup_without_newline(path);
 	if (!*texture)
 		return (error_msg(MALLOC_ERROR));
-	return (TRUE);
+	return (true);
 }
 
 // TODO: We nned to comment this back in
@@ -59,7 +59,7 @@ static int	set_texture(char **texture, char *path, char *identifier,
 // 		return (set_texture(&game->west.path, line + 3));
 // 	if (ft_strncmp(line, "EA ", 3) == 0)
 // 		return (set_texture(&game->east.path, line + 3));
-// 	return (FALSE);
+// 	return (false);
 // }
 
 int	parse_texture(t_game *game, char *line)
@@ -81,7 +81,7 @@ int	parse_texture(t_game *game, char *line)
 	if (ft_strncmp(line, "EA", 2) == 0)
 		return (set_texture(&game->east.path, line + 2, "EA",
 				original_line));
-	return (FALSE);
+	return (false);
 }
 
 int	parse_config(t_game *game, char *line)
