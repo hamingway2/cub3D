@@ -6,11 +6,17 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/12 17:00:00 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/12 18:22:23 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/29 20:04:01 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+/*
+ * Selects the appropriate wall texture based on the side of the wall hit by 
+ * the ray and its direction of travel, returning the texture corresponding 
+ * to the north, south, east or west wall.
+ */
 
 static t_texture	*wall_texture(t_game *game, t_ray *ray)
 {
@@ -22,6 +28,13 @@ static t_texture	*wall_texture(t_game *game, t_ray *ray)
 		return (&game->south);
 	return (&game->north);
 }
+
+/*
+ * Calculates the horizontal texture coordinate by finding the exact point 
+ * where the ray hits the wall and mapping it to the texture's width. 
+ * Adjusts the coordinate based on the wall's orientation to ensure the 
+ * texture is displayed in the correct direction.
+ */
 
 static int	wall_texture_x(t_game *game, t_ray *ray, t_texture *texture)
 {
@@ -40,6 +53,12 @@ static int	wall_texture_x(t_game *game, t_ray *ray, t_texture *texture)
 	return (tex_x);
 }
 
+/*
+ * Retrieves the colour of a specific pixel from a texture by calculating
+ * its memory address using the pixel coordinates, line length and bits
+ * per pixel, then returns the pixel's colour value.
+ */
+
 static unsigned int	texture_pixel(t_texture *texture, int x, int y)
 {
 	int	index;
@@ -48,6 +67,14 @@ static unsigned int	texture_pixel(t_texture *texture, int x, int y)
 		+ x * (texture->img.bits_per_pixel / 8);
 	return (*(unsigned int *)(texture->img.addr + index));
 }
+
+/*
+ * Prepares the wall for rendering by selecting the correct texture, 
+ * calculating the texture's horizontal coordinate, and determining the 
+ * wall's height and vertical position based on its distance from the 
+ * player. Calculates the texture sampling step and starting position, 
+ * then clips the wall to fit within the screen boundaries.
+ */
 
 static void	prepare_wall(t_game *game, t_ray *ray, t_wall *wall)
 {

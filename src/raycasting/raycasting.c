@@ -6,11 +6,17 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/03 16:49:07 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/12 18:34:47 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/29 19:23:05 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+/*
+ * Implements one step of the DDA algorithm by comparing the distances to the 
+ * next vertical and horizontal grid boundaries. Moves the ray into the next 
+ * map cell along the closest boundary and records which side was crossed.
+ */
 
 static void	step_ray(t_ray *ray)
 {
@@ -27,6 +33,13 @@ static void	step_ray(t_ray *ray)
 		ray->side = 1;
 	}
 }
+
+/*
+ * Casts a ray through the map using the DDA algorithm until it hits a wall 
+ * or leaves the map boundaries. Calculates the perpendicular distance to 
+ * the wall based on the side hit and ensures the distance is not too small 
+ * to avoid rendering issues.
+ */
 
 static void	cast_ray(t_ray *ray, t_game *game)
 {

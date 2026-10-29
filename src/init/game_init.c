@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 20:17:53 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/29 18:11:25 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:21:13 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,15 @@ static double	get_player_direction(char player_start)
 	else if (player_start == PLAYER_WEST)
 		return (270.0);
 	else
-		return (-1.0); // Invalid player start character
+		return (-1.0);
 }
+
+/*
+ * Initialises the camera plane based on the player's viewing direction and 
+ * the field of view (FOV). Calculates the plane's length using the half-FOV 
+ * angle and sets its x and y components perpendicular to the viewing 
+ * direction for use in raycasting.
+ */
 
 void	init_player_plane(t_player *player)
 {
@@ -46,6 +53,14 @@ void	init_player_plane(t_player *player)
 	player->plane_x = cos(angle) * plane_length;
 	player->plane_y = -sin(angle) * plane_length;
 }
+
+/*
+ * Initialises the player's keys and searches the map for the player's
+ * starting position. Sets the player's coordinates to the center of the 
+ * corresponding map cell, determines the initial viewing direction and 
+ * initialises the camera plane. Returns true on success or displays an 
+ * error message if no player starting position is found.
+ */
 
 int	player_init(t_game *game)
 {
@@ -74,6 +89,13 @@ int	player_init(t_game *game)
 	}
 	return (error_msg(NO_PLAYER_START));
 }
+
+/*
+ * Initialises MiniLibX, retrieves the screen dimensions and creates the 
+ * window and image used for rendering. Retrieves the image's pixel data 
+ * address and its format information. Returns true on success or displays 
+ * an error message and returns false if any step fails.
+ */
 
 int	game_init(t_game *game)
 {

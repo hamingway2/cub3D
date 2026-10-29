@@ -6,12 +6,23 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/03 15:22:15 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/12 19:16:31 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:50:36 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <sys/time.h>
+
+/*
+ * Provides the main drawing loop, updating the game continuously by
+ * calculating the time elapsed between frames and using it to ensure that 
+ * player movement and rotation remain consistent regardless of the frame rate.
+ *
+ * Calculates the frame delta using the current time, clears the image, updates 
+ * the player's rotation and movement, draws the background, renders the 3D 
+ * scene using raycasting, and draws the minimap. 
+ * Finally, displays the completed image in the window and returns 0 to keep 
+ * the MiniLibX loop running.
+ */
 
 int	draw_loop(t_game *game)
 {
@@ -78,6 +89,16 @@ void	clear_image(t_game *game)
 	}
 }
 
+/*
+ * Provides a reusable drawing function for creating filled squares, allowing 
+ * other parts of the programme to draw shapes without repeating the logic for 
+ * filling an area with pixels.
+ *
+ * Draws a filled square at the specified position using the given size and 
+ * colour. Iterates over each pixel within the square and uses put_pixel to 
+ * colour it, ensuring that pixels outside the screen boundaries are ignored.
+ */
+
 void	draw_square(t_game *game, t_square square)
 {
 	int	i;
@@ -95,6 +116,17 @@ void	draw_square(t_game *game, t_square square)
 		i++;
 	}
 }
+
+/*
+ * Serves as a reusable, basic drawing operation for other functions, such as 
+ * draw_square(), which uses it to draw larger shapes without duplicating the 
+ * pixel-drawing logic.
+ * 
+ * Draws a pixel of the specified colour at the given coordinates. Checks 
+ * that the coordinates are within the screen boundaries, then calculates 
+ * the pixel's memory address using the image's line length and bits per 
+ * pixel before writing the colour to the image data.
+ */
 
 void	put_pixel(int x, int y, int colour, t_game *game)
 {

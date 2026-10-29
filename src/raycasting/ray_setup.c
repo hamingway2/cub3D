@@ -6,11 +6,25 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/12 17:21:58 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/12 18:36:07 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/29 19:17:07 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+/*
+ * The init_ray functions initialise a ray for raycasting by calculating its 
+ * direction and starting map cell, then setting the step directions and 
+ * distances to the next grid boundaries along both axes. These values allow 
+ * the DDA (Digital Differential Analysis) algorithm to traverse the map 
+ * efficiently and detect walls.
+ * 
+ * HUGE_VAL is used when the ray does not move along an axis. For example, 
+ * if the ray moves straight up, it does not move left or right, so it will 
+ * never cross a vertical grid line. HUGE_VAL sets the distance for that axis 
+ * to infinity, allowing the DDA algorithm to move along the axis where the 
+ * ray actually travels.
+ */
 
 static void	init_ray_x(t_ray *ray, t_game *game)
 {

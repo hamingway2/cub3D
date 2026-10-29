@@ -6,11 +6,17 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/12 16:16:24 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/12 16:27:20 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:55:47 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+/*
+ * Loads an XPM texture from the specified file path using MiniLibX, 
+ * retrieves its pixel data address and stores its dimensions and image 
+ * format information.
+ */
 
 static int	load_texture(t_game *game, t_texture *texture, char *path)
 {

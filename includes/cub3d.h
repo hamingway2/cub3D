@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 19:59:54 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/29 18:04:14 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:24:03 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <math.h>
+# include <sys/time.h>
 # include "mlx.h"
 
 # include "cub3d_defines.h"

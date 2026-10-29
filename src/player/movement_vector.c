@@ -6,11 +6,16 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/12 21:05:15 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/12 21:10:01 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/29 19:00:00 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+/*
+ * Normalises diagonal movement to prevent the player from moving faster
+ * when combining forward and sideways movement.
+ */
 
 static void	normalise_movement(double *move_x, double *move_y, int move_count)
 {
@@ -20,6 +25,11 @@ static void	normalise_movement(double *move_x, double *move_y, int move_count)
 		*move_y /= sqrt(2.0);
 	}
 }
+
+/*
+ * Calculates the sideways movement vector based on the player's 
+ * direction and the left or right movement keys.
+ */
 
 static void	get_strafe_movement(t_player *player, double *move_x,
 		double *move_y)
@@ -39,6 +49,11 @@ static void	get_strafe_movement(t_player *player, double *move_x,
 	}
 }
 
+/*
+ * Calculates the forward and backward movement vector based on the
+ * player's direction and the corresponding movement keys.
+ */
+
 static void	get_forward_movement(t_player *player, double *move_x,
 		double *move_y)
 {
@@ -57,6 +72,11 @@ static void	get_forward_movement(t_player *player, double *move_x,
 	}
 }
 
+/*
+ * Counts the number of active movement keys to determine whether
+ * movement is requested and whether normalisation is needed.
+ */
+
 static int	get_move_count(t_player *player)
 {
 	int	count;
@@ -72,6 +92,12 @@ static int	get_move_count(t_player *player)
 		count++;
 	return (count);
 }
+
+/*
+ * Calculates the player's movement vector from the active movement keys, 
+ * normalises diagonal movement and applies the movement speed scaled by 
+ * the elapsed time between frames.
+ */
 
 void	get_movement_vector(t_player *player, double delta_time,
 		double *move_x, double *move_y)

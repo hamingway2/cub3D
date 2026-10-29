@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/08 15:17:48 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/29 18:08:24 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/29 18:23:03 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ int	game_close(t_game *game)
 	mlx_loop_end(game->mlx);
 	return (0);
 }
+
+/*
+ * Sets up the event hooks for key presses, key releases and window closure. 
+ * Registers the drawing function to run continuously within the main loop, 
+ * which handles events and updates the game until it is closed.
+ */
 
 void	game_loop(t_game *game)
 {
