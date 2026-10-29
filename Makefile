@@ -3,6 +3,7 @@ SRC := src/main.c \
 		src/check_input.c \
 		src/testing_functions.c \
 		src/init/game_init.c \
+		src/init/init_textures.c \
 		src/game_destroy.c \
 		src/parsing/parse_file.c \
 		src/parsing/parse_config.c \
@@ -12,8 +13,13 @@ SRC := src/main.c \
 		src/parsing/validate_map.c \
 		src/event/event.c \
 		src/rendering/drawing.c \
-		src/rendering/minimap.c \
+		src/rendering/draw_minimap.c \
+		src/rendering/draw_mini_player.c \
 		src/player/movement.c \
+		src/player/movement_vector.c \
+		src/raycasting/raycasting.c \
+		src/raycasting/ray_setup.c \
+		src/raycasting/texture_mapping.c
 
 NAME := cub3d
 CC := cc

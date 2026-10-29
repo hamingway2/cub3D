@@ -26,6 +26,7 @@
 # define PLAYER_SPEED 3.0
 # define TURN_SPEED 90.0
 # define FOV 60.0
+# define TILE_SIZE 32
 
 // Minimap dimensions
 # define MINIMAP_X 20	// position of minimap in game window
@@ -84,6 +85,41 @@ typedef struct s_img
 	int		endian;			// how the bytes are ordered in memory
 }	t_img;
 
+typedef struct s_texture
+{
+	t_img	img;		// stores MLX image handling
+	char	*path;
+	int		width;
+	int		height;
+}	t_texture;
+
+typedef struct s_ray
+{
+	double	dir_x;
+	double	dir_y;
+	double	delta_x;
+	double	delta_y;
+	double	side_x;
+	double	side_y;
+	double	perp_dist;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+}	t_ray;
+
+typedef struct s_wall
+{
+	t_texture	*texture;
+	double		tex_step;
+	double		tex_pos;
+	int			tex_x;
+	int			height;
+	int			start_y;
+	int			end_y;
+}	t_wall;
+
 typedef struct s_map
 {
 	char	**grid;
@@ -107,15 +143,24 @@ typedef struct s_player
 	bool	key_turn_right;
 }	t_player;
 
+typedef struct s_square
+{
+	int	x;
+	int	y;
+	int	size;
+	int	colour;
+}	t_square;
+
+// could make floor colour & ceiling colour a define as currently not really used
 typedef struct s_game
 {
 	void		*mlx;
 	void		*window;
-	char		*texture_north;
-	char		*texture_south;
-	char		*texture_west;
-	char		*texture_east;
-	int	 		floor_color;
+	t_texture	north;
+	t_texture	south;
+	t_texture	west;
+	t_texture	east;
+	int			floor_color;
 	int			ceiling_color;
 	t_map		map;
 	t_player	player;
@@ -148,15 +193,26 @@ int		normalize_map(t_map *map);
 int		game_setup(t_game *game, char *file);
 void	game_loop(t_game *game);
 
-//execution part
+// Minimap
+void	draw_minimap(t_game *game);
+void	draw_minimap_player(t_game *game, int cell_size);
+void	draw_player_rays(t_game *game, int cell_size);
+
+// Other
+
+int		load_all_textures(t_game *game);
 int		draw_loop(t_game *game);
 void	put_pixel(int x, int y, int colour, t_game *game);
-void	draw_square(int x, int y, int size, int colour, t_game *game);
-// void	draw_map(t_game *game);
-void	draw_minimap(t_game *game);
+void	draw_square(t_game *game, t_square square);
+void	draw_raycasting(t_game *game);
+void	draw_textured_column(t_game *game, t_ray *ray, int screen_x);
+void	init_ray(t_ray *ray, t_game *game, double ray_angle);
 void	rotate_player(t_player *player, double delta_time);
 void	move_player(t_player *player, t_game *game, double delta_time);
-bool	collision_minimap(double x, double y, t_game *game);
+bool	collision(double x, double y, t_game *game);
 void	clear_image(t_game *game);
+void	draw_background(t_game *game);
+void	get_movement_vector(t_player *player, double delta_time,
+		double *move_x, double *move_y);
 
 #endif

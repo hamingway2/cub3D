@@ -6,11 +6,33 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/03 15:22:15 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/08 17:56:21 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/12 19:16:31 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
+
+void	draw_background(t_game *game)
+{
+	int		y;
+	int		x;
+	int		colour;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		colour = 0x564F43;
+		if (y <= HEIGHT / 2)
+			colour = 0xBDE0FE;
+		while (x < WIDTH)
+		{
+			put_pixel(x, y, colour, game);
+			x++;
+		}
+		y++;
+	}
+}
 
 void	clear_image(t_game *game)
 {
@@ -30,18 +52,18 @@ void	clear_image(t_game *game)
 	}
 }
 
-void	draw_square(int x, int y, int size, int colour, t_game *game)
+void	draw_square(t_game *game, t_square square)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < size)
+	while (i < square.size)
 	{
 		j = 0;
-		while (j < size)
+		while (j < square.size)
 		{
-			put_pixel(x + i, y + j, colour, game);
+			put_pixel(square.x + i, square.y + j, square.colour, game);
 			j++;
 		}
 		i++;
@@ -51,7 +73,7 @@ void	draw_square(int x, int y, int size, int colour, t_game *game)
 void	put_pixel(int x, int y, int colour, t_game *game)
 {
 	int	index;
-		
+
 	if (x >= WIDTH || y >= HEIGHT || x < 0 || y < 0)
 		return ;
 	index = y * game->img.line_length + x * game->img.bits_per_pixel / 8;

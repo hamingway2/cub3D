@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 20:17:53 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/09/29 20:17:55 by gkhavari         ###   ########.fr       */
+/*   Updated: 2026/10/12 16:50:15 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int	game_setup(t_game *game, char *file)
 	game_init(game);
 	if (parse_file(game, file) == FALSE)
 		return (FALSE);
+	if (!load_all_textures(game))
+		return (FALSE);
 	if (player_init(game) == FALSE)
 		return (FALSE);
 	return (TRUE);
@@ -103,7 +105,7 @@ void	game_init(t_game *game)
 	if (!game->img.img)
 		game_destroy(game, EXIT_FAILURE);
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bits_per_pixel,
-			&game->img.line_length, &game->img.endian);
+		&game->img.line_length, &game->img.endian);
 	if (!game->img.addr)
 		game_destroy(game, EXIT_FAILURE);
 }
