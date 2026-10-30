@@ -54,8 +54,21 @@ static int	process_after_map(t_game *game, char *line, t_parse *parse)
 	if (is_config_line(line))
 		return (error_msg(CONFIG_AFTER_MAP));
 	if (is_empty_line(line))
-		return (error_line(INVALID_LINE, line));
+		return (true);
 	return (add_map_line(game, line, &parse->map_height, &parse->capacity));
+}
+
+static int	process_line(t_game *game, char *line, t_parse *parse,
+		int *trailing_empty_lines)
+{
+	if (!parse->map_started)
+		return (process_before_map(game, line, parse));
+	if (*trailing_empty_lines && !is_empty_line(line)
+		&& !is_config_line(line))
+		return (error_line(INVALID_LINE, line));
+	if (is_empty_line(line))
+		*trailing_empty_lines = true;
+	return (process_after_map(game, line, parse));
 }
 
 int	read_map_file(t_game *game, int fd, t_parse *parse)
@@ -63,7 +76,9 @@ int	read_map_file(t_game *game, int fd, t_parse *parse)
 	char	*line;
 	int		result;
 	int		read_error;
+	int		trailing_empty_lines;
 
+	trailing_empty_lines = false;
 	line = get_next_line(fd, &read_error);
 	if (read_error)
 		return (error_msg(FILE_READ_ERROR));
@@ -71,10 +86,7 @@ int	read_map_file(t_game *game, int fd, t_parse *parse)
 		return (error_msg(EMPTY_FILE));
 	while (line)
 	{
-		if (!parse->map_started)
-			result = process_before_map(game, line, parse);
-		else
-			result = process_after_map(game, line, parse);
+		result = process_line(game, line, parse, &trailing_empty_lines);
 		free(line);
 		if (!result)
 			return (false);
