@@ -27,7 +27,7 @@ SRC := src/main.c \
 		src/raycasting/ray_setup.c \
 		src/raycasting/texture_mapping.c
 
-NAME := cub3d
+NAME := cub3D
 CC := cc
 CFLAGS := -Wall -Wextra -Werror -I libft -I includes
 MLXFLAGS = -lmlx -lXext -lX11 -lm  # -lm for the math library
