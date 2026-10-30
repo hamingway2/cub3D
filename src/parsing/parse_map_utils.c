@@ -26,7 +26,8 @@ int	is_player_char(char c)
 
 static int	is_map_character(char c)
 {
-	return (c == ' ' || c == '0' || c == '1' || is_player_char(c));
+	return (c == ' ' || c == WALKABLE_TILE || c == WALL
+		|| is_player_char(c));
 }
 
 int	is_map_line(char *line)

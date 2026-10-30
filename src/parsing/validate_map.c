@@ -14,7 +14,7 @@
 
 static int	is_valid_map_character(char c)
 {
-	return (c == '0' || c == '1' || c == 'N' || c == 'S'
+	return (c == WALKABLE_TILE || c == WALL || c == 'N' || c == 'S'
 		|| c == 'E' || c == 'W' || c == ' ');
 }
 

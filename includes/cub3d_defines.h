@@ -51,6 +51,7 @@
 # define INVALID_MAP "Map section is missing or empty\n"
 # define MALLOC_ERROR "Memory allocation failed\n"
 
+# define WALKABLE_TILE '0'
 # define WALL '1'
 # define PLAYER_NORTH 'N'
 # define PLAYER_SOUTH 'S'

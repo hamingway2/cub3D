@@ -29,7 +29,7 @@ static int	check_wall_direction(t_map *map, int i, int j, int direction[2])
 
 static int	is_walkable_tile(char tile)
 {
-	return (tile == '0' || is_player_char(tile));
+	return (tile == WALKABLE_TILE || is_player_char(tile));
 }
 
 static int	check_cell_walls(t_map *map, int i, int j)
