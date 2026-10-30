@@ -5,31 +5,41 @@ _This project has been created as part of the 42 curriculum by azielnic, gkhavar
 ## Description
 
 cub3D is a 42 project inspired by the classic Wolfenstein 3D raycasting engine.
-The project currently provides map parsing and validation, a MiniLibX window,
-player movement, and a minimap. The 3D raycasting renderer and textured walls
-have not yet been implemented.
+The project loads a `.cub` map, validates the map data, and renders a first-person
+3D maze using raycasting in a MiniLibX window. The player can move, rotate, and
+explore the level while the game continuously draws textured walls, a ceiling,
+a floor, and a minimap overlay.
 
 ## Current functionality
 
 The project currently includes the following features:
 
 - Command-line argument validation for a single `.cub` file
-- Checks for one `.cub` input file and parses texture (`NO`, `SO`, `WE`, `EA`)
-  and floor/ceiling color (`F`, `C`) configuration lines
-- RGB color validation and detection of missing or duplicate configuration
-  entries
-- Map loading, allowed-character checks, wall-enclosure checks, and player
+- Parser for texture (`NO`, `SO`, `WE`, `EA`) and floor/ceiling color (`F`, `C`)
+  configuration lines
+- RGB color validation and duplicate/missing configuration detection
+- Map loading, allowed-character validation, wall-enclosure checks, and player
   start detection
+- 3D raycasting engine with DDA wall traversal and perspective projection
+- Textured wall rendering with dedicated north, south, east, and west textures
+- Floor and ceiling background fill using the configured colors
 - MiniLibX window and image initialization
-- Player movement with WASD, rotation with the left/right arrow keys, and
-  collision checks
-- A top-down minimap showing the walls, player, and facing direction
+- Player movement with `W`/`S`/`A`/`D`, rotation with the left/right arrow keys,
+  and collision checks
+- Top-down minimap showing walls, the player, and facing direction
+- Clean shutdown with resource freeing for the map, textures, image, and MiniLibX
+  allocations
 - Exit handling with `Esc` or by closing the window
 
-The window does not yet show a 3D scene. Parsed texture paths are not loaded or
-drawn, and the configured floor and ceiling colors are not yet used for
-rendering. The program currently prints parsed game state to standard output
-for debugging.
+## Project structure
+
+- `src/` contains the main game loop, parser, renderer, raycasting logic, and
+  player movement code
+- `includes/` holds the project headers and shared type definitions
+- `libft/` contains the custom C utility library used across the project
+- `maps/valid/` and `maps/invalid/` provide valid and invalid `.cub` test maps
+- `texture/` stores the wall textures used by the renderer
+- `Makefile` builds the project and links MiniLibX and `libft`
 
 ## Instructions
 
@@ -104,9 +114,9 @@ After the input file is checked, the parser reads the file and identifies:
 3. the player's spawn point
 
 The parser checks required and duplicate configuration entries, validates
-color values, and checks map characters, wall enclosure, and player count.
-Texture paths are required to be non-empty, but the referenced files are not
-currently checked or loaded.
+color values, and verifies map characters, wall enclosure, and player count.
+Texture paths are required to be non-empty and each wall direction must be mapped
+correctly before the game can start.
 
 ### Controls and exit
 
@@ -129,11 +139,28 @@ The program reports errors for cases such as:
 - invalid map walls
 - invalid map characters
 - missing player start position
+- file read errors while parsing the map
+
+## Get next line changes
+
+The only change in the custom get_next_line implementation is that it now treats
+`read_error` separately from end-of-file handling. In practice, a `read()` return
+value of `0` is interpreted as normal end-of-file, while a negative value is
+reported through the `read_error` flag so the caller can stop and report a real
+file-read failure without confusing it with a valid end-of-file condition. This
+is why the function now takes two arguments: `fd` and a pointer to an `int` that
+stores whether the last read failed. The parser can then distinguish between:
+
+- `line == NULL` and `read_error == false` : normal EOF
+- `line == NULL` and `read_error == true` : actual read failure
+
+The rest of the logic remains the same: it reads one line at a time, keeps any
+remaining characters in a static buffer, and continues cleanly from the next call.
 
 ## Resources
 
-The project includes `libft`. On Linux, MiniLibX and its X11 development
-dependencies must be available to the system linker;
+The project includes `libft` for utility functions and relies on MiniLibX with the
+Linux X11 dependencies available on the system linker path.
 
 ## AI usage
 
