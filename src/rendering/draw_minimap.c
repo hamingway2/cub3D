@@ -99,4 +99,5 @@ void	draw_minimap(t_game *game)
 	draw_minimap_grid(&minimap);
 	draw_player_rays(&minimap);
 	draw_minimap_player(&minimap);
+	draw_minimap_border(&minimap);
 }

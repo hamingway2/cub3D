@@ -21,6 +21,7 @@ void	draw_square(t_game *game, t_square square);
 void	draw_minimap(t_game *game);
 void	draw_minimap_walls(t_minimap *minimap);
 void	draw_minimap_grid(t_minimap *minimap);
+void	draw_minimap_border(t_minimap *minimap);
 void	draw_minimap_player(t_minimap *minimap);
 void	draw_player_rays(t_minimap *minimap);
 void	init_minimap(t_game *game, t_minimap *minimap);

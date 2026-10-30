@@ -28,6 +28,28 @@ void	draw_minimap_pixel(t_minimap *minimap, int x, int y, int colour)
 		put_pixel(x, y, colour, minimap->game);
 }
 
+void	draw_minimap_border(t_minimap *minimap)
+{
+	int	i;
+
+	i = 0;
+	while (i < minimap->width)
+	{
+		draw_minimap_pixel(minimap, MINIMAP_X + i, MINIMAP_Y, 0xFFFFFF);
+		draw_minimap_pixel(minimap, MINIMAP_X + i,
+			MINIMAP_Y + minimap->height - 1, 0xFFFFFF);
+		i++;
+	}
+	i = 0;
+	while (i < minimap->height)
+	{
+		draw_minimap_pixel(minimap, MINIMAP_X, MINIMAP_Y + i, 0xFFFFFF);
+		draw_minimap_pixel(minimap, MINIMAP_X + minimap->width - 1,
+			MINIMAP_Y + i, 0xFFFFFF);
+		i++;
+	}
+}
+
 static void	draw_minimap_tile(t_minimap *minimap, int map_x, int map_y,
 		int colour)
 {
