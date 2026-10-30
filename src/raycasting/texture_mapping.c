@@ -48,8 +48,8 @@ static int	wall_texture_x(t_game *game, t_ray *ray, t_texture *texture)
 	wall_x -= floor(wall_x);
 	tex_x = (int)(wall_x * texture->width);
 	if ((ray->side == 0 && ray->dir_x < 0.0)
-    || (ray->side == 1 && ray->dir_y > 0.0))
-    tex_x = texture->width - tex_x - 1;
+		|| (ray->side == 1 && ray->dir_y > 0.0))
+		tex_x = texture->width - tex_x - 1;
 	return (tex_x);
 }
 
