@@ -6,7 +6,7 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/12 17:00:00 by azielnic          #+#    #+#             */
-/*   Updated: 2026/10/29 20:04:01 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/10/30 18:33:44 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ static int	wall_texture_x(t_game *game, t_ray *ray, t_texture *texture)
 		wall_x = game->player.x + ray->perp_dist * ray->dir_x;
 	wall_x -= floor(wall_x);
 	tex_x = (int)(wall_x * texture->width);
-	if ((ray->side == 0 && ray->dir_x > 0.0)
-		|| (ray->side == 1 && ray->dir_y < 0.0))
-		tex_x = texture->width - tex_x - 1;
+	if ((ray->side == 0 && ray->dir_x < 0.0)
+    || (ray->side == 1 && ray->dir_y > 0.0))
+    tex_x = texture->width - tex_x - 1;
 	return (tex_x);
 }
 
