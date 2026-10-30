@@ -17,7 +17,7 @@ static int	check_wall_direction(t_map *map, int i, int j, int direction[2])
 	while (i >= 0 && i < map->height
 		&& j >= 0 && j < map->width)
 	{
-		if (map->grid[i][j] == '1')
+		if (map->grid[i][j] == WALL)
 			return (true);
 		if (map->grid[i][j] == ' ')
 			return (false);
