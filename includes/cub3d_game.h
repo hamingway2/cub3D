@@ -16,6 +16,7 @@
 # include "cub3d_structs.h"
 
 int		game_init(t_game *game);
+int		resize_game_window(t_game *game);
 int		player_init(t_game *game);
 int		game_setup(t_game *game, char *file);
 int		load_all_textures(t_game *game);
@@ -31,6 +32,7 @@ void	print_game(t_game *game);
 int		key_press(int key, t_game *game);
 int		key_release(int key, t_game *game);
 int		game_close(t_game *game);
+void	register_window_hooks(void *window, t_game *game);
 void	rotate_player(t_player *player, double delta_time);
 void	move_player(t_player *player, t_game *game, double delta_time);
 bool	collision(double x, double y, t_game *game);

@@ -102,6 +102,10 @@ typedef struct s_game
 	void		*window;
 	int			screen_width;
 	int			screen_height;
+	int			display_width;
+	int			display_height;
+	bool		windowed;
+	bool		resize_requested;
 	t_texture	north;
 	t_texture	south;
 	t_texture	west;

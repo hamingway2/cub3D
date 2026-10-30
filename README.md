@@ -128,6 +128,7 @@ validation checks.
 ### Controls and exit
 
 - Press `Esc` to quit the program.
+- Press `F11` to toggle between the screen-sized view and a smaller window.
 - Use `W`/`S` to move forward/backward, `A`/`D` to strafe, and the left/right
   arrow keys to turn.
 - Closing the window also ends the session.

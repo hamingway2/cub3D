@@ -33,6 +33,8 @@ int	key_press(int key, t_game *game)
 {
 	if (key == KEY_ESC)
 		game_close(game);
+	if (key == KEY_F11)
+		game->resize_requested = true;
 	if (key == W)
 		game->player.key_up = true;
 	if (key == S)
@@ -46,6 +48,13 @@ int	key_press(int key, t_game *game)
 	if (key == KEY_RIGHT)
 		game->player.key_turn_right = true;
 	return (0);
+}
+
+void	register_window_hooks(void *window, t_game *game)
+{
+	mlx_hook(window, 2, 1L << 0, key_press, game);
+	mlx_hook(window, 3, 1L << 1, key_release, game);
+	mlx_hook(window, 17, 0, game_close, game);
 }
 
 int	game_close(t_game *game)
@@ -62,9 +71,7 @@ int	game_close(t_game *game)
 
 void	game_loop(t_game *game)
 {
-	mlx_hook(game->window, 2, 1L << 0, key_press, game);
-	mlx_hook(game->window, 3, 1L << 1, key_release, game);
-	mlx_hook(game->window, 17, 0, game_close, game);
+	register_window_hooks(game->window, game);
 	mlx_loop_hook(game->mlx, draw_loop, game);
 	mlx_loop(game->mlx);
 }

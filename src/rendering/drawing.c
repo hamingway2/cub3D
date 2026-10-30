@@ -30,6 +30,11 @@ int	draw_loop(t_game *game)
 	struct timeval			current_time;
 	double					frame_delta;
 
+	if (game->resize_requested)
+	{
+		game->resize_requested = false;
+		resize_game_window(game);
+	}
 	gettimeofday(&current_time, NULL);
 	frame_delta = (double)current_time.tv_sec
 		+ (double)current_time.tv_usec / 1000000.0;

@@ -63,6 +63,7 @@
 # define PLAYER_EAST 'E'
 
 # define KEY_ESC 65307
+# define KEY_F11 65480
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 # define W 119
