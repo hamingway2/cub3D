@@ -117,6 +117,9 @@ The parser checks required and duplicate configuration entries, validates
 color values, and verifies map characters, wall enclosure, and player count.
 Texture paths are required to be non-empty and each wall direction must be mapped
 correctly before the game can start.
+Maps with walkable tiles or regions that cannot be reached from the player's
+starting position are accepted as valid, provided the map passes the other
+validation checks.
 
 ### Controls and exit
 
