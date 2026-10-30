@@ -14,6 +14,7 @@
 # define GET_NEXT_LINE_INTERNAL_H
 
 char	*gnl_read_line(int fd, char *left_over_chars, int *read_error);
-void	gnl_setup_line(char *line_buffer, char **left_over_chars);
+int		gnl_setup_line(char *line_buffer, char **left_over_chars,
+			int *read_error);
 
 #endif

@@ -45,7 +45,11 @@ static char	*fill_line(int fd, char *line, char *buffer, int *read_error)
 			return (read_error_line(line, read_error));
 		line = append_buffer(line, buffer, bytes_read);
 		if (!line)
+		{
+			if (read_error)
+				*read_error = true;
 			return (NULL);
+		}
 	}
 	return (line);
 }
@@ -63,6 +67,8 @@ char	*gnl_read_line(int fd, char *left_over_chars, int *read_error)
 	buffer = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!buffer)
 	{
+		if (read_error)
+			*read_error = true;
 		free(left_over_chars);
 		return (NULL);
 	}
@@ -71,7 +77,8 @@ char	*gnl_read_line(int fd, char *left_over_chars, int *read_error)
 	return (line);
 }
 
-void	gnl_setup_line(char *line_buffer, char **left_over_chars)
+int	gnl_setup_line(char *line_buffer, char **left_over_chars,
+		int *read_error)
 {
 	size_t	i;
 
@@ -82,6 +89,13 @@ void	gnl_setup_line(char *line_buffer, char **left_over_chars)
 	{
 		*left_over_chars = ft_substr(line_buffer, i + 1,
 				ft_strlen(line_buffer) - i);
+		if (!*left_over_chars)
+		{
+			if (read_error)
+				*read_error = true;
+			return (false);
+		}
 		line_buffer[i + 1] = '\0';
 	}
+	return (true);
 }

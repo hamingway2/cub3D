@@ -23,7 +23,11 @@ char	*get_next_line(int fd, int *read_error)
 	left_over_chars = NULL;
 	if (!next_line)
 		return (NULL);
-	gnl_setup_line(next_line, &left_over_chars);
+	if (!gnl_setup_line(next_line, &left_over_chars, read_error))
+	{
+		free(next_line);
+		return (NULL);
+	}
 	if (!next_line[0])
 	{
 		free(next_line);
