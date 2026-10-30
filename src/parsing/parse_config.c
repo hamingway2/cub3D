@@ -47,7 +47,7 @@ static int	set_texture(char **texture, char *path, char *identifier,
 	if (has_extension(texture_path, TEXTURE_EXTENSION) == false)
 	{
 		free(texture_path);
-		return (error_msg(WRONG_TEXTURE_EXTENSION));
+		return (error_msg(WRONG_TEXTURE_EXT));
 	}
 	if (has_filename_before_extension(texture_path,
 			TEXTURE_EXTENSION) == false)

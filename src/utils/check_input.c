@@ -44,7 +44,7 @@ int	check_arguments(int ac, char **av)
 	if (ac != 2)
 		return (error_msg(USAGE_INFO));
 	if (has_extension(av[1], EXTENSION) == false)
-		return (error_msg(WRONG_EXTENSION));
+		return (error_msg(WRONG_EXT));
 	if (has_filename_before_extension(av[1], EXTENSION) == false)
 		return (error_msg(INVALID_FILE_NAME));
 	return (true);

@@ -19,6 +19,7 @@ SRC := src/main.c \
 		src/utils/game_destroy.c \
 		src/event/event.c \
 		src/rendering/drawing.c \
+		src/rendering/draw_loop.c \
 		src/rendering/draw_minimap.c \
 		src/rendering/draw_mini_player.c \
 		src/player/movement.c \

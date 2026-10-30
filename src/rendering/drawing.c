@@ -12,48 +12,6 @@
 
 #include "cub3d.h"
 
-/*
- * Provides the main drawing loop, updating the game continuously by
- * calculating the time elapsed between frames and using it to ensure that 
- * player movement and rotation remain consistent regardless of the frame rate.
- *
- * Calculates the frame delta using the current time, clears the image, updates 
- * the player's rotation and movement, draws the background, renders the 3D 
- * scene using raycasting, and draws the minimap. 
- * Finally, displays the completed image in the window and returns 0 to keep 
- * the MiniLibX loop running.
- */
-
-int	draw_loop(t_game *game)
-{
-	static struct timeval	last_frame_time;
-	struct timeval			current_time;
-	double					frame_delta;
-
-	if (game->resize_requested)
-	{
-		game->resize_requested = false;
-		resize_game_window(game);
-	}
-	gettimeofday(&current_time, NULL);
-	frame_delta = (double)current_time.tv_sec
-		+ (double)current_time.tv_usec / 1000000.0;
-	if (last_frame_time.tv_sec != 0 || last_frame_time.tv_usec != 0)
-		frame_delta -= (double)last_frame_time.tv_sec
-			+ (double)last_frame_time.tv_usec / 1000000.0;
-	else
-		frame_delta = 0.0;
-	last_frame_time = current_time;
-	clear_image(game);
-	rotate_player(&game->player, frame_delta);
-	move_player(&game->player, game, frame_delta);
-	draw_background(game);
-	draw_raycasting(game);
-	draw_minimap(game);
-	mlx_put_image_to_window(game->mlx, game->window, game->img.img, 0, 0);
-	return (0);
-}
-
 void	draw_background(t_game *game)
 {
 	int		y;

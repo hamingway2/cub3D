@@ -56,8 +56,3 @@ int	is_color_line(char *line)
 		return (true);
 	return (false);
 }
-
-int	is_config_line(char *line)
-{
-	return (is_texture_line(line) || is_color_line(line));
-}

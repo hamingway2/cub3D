@@ -24,6 +24,11 @@ int	is_player_char(char c)
 	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
 
+int	is_config_line(char *line)
+{
+	return (is_texture_line(line) || is_color_line(line));
+}
+
 static int	is_map_character(char c)
 {
 	return (c == ' ' || c == WALKABLE_TILE || c == WALL
