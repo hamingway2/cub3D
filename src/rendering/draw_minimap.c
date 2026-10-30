@@ -12,88 +12,91 @@
 
 #include "cub3d.h"
 
-static void	draw_horizontal_grid(t_game *game, int cell_size)
+static t_minimap_range	get_visible_range(double player_pos, int viewport_size,
+		int map_size)
+{
+	t_minimap_range	range;
+
+	range.start = (int)floor(player_pos
+			- viewport_size / (2.0 * MINIMAP_CELL_SIZE));
+	range.end = (int)ceil(player_pos
+			+ viewport_size / (2.0 * MINIMAP_CELL_SIZE));
+	if (range.start < 0)
+		range.start = 0;
+	if (range.end > map_size)
+		range.end = map_size;
+	return (range);
+}
+
+void	init_minimap(t_game *game, t_minimap *minimap)
+{
+	minimap->game = game;
+	minimap->width = game->screen_width / MINIMAP_WINDOW_DIVISOR;
+	minimap->height = game->screen_height / MINIMAP_WINDOW_DIVISOR;
+	if (minimap->width < 1)
+		minimap->width = 1;
+	if (minimap->height < 1)
+		minimap->height = 1;
+	minimap->origin.x = MINIMAP_X + minimap->width / 2
+		- (int)(game->player.x * MINIMAP_CELL_SIZE);
+	minimap->origin.y = MINIMAP_Y + minimap->height / 2
+		- (int)(game->player.y * MINIMAP_CELL_SIZE);
+	if (game->map.width * MINIMAP_CELL_SIZE <= minimap->width)
+		minimap->origin.x = MINIMAP_X;
+	if (game->map.height * MINIMAP_CELL_SIZE <= minimap->height)
+		minimap->origin.y = MINIMAP_Y;
+	minimap->horizontal = get_visible_range(game->player.x,
+			minimap->width, game->map.width);
+	minimap->vertical = get_visible_range(game->player.y,
+			minimap->height, game->map.height);
+}
+
+static void	draw_grid_cell(t_minimap *minimap, int x, int y)
+{
+	int				i;
+	t_minimap_point	point;
+
+	minimap_map_to_screen(minimap, x, y, &point);
+	i = 0;
+	while (i < MINIMAP_CELL_SIZE)
+	{
+		draw_minimap_pixel(minimap, point.x + i, point.y, 0xC5C6C7);
+		draw_minimap_pixel(minimap, point.x, point.y + i, 0xC5C6C7);
+		if (x == minimap->game->map.width - 1)
+			draw_minimap_pixel(minimap, point.x + MINIMAP_CELL_SIZE,
+				point.y + i, 0xC5C6C7);
+		if (y == minimap->game->map.height - 1)
+			draw_minimap_pixel(minimap, point.x + i,
+				point.y + MINIMAP_CELL_SIZE, 0xC5C6C7);
+		i++;
+	}
+}
+
+void	draw_minimap_grid(t_minimap *minimap)
 {
 	int	x;
 	int	y;
 
-	y = 0;
-	while (y <= game->map.height)
+	y = minimap->vertical.start;
+	while (y < minimap->vertical.end)
 	{
-		x = 0;
-		while (x < game->map.width * cell_size)
+		x = minimap->horizontal.start;
+		while (x < minimap->horizontal.end)
 		{
-			put_pixel(MINIMAP_X + x, MINIMAP_Y + y * cell_size, 0xC5C6C7, game);
+			draw_grid_cell(minimap, x, y);
 			x++;
 		}
 		y++;
 	}
 }
 
-static void	draw_vertical_grid(t_game *game, int cell_size)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x <= game->map.width)
-	{
-		y = 0;
-		while (y < game->map.height * cell_size)
-		{
-			put_pixel(MINIMAP_X + x * cell_size, MINIMAP_Y + y, 0xC5C6C7, game);
-			y++;
-		}
-		x++;
-	}
-}
-
-static void	draw_map_row(t_game *game, int y, int cell_size)
-{
-	t_map	*map;
-	int		x;
-
-	map = &game->map;
-	x = 0;
-	while (map->grid[y][x] && map->grid[y][x] != '\n')
-	{
-		if (map->grid[y][x] == '1')
-		{
-			draw_square(game, (t_square){MINIMAP_X + x * cell_size,
-				MINIMAP_Y + y * cell_size, cell_size, 0x708090});
-		}
-		x++;
-	}
-}
-
-static float	get_minimap_scale(t_map *map)
-{
-	float	scale_x;
-	float	scale_y;
-
-	scale_x = (float)MINIMAP_WIDTH / map->width;
-	scale_y = (float)MINIMAP_HEIGHT / map->height;
-	if (scale_x < scale_y)
-		return (scale_x);
-	return (scale_y);
-}
-
 void	draw_minimap(t_game *game)
 {
-	t_map	*map;
-	int		cell_size;
-	int		y;
+	t_minimap	minimap;
 
-	map = &game->map;
-	cell_size = (int)get_minimap_scale(map);
-	y = 0;
-	while (y < map->height)
-	{
-		draw_map_row(game, y, cell_size);
-		y++;
-	}
-	draw_horizontal_grid(game, cell_size);
-	draw_vertical_grid(game, cell_size);
-	draw_player_rays(game, cell_size);
-	draw_minimap_player(game, cell_size);
+	init_minimap(game, &minimap);
+	draw_minimap_walls(&minimap);
+	draw_minimap_grid(&minimap);
+	draw_player_rays(&minimap);
+	draw_minimap_player(&minimap);
 }

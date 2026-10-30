@@ -21,6 +21,7 @@ SRC := src/main.c \
 		src/rendering/drawing.c \
 		src/rendering/draw_loop.c \
 		src/rendering/draw_minimap.c \
+		src/rendering/draw_minimap_utils.c \
 		src/rendering/draw_mini_player.c \
 		src/player/movement.c \
 		src/player/movement_vector.c \

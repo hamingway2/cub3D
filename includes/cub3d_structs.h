@@ -119,4 +119,26 @@ typedef struct s_game
 	t_img		img;
 }	t_game;
 
+typedef struct s_minimap_range
+{
+	int	start;
+	int	end;
+}	t_minimap_range;
+
+typedef struct s_minimap_point
+{
+	int	x;
+	int	y;
+}	t_minimap_point;
+
+typedef struct s_minimap
+{
+	t_game			*game;
+	int				width;
+	int				height;
+	t_minimap_point	origin;
+	t_minimap_range	horizontal;
+	t_minimap_range	vertical;
+}	t_minimap;
+
 #endif

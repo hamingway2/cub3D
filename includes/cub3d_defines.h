@@ -27,8 +27,8 @@
 
 # define MINIMAP_X 20
 # define MINIMAP_Y 20
-# define MINIMAP_WIDTH 300
-# define MINIMAP_HEIGHT 300
+# define MINIMAP_WINDOW_DIVISOR 4
+# define MINIMAP_CELL_SIZE 10
 
 # define ERROR "Error\n"
 # define INVALID_FILE_NAME "Invalid file name\n"

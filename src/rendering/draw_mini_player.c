@@ -12,50 +12,54 @@
 
 #include "cub3d.h"
 
-static void	draw_player_ray(t_game *game, int cell_size, double ray_angle)
+static void	draw_player_ray(t_minimap *minimap, double ray_angle)
 {
-	double	ray_x;
-	double	ray_y;
-	double	step;
-	int		screen_x;
-	int		screen_y;
+	t_game			*game;
+	double			ray_x;
+	double			ray_y;
+	double			step;
+	t_minimap_point	point;
 
+	game = minimap->game;
 	ray_x = game->player.x;
 	ray_y = game->player.y;
 	step = 0.02;
 	while (!collision(ray_x, ray_y, game))
 	{
-		screen_x = MINIMAP_X + (int)(ray_x * cell_size);
-		screen_y = MINIMAP_Y + (int)(ray_y * cell_size);
-		put_pixel(screen_x, screen_y, 0xFF0000, game);
+		minimap_map_to_screen(minimap, ray_x, ray_y, &point);
+		if (point.x < MINIMAP_X || point.x >= MINIMAP_X + minimap->width
+			|| point.y < MINIMAP_Y
+			|| point.y >= MINIMAP_Y + minimap->height)
+			break ;
+		put_pixel(point.x, point.y, 0xFF0000, game);
 		ray_x += sin(ray_angle * PI / 180.0) * step;
 		ray_y -= cos(ray_angle * PI / 180.0) * step;
 	}
 }
 
-void	draw_player_rays(t_game *game, int cell_size)
+void	draw_player_rays(t_minimap *minimap)
 {
 	double	ray_direction;
 	double	angle;
 	int		i;
 
-	ray_direction = game->player.direction;
+	ray_direction = minimap->game->player.direction;
 	i = 0;
-	while (i < game->screen_width)
+	while (i < minimap->game->screen_width)
 	{
 		angle = ray_direction - FOV / 2.0
-			+ FOV * i / (game->screen_width - 1.0);
-		draw_player_ray(game, cell_size, angle);
+			+ FOV * i / (minimap->game->screen_width - 1.0);
+		draw_player_ray(minimap, angle);
 		i++;
 	}
 }
 
-void	draw_minimap_player(t_game *game, int cell_size)
+void	draw_minimap_player(t_minimap *minimap)
 {
-	int		player_x;
-	int		player_y;
+	t_minimap_point	point;
 
-	player_x = MINIMAP_X + (int)(game->player.x * cell_size);
-	player_y = MINIMAP_Y + (int)(game->player.y * cell_size);
-	draw_square(game, (t_square){player_x - 5, player_y - 5, 10, 0x00FF00});
+	minimap_map_to_screen(minimap, minimap->game->player.x,
+		minimap->game->player.y, &point);
+	draw_square(minimap->game, (t_square){point.x - 5, point.y - 5,
+		10, 0x00FF00});
 }

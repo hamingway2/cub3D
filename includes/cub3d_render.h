@@ -19,8 +19,14 @@ int		draw_loop(t_game *game);
 void	put_pixel(int x, int y, int colour, t_game *game);
 void	draw_square(t_game *game, t_square square);
 void	draw_minimap(t_game *game);
-void	draw_minimap_player(t_game *game, int cell_size);
-void	draw_player_rays(t_game *game, int cell_size);
+void	draw_minimap_walls(t_minimap *minimap);
+void	draw_minimap_grid(t_minimap *minimap);
+void	draw_minimap_player(t_minimap *minimap);
+void	draw_player_rays(t_minimap *minimap);
+void	init_minimap(t_game *game, t_minimap *minimap);
+void	minimap_map_to_screen(t_minimap *minimap, double map_x, double map_y,
+			t_minimap_point *screen_point);
+void	draw_minimap_pixel(t_minimap *minimap, int x, int y, int colour);
 void	clear_image(t_game *game);
 void	draw_background(t_game *game);
 void	draw_raycasting(t_game *game);
