@@ -1,0 +1,13 @@
+NO ./texture/wolfenstein_north.xp
+SO ./texture/wolfenstein_south.xpm
+WE ./texture/wolfenstein_west.xpm
+EA ./texture/wolfenstein_east.xpm
+
+F 220,100,0
+C 135,206,235
+
+111111
+100001
+10N001
+100001
+111111

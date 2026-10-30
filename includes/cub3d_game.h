@@ -25,6 +25,8 @@ void	free_map(t_map *map);
 int		error_msg(char *msg);
 int		error_line(char *msg, char *line);
 int		check_arguments(int ac, char **av);
+int		has_extension(char *filename, char *extension);
+int		has_filename_before_extension(char *filename, char *extension);
 void	print_game(t_game *game);
 int		key_press(int key, t_game *game);
 int		key_release(int key, t_game *game);

@@ -16,6 +16,7 @@
 # define USAGE_INFO "Usage: ./cub3d <map.cub>\n"
 # define HELP_FLAG "--help"
 # define EXTENSION ".cub"
+# define TEXTURE_EXTENSION ".xpm"
 # define BUFFER_SIZE 42
 # define PI 3.14159265359
 # define FOV 60.0
@@ -32,6 +33,8 @@
 # define ERROR "Error\n"
 # define INVALID_FILE_NAME "Invalid file name\n"
 # define WRONG_EXTENSION "Invalid map file extension (expected .cub)\n"
+# define INVALID_TEXTURE_FILE_NAME "Invalid texture file name\n"
+# define WRONG_TEXTURE_EXTENSION "Invalid texture file extension (expected .xpm)\n"
 # define OPEN_ERROR "Could not open map file\n"
 # define EMPTY_FILE "Map file is empty\n"
 # define FILE_READ_ERROR "Could not read map file\n"
