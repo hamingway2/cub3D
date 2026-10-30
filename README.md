@@ -26,7 +26,10 @@ The project currently includes the following features:
 - MiniLibX window and image initialization
 - Player movement with `W`/`S`/`A`/`D`, rotation with the left/right arrow keys,
   and collision checks
-- Top-down minimap showing walls, the player, and facing direction
+- Top-down minimap showing walls, the player, and the player's field of view
+- Minimap viewport sized to one quarter of the game window in each dimension,
+  preserving the window's aspect ratio and updating when the window is resized
+- Player-centered minimap with a fixed tile size
 - Clean shutdown with resource freeing for the map, textures, image, and MiniLibX
   allocations
 - Exit handling with `Esc` or by closing the window
