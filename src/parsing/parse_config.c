@@ -12,14 +12,21 @@
 
 #include "cub3d.h"
 
-static char	*dup_without_newline(char *str)
+static int	is_config_whitespace(char c)
 {
-	size_t	len;
+	return (c == ' ' || c == '\t' || c == '\r' || c == '\n');
+}
 
-	len = ft_strlen(str);
-	if (len > 0 && str[len - 1] == '\n')
-		len--;
-	return (ft_substr(str, 0, len));
+static char	*dup_trimmed(char *str)
+{
+	char	*start;
+	size_t	end;
+
+	start = skip_config_whitespace(str);
+	end = ft_strlen(start);
+	while (end > 0 && is_config_whitespace(start[end - 1]))
+		end--;
+	return (ft_substr(start, 0, end));
 }
 
 static int	set_texture(char **texture, char *path, char *identifier,
@@ -29,13 +36,14 @@ static int	set_texture(char **texture, char *path, char *identifier,
 
 	if (*texture != NULL)
 		return (duplicate_config(identifier));
-	while (*path == ' ' || *path == '\t')
-		path++;
-	if (*path == '\0' || *path == '\n')
-		return (error_line(INVALID_LINE, line));
-	texture_path = dup_without_newline(path);
+	texture_path = dup_trimmed(path);
 	if (!texture_path)
 		return (error_msg(MALLOC_ERROR));
+	if (*texture_path == '\0')
+	{
+		free(texture_path);
+		return (error_line(INVALID_LINE, line));
+	}
 	if (has_extension(texture_path, TEXTURE_EXTENSION) == false)
 	{
 		free(texture_path);
@@ -56,8 +64,7 @@ int	parse_texture(t_game *game, char *line)
 	char	*original_line;
 
 	original_line = line;
-	while (*line == ' ' || *line == '\t')
-		line++;
+	line = skip_config_whitespace(line);
 	if (ft_strncmp(line, "NO", 2) == 0)
 		return (set_texture(&game->north.path, line + 2, "NO",
 				original_line));

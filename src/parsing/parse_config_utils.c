@@ -12,9 +12,17 @@
 
 #include "cub3d.h"
 
+char	*skip_config_whitespace(char *str)
+{
+	while (*str == ' ' || *str == '\t')
+		str++;
+	return (str);
+}
+
 static int	is_config_separator(char c)
 {
-	return (c == ' ' || c == '\t' || c == '\n' || c == '\0');
+	return (c == ' ' || c == '\t' || c == '\n'
+		|| c == '\0');
 }
 
 int	duplicate_config(char *identifier)
@@ -27,8 +35,7 @@ int	duplicate_config(char *identifier)
 
 int	is_texture_line(char *line)
 {
-	while (*line == ' ' || *line == '\t')
-		line++;
+	line = skip_config_whitespace(line);
 	if (ft_strncmp(line, "NO", 2) == 0 && is_config_separator(line[2]))
 		return (true);
 	if (ft_strncmp(line, "SO", 2) == 0 && is_config_separator(line[2]))
@@ -42,8 +49,7 @@ int	is_texture_line(char *line)
 
 int	is_color_line(char *line)
 {
-	while (*line == ' ' || *line == '\t')
-		line++;
+	line = skip_config_whitespace(line);
 	if (ft_strncmp(line, "F", 1) == 0 && is_config_separator(line[1]))
 		return (true);
 	if (ft_strncmp(line, "C", 1) == 0 && is_config_separator(line[1]))

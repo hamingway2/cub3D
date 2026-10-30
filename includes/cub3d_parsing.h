@@ -29,6 +29,7 @@ int		is_config_line(char *line);
 int		is_map_line(char *line);
 int		is_texture_line(char *line);
 int		is_color_line(char *line);
+char	*skip_config_whitespace(char *str);
 int		is_player_char(char c);
 int		get_line_length(char *line);
 char	*get_next_line(int fd, int *read_error);

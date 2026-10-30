@@ -67,8 +67,7 @@ static int	set_color(int *color, bool *color_set, char *value,
 
 int	parse_color(t_game *game, char *line)
 {
-	while (*line == ' ' || *line == '\t')
-		line++;
+	line = skip_config_whitespace(line);
 	if (ft_strncmp(line, "F", 1) == 0)
 		return (set_color(&game->floor_color, &game->floor_color_set,
 				line + 1, "F"));

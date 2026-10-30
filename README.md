@@ -115,8 +115,12 @@ After the input file is checked, the parser reads the file and identifies:
 
 The parser checks required and duplicate configuration entries, validates
 color values, and verifies map characters, wall enclosure, and player count.
-Texture paths are required to be non-empty and each wall direction must be mapped
-correctly before the game can start.
+The map filename must have a non-empty basename and end in `.cub`. Texture
+paths must have a non-empty basename and end in `.xpm`; each wall direction
+must be mapped correctly before the game can start.
+Configuration lines may have leading and trailing spaces or tabs, and one or
+more spaces or tabs may separate an identifier from its value. Whitespace is
+also allowed around RGB components and commas in floor and ceiling colors.
 Maps with walkable tiles or regions that cannot be reached from the player's
 starting position are accepted as valid, provided the map passes the other
 validation checks.
