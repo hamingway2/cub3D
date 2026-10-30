@@ -12,6 +12,7 @@
 
 #include "cub3d.h"
 
+/* Converts map coordinates to pixels using the current minimap origin. */
 void	minimap_map_to_screen(t_minimap *minimap, double map_x, double map_y,
 		t_minimap_point *screen_point)
 {
@@ -21,6 +22,7 @@ void	minimap_map_to_screen(t_minimap *minimap, double map_x, double map_y,
 		+ (int)(map_y * MINIMAP_CELL_SIZE);
 }
 
+/* Draws a pixel only when it falls inside the minimap viewport. */
 void	draw_minimap_pixel(t_minimap *minimap, int x, int y, int colour)
 {
 	if (x >= MINIMAP_X && x < MINIMAP_X + minimap->width
@@ -28,6 +30,7 @@ void	draw_minimap_pixel(t_minimap *minimap, int x, int y, int colour)
 		put_pixel(x, y, colour, minimap->game);
 }
 
+/* Draws the viewport outline over the minimap contents. */
 void	draw_minimap_border(t_minimap *minimap)
 {
 	int	i;
@@ -50,6 +53,7 @@ void	draw_minimap_border(t_minimap *minimap)
 	}
 }
 
+/* Fills one wall tile, clipping its pixels to the minimap viewport. */
 static void	draw_minimap_tile(t_minimap *minimap, int map_x, int map_y,
 		int colour)
 {
@@ -71,6 +75,7 @@ static void	draw_minimap_tile(t_minimap *minimap, int map_x, int map_y,
 	}
 }
 
+/* Draws wall tiles within the visible map ranges. */
 void	draw_minimap_walls(t_minimap *minimap)
 {
 	int	x;

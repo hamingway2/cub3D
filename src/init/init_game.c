@@ -81,10 +81,7 @@ static int	init_resized_image(t_game *game, int width, int height,
 	return (true);
 }
 
-/*
- * Recreates the window and render image at the alternate size, then restores
- * the window event hooks and updates the game's dimensions.
- */
+/* Toggles the window size and recreates its image and event hooks. */
 int	resize_game_window(t_game *game)
 {
 	void	*new_window;

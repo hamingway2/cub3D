@@ -12,6 +12,7 @@
 
 #include "cub3d.h"
 
+/* Traces one field-of-view ray and draws its visible section. */
 static void	draw_player_ray(t_minimap *minimap, double ray_angle)
 {
 	t_game			*game;
@@ -37,6 +38,7 @@ static void	draw_player_ray(t_minimap *minimap, double ray_angle)
 	}
 }
 
+/* Draws the player's field-of-view rays on the minimap. */
 void	draw_player_rays(t_minimap *minimap)
 {
 	double	ray_direction;
@@ -54,6 +56,7 @@ void	draw_player_rays(t_minimap *minimap)
 	}
 }
 
+/* Draws the player marker at its minimap position. */
 void	draw_minimap_player(t_minimap *minimap)
 {
 	t_minimap_point	point;

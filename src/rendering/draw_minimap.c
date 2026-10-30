@@ -12,6 +12,7 @@
 
 #include "cub3d.h"
 
+/* Finds the map tiles visible within one minimap axis. */
 static t_minimap_range	get_visible_range(double player_pos, int viewport_size,
 		int map_size)
 {
@@ -28,6 +29,7 @@ static t_minimap_range	get_visible_range(double player_pos, int viewport_size,
 	return (range);
 }
 
+/* Sets the viewport size, origin, and visible map ranges. */
 void	init_minimap(t_game *game, t_minimap *minimap)
 {
 	minimap->game = game;
@@ -51,6 +53,7 @@ void	init_minimap(t_game *game, t_minimap *minimap)
 			minimap->height, game->map.height);
 }
 
+/* Draws the grid lines around one visible map tile. */
 static void	draw_grid_cell(t_minimap *minimap, int x, int y)
 {
 	int				i;
@@ -72,6 +75,7 @@ static void	draw_grid_cell(t_minimap *minimap, int x, int y)
 	}
 }
 
+/* Draws grid lines for all tiles in the minimap viewport. */
 void	draw_minimap_grid(t_minimap *minimap)
 {
 	int	x;
@@ -90,6 +94,7 @@ void	draw_minimap_grid(t_minimap *minimap)
 	}
 }
 
+/* Renders the visible map, player, view rays, and viewport border. */
 void	draw_minimap(t_game *game)
 {
 	t_minimap	minimap;
