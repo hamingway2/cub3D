@@ -25,6 +25,7 @@
 
 # include "cub3d_defines.h"
 # include "cub3d_structs.h"
+# include "get_next_line_internal.h"
 # include "cub3d_game.h"
 # include "cub3d_parsing.h"
 # include "cub3d_render.h"

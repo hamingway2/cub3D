@@ -32,11 +32,6 @@ CC := cc
 CFLAGS := -Wall -Wextra -Werror -I libft -I includes
 MLXFLAGS = -lmlx -lXext -lX11 -lm  # -lm for the math library
 
-MLX_DIR = minilibx-linux
-MLX     = -L$(MLX_DIR) -lmlx_Linux
-MLX_INC = -I$(MLX_DIR)
-MLX_LIBS= -lXext -lX11 -lm -lz
-
 OBJ := $(SRC:.c=.o)
 
 LIBFT_DIR := libft
@@ -49,8 +44,6 @@ all: $(LIBFT) $(NAME)
 $(OBJ): includes/cub3d.h includes/cub3d_defines.h includes/cub3d_structs.h \
 		includes/cub3d_game.h includes/cub3d_parsing.h includes/cub3d_render.h
 
-src/get_next_line.o src/get_next_line_utils.o: includes/get_next_line_internal.h
-
 debug:
 	$(MAKE) CFLAGS="$(CFLAGS) -g" re
 
@@ -59,11 +52,9 @@ $(LIBFT):
 
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(MLXFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
-#	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX) $(MLX_LIBS) -o $(NAME)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -Iincludes -c $< -o $@
-#	@$(CC) $(CFLAGS) $(MLX_INC)  -Iincludes -c $< -o $@
 
 clean:
 	@rm -f $(OBJ)
