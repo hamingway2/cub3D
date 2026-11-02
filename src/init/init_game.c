@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_init.c                                        :+:      :+:    :+:   */
+/*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 20:17:53 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/29 20:56:21 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/11/02 17:47:01 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	game_init(t_game *game)
 {
 	game->mlx = mlx_init();
 	if (!game->mlx)
-		return (error_msg("MiniLibX initialization failed\n"));
+		return (error_msg("MiniLibX initialisation failed\n"));
 	mlx_get_screen_size(game->mlx, &game->display_width,
 		&game->display_height);
 	if (game->display_width < 2 || game->display_height < 1)
@@ -30,7 +30,7 @@ int	game_init(t_game *game)
 	game->screen_width = game->display_width;
 	game->screen_height = game->display_height;
 	game->window = mlx_new_window(game->mlx, game->display_width,
-			game->display_height, "cub3d");
+			game->display_height, "cub3D");
 	if (!game->window)
 		return (error_msg("Could not create MiniLibX window\n"));
 	game->img.img = mlx_new_image(game->mlx, game->screen_width,
@@ -90,7 +90,7 @@ int	resize_game_window(t_game *game)
 	t_img	new_img;
 
 	get_window_dimensions(game, &new_width, &new_height);
-	new_window = mlx_new_window(game->mlx, new_width, new_height, "cub3d");
+	new_window = mlx_new_window(game->mlx, new_width, new_height, "cub3D");
 	if (!new_window)
 		return (error_msg("Could not resize game window\n"));
 	if (!init_resized_image(game, new_width, new_height, &new_img))
