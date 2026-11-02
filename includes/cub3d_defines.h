@@ -6,14 +6,14 @@
 /*   By: azielnic <azielnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 19:58:44 by gkhavari          #+#    #+#             */
-/*   Updated: 2026/10/29 20:49:10 by azielnic         ###   ########.fr       */
+/*   Updated: 2026/11/02 17:45:34 by azielnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_DEFINES_H
 # define CUB3D_DEFINES_H
 
-# define USAGE_INFO "Usage: ./cub3d <map.cub>\n"
+# define USAGE_INFO "Usage: ./cub3D <map.cub>\n"
 # define HELP_FLAG "--help"
 # define EXTENSION ".cub"
 # define TEXTURE_EXTENSION ".xpm"
